@@ -4,18 +4,6 @@ function APIGetCall(link){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Cache out buttons container, and all of the panels
 const buttons = document.querySelector('.setting-buttons');
 const panels = document.querySelectorAll('.panel');

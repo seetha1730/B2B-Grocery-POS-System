@@ -9,13 +9,16 @@ app.use(express.static('public'))
 
 
 // Define your routes
-const indexRouter = require('./routes/view.routes');
+const viewRoutes = require('./routes/view.routes');
 const ProductRoutes = require('./routes/product.routes');
 const categoryRoutes = require('./routes/category.routes');
-
+const homeRoutes = require('./routes/home.routes');
 // Use the route handlers
 app.use('/', ProductRoutes);
 app.use('/', categoryRoutes);
+app.use('/', homeRoutes);
+app.use('/', viewRoutes);
+
 
 
 app.get("/", (req, res) => {

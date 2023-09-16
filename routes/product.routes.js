@@ -6,7 +6,14 @@ const fileUploader = require('../config/cloudinary.config');
 
 const path = require('path'); 
 
-
+// Display the form for adding a new category
+router.get('/product/all', (req, res, next) => {
+    Product.find()
+    .then(productList => {
+      res.send( { productList });
+    })
+    .catch(err => next(err));
+  });
 // // GET request to display the product list
 
 // // Display the form for adding a new product
@@ -64,23 +71,6 @@ const path = require('path');
 //     });
 // });
 
-
-
-
-// router.get('/product', (req, res, next) => {
-//   Category.find()
-//     .then(categoryList => {
-//       console.log(categoryList)
-//       // Fetch categoryList here and render product.hbs
-//       Product.find()
-//         .then(productList => {
-//           console.log(productList)
-//           res.render("product/product", { productList, categoryList });
-//         })
-//         .catch(err => next(err));
-//     })
-//     .catch(err => next(err));
-// });
 
 // // GET request to display the edit product page
 // router.get('/product/:id/edit', (req, res, next) => {

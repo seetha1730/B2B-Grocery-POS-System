@@ -95,7 +95,30 @@
            
               <!-- Search section ends-->
                <!-- Categories  section starts-->
-               <div class="categories-section ">
+
+               <div id="carouselExampleIndicators" class="carousel slide categories-section" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <!-- Indicators will be generated dynamically by JavaScript -->
+                </ol>
+                <div class="carousel-inner">
+                
+                 
+                  <!-- Categories will be added here dynamically by JavaScript -->
+                </div>
+              
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+
+
+               <!-- <div class="categories-section ">
+
                 <div class="category active col-3">
                  <span>Vegetables</span>
                 </div>
@@ -109,7 +132,7 @@
                 <div class="loadmore col-3">
                  <button><span>...</span></button>
                 </div>
-               </div>
+               </div> -->
               
                <!-- Categories  section ends-->
                <div class="product-section row" id="product-container">
@@ -217,9 +240,10 @@
 
       </div>
     </main>
-    <script src="js/apiHandler.js"></script>
-    <script src="js/controllers/homePageController.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/controllers/Order/orderPanelController.js"></script>
+    <script src="js/controllers/Order/popupController.js"></script>
+    
 
   </body>
 </html>
