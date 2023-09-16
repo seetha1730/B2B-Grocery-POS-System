@@ -1,8 +1,21 @@
+
 function APIGetCall(link){
   return fetch(link)
 }
 
 
+function updateDateTime() {
+  console.log("function called")
+  const dateTimeElement = document.getElementById("current-date-time");
+  const currentDate = new Date();
+
+  const formattedDateTime = currentDate.toLocaleString();
+
+  dateTimeElement.textContent = formattedDateTime;
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
 
 // Cache out buttons container, and all of the panels
 const buttons = document.querySelector('.setting-buttons');
