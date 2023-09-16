@@ -1,10 +1,15 @@
 const express = require("express")
 // ℹ️ Connects to the database
 require("./db");
+const path = require('path')
 const app = express()
-const port = 3000
+const port = 3001
+
+const hbs = require("hbs");
 
 app.use(express.static('public'))
+app.set("views", path.join(__dirname, "/", "views"));
+app.set("view engine", "hbs");
 
 
 
@@ -23,39 +28,39 @@ app.use('/', viewRoutes);
 
 app.get("/", (req, res) => {
 
-  res.sendFile(__dirname + "/views/index.html")
-  
+  res.render("index")
+
 })
 
 app.get("/inventory", (req, res) => {
-  
-  res.sendFile(__dirname + "/views/inventory.html")
+
+  res.render("inventory")
 
 })
-app.get("/setting", (req, res) => {
-  
-  res.sendFile(__dirname + "/views/setting.html")
+app.get("/settings", (req, res) => {
+
+  res.render("settings")
 
 })
 
 app.get("/profile", (req, res) => {
-  
-  res.sendFile(__dirname + "/views/profile.html")
+
+  res.render("profile")
 
 })
 
 app.get("/product", (req, res) => {
-  
-     res.sendFile(__dirname + "/views/product/product.html")
-  
-  })
+
+  res.render("product")
+
+})
 
 
 app.get("/category", (req, res) => {
-  
-    res.sendFile(__dirname + "/views/category/category.html")
-  
-  })
+
+  res.render("category")
+
+})
 
 
 app.listen(port, () => {

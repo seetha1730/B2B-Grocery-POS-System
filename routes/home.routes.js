@@ -4,7 +4,7 @@ const Product = require("../models/Product.model");
 const Category = require("../models/Category.model");
 
 router.get("/", (req, res) => {
-  res.sendFile("index.html", { root: "views" });
+  res.render("index", { root: "views" });
 });
 
 router.get("/search/:searchTerm", (req, res, next) => {
