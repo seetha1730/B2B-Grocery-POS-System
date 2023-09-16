@@ -12,6 +12,16 @@ router.get('/category/all', (req, res, next) => {
   .catch(err => next(err));
 });
 
+
+
+// Display the form for adding a new category
+router.get('/category/add-category', (req, res, next) => {
+  Category.find()
+    .then(categoryList => {
+      res.render('category/add-category', { categoryList });
+    })
+    .catch(err => next(err));
+});
 // Handle the POST request to add a new category
 router.post('/category/add-category', fileUploader.single('image'), (req, res, next) => {
     const { categoryName, parentCategory } = req.body;
