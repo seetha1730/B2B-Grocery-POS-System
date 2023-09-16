@@ -20,10 +20,12 @@
 
       <label class="form-label">Category Name</label>
       <select class="custom-select form-select" aria-label="category" name="categoryName">
-        <option value="{{categoryName}}" selected>{{categoryName}}</option>
-        <!-- Add other category options here -->
+        <option value="" selected>Select Category</option>
+        {{#each categoryList}}
+          <option value="{{this.categoryName}}">{{this.categoryName}}</option>
+        {{/each}}
       </select>
-
+      
       <label class="form-label">Stock</label>
 <select class="custom-select form-select" name="stock" aria-label="stock">
   <option value="Instock" selected>Instock</option>

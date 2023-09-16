@@ -22,9 +22,13 @@ router.get("/signup", (req, res, next) => {
   res.render('auth/signup', { root: 'views' });
 })
 
-router.get("/product", (req, res, next) => {
-  res.render('product/product', { root: 'views' });
-})
+// router.get("/product", (req, res, next) => {
+//   res.render('product/product', { root: 'views' });
+// })
+
+// router.get("/category", (req, res, next) => {
+//   res.render('category/category', { root: 'views' });
+// })
 
 
 module.exports = router;

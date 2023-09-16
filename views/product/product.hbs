@@ -25,8 +25,6 @@
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
-              <th>quan</th>
-
               <th>Category</th>
               <th>Stock</th>
               <th class="column-wider">Desc</th>
@@ -35,6 +33,26 @@
             </tr>
           </thead>
           <tbody>
+                  {{#each productList}}
+          <tr>
+  <td>{{inc @index}}</td>
+  <td class="product-image"><img src="{{this.imageUrl}}" /></td>
+  <td>{{this.productName}}<p>{{this.quantity}}</p></td>
+  <td>{{this.productPrice}} euros</td>
+  <td>{{this.categoryName}}</td>
+  <td>{{this.stock}}</td>
+  <td>{{this.description}}</td>
+  <td>
+    <form action="/product/{{_id}}/edit" method="GET"> <!-- Use GET method to navigate to edit page -->
+      <button type="submit" class="edit" title="Edit"><i class="material-icons">&#xE254;</i></button>
+    </form>
+    <form action="/product/{{_id}}/delete" method="POST">
+      <button type="submit" class="delete" title="Delete"><i class="material-icons">&#xE872;</i></button>
+    </form>
+  </td>
+</tr>
+      
+          {{/each}}
             
           </tbody>
       
@@ -47,5 +65,4 @@
 
 
 
-</div>
-</main>
+

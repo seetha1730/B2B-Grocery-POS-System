@@ -35,14 +35,14 @@ router.post('/category/add-category', fileUploader.single('image'), (req, res, n
       })
       .catch(err => next(err));
   });
-// Display the category list
-// router.get('/category', (req, res, next) => {
-//   Category.find().populate('parentCategory')// Populate the parentCategory field
-//     .then(categoryList => {
-//       res.render('category/category', { categoryList });
-//     })
-//     .catch(err => next(err));
-// });
+//Display the category list
+router.get('/category', (req, res, next) => {
+  Category.find().populate('parentCategory')// Populate the parentCategory field
+    .then(categoryList => {
+      res.render('category/category', { categoryList });
+    })
+    .catch(err => next(err));
+});
 
 // Display the edit category page
 router.get('/category/:id/edit', (req, res, next) => {

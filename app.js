@@ -12,6 +12,9 @@ app.set("views", path.join(__dirname, "/", "views"));
 app.set("view engine", "hbs");
 
 
+hbs.registerHelper('inc', function (value, options) {
+  return parseInt(value) + 1;
+});
 
 // Define your routes
 const viewRoutes = require('./routes/view.routes');
