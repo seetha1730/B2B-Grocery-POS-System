@@ -14,11 +14,12 @@
       <label class="form-label">Quantity</label>
       <input class="form-control mr-sm-2" type="text" name="quantity" placeholder="Enter your quantity"
         aria-label="Quantity" value="{{quantity}}" />
-      
+
       <label class="form-label">Product Price</label>
       <input class="form-control mr-sm-2" type="text" name="productPrice" placeholder="Price" aria-label="price" value="{{productPrice}}" />
 
-      <label class="form-label">Category Name</label>
+
+      <label class="form-label">Category Name </label>
       <select class="custom-select form-select" aria-label="category" name="categoryName">
         <option value="" selected>Select Category</option>
         {{#each categoryList}}
@@ -35,7 +36,7 @@
       <label class="form-label">Description</label>
       <textarea class="form-control description mr-sm-2" type="text" name="description" id="" cols="20" rows="10"
         placeholder="Product Description">{{description}}</textarea>
-      
+
       <div class="upload-image col-lg-12 col-md-12">
         <img class="col-lg-3 col-md-3" src="{{imageUrl}}" />
         <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>

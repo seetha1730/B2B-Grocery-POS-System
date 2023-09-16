@@ -5,7 +5,6 @@ function APIGetCall(link){
 
 
 function updateDateTime() {
-  console.log("function called")
   const dateTimeElement = document.getElementById("current-date-time");
   const currentDate = new Date();
 
@@ -45,3 +44,6 @@ function handleClick(e) {
     document.querySelector(selector).classList.add('show');
   }
 }
+
+
+

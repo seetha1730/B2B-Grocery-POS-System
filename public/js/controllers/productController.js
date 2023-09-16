@@ -1,17 +1,16 @@
 const tbody = document.querySelector('#product table tbody')
 
 window.addEventListener("load", (event) => {
-//   APIGetCall("/product/all")
-//   .then(response => response.json())
-//   .then(data => {
-//     const products = data.productList; 
-//     console.log(products)// Replace with the actual data property name
-//     renderCategoryTable(products);
-//   })
-//   .catch(error => {
-//     console.error("Error fetching products data:", error);
-//   });
-// });
+  APIGetCall("/product/all")
+  .then(response => response.json())
+  .then(data => {
+    const products = data.productList;
+    renderCategoryTable(products);
+  })
+  .catch(error => {
+    console.error("Error fetching products data:", error);
+  });
+});
 
 
 // function renderCategoryTable(products) {

@@ -1,5 +1,4 @@
 
-
       <div class="right-panel col-11">
 
         <!-- Categories and product section starts-->
@@ -84,8 +83,11 @@
               <p><b>Total </b><span class="total"><b>$0.00</b></span></p>
 
 
+            <div class="payment type">
+              <button type="button" class="btn btn-secondary checkout-button" id="checkoutBtnCard">Pay by Card</button>
+              <button type="button" class="btn btn-secondary checkout-button" id="checkoutBtnCash">Pay by Cash</button>
+           </div>
 
-              <button type="button" class="btn btn-secondary checkout-button" id="checkoutBtn">Check Out</button>
 
             </div>
 
@@ -108,7 +110,7 @@
         <p>Paying as customer: Guest</p>
 
         <div class="coupon-section">
-          <label for="coupon-code">coupon Code:</label>
+          <label for="coupon-code"> Coupon Code:</label>
           <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
             max="100">
           <button id="apply-coupon">Apply</button>
@@ -145,7 +147,6 @@
         </table>
 
         <button type="button" class="btn btn-primary" id="paymentBtn">Process payment</button>
-        <button type="button" class="btn btn-light print-button">Print Receipt</button>
       </div>
     </div>
 
