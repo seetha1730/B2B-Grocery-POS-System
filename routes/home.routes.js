@@ -9,8 +9,12 @@ router.get("/", (req, res) => {
 
 router.get("/search/:searchTerm", (req, res, next) => {
   const { searchTerm } = req.params;
-  console.log(searchTerm);
-  Product.find({ productName: { $regex: searchTerm, $options: "i" } }) // Case-insensitive search
+  console.log("TEST");
+  Product.find({ productName: { 
+    
+    $regex: searchTerm, $options: "i" } })  // Case-insensitive search
+  
+ 
     .then((searchResults) => {
       res.json(searchResults); // Send the search results as JSON
     })

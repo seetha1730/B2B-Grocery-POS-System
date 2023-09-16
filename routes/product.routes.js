@@ -72,6 +72,23 @@ router.get('/product/all', (req, res, next) => {
 // });
 
 
+
+
+// router.get('/product', (req, res, next) => {
+//   Category.find()
+//     .then(categoryList => {
+//       console.log(categoryList)
+//       // Fetch categoryList here and render product.hbs
+//       Product.find()
+//         .then(productList => {
+//           console.log(productList)
+//           res.render("product/product", { productList, categoryList });
+//         })
+//         .catch(err => next(err));
+//     })
+//     .catch(err => next(err));
+// });
+
 // // GET request to display the edit product page
 // router.get('/product/:id/edit', (req, res, next) => {
 //   const { id } = req.params;

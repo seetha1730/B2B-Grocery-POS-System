@@ -12,29 +12,29 @@ router.get('/category/all', (req, res, next) => {
   .catch(err => next(err));
 });
 
-// // Handle the POST request to add a new category
-// router.post('/category/add-category', fileUploader.single('image'), (req, res, next) => {
-//     const { categoryName, parentCategory } = req.body;
+// Handle the POST request to add a new category
+router.post('/category/add-category', fileUploader.single('image'), (req, res, next) => {
+    const { categoryName, parentCategory } = req.body;
   
-//     if (!categoryName) {
-//       const errors = [{ msg: 'Category name is required.' }];
-//       return res.render('category/add-category', { errors, categoryName, parentCategory });
-//     }
+    if (!categoryName) {
+      const errors = [{ msg: 'Category name is required.' }];
+      return res.render('category/add-category', { errors, categoryName, parentCategory });
+    }
   
-//     // Continue with creating the category
-//     const imageUrl = req.file ? req.file.path : '';
+    // Continue with creating the category
+    const imageUrl = req.file ? req.file.path : '';
   
-//     Category.create({
-//       categoryName,
-//       parentCategory: parentCategory || null, // Set to null if not provided
-//       imageUrl,
-//     })
-//       .then(() => {
-//         console.log('Category added successfully');
-//         res.redirect('/category'); // Redirect to the category list page
-//       })
-//       .catch(err => next(err));
-//   });
+    Category.create({
+      categoryName,
+      parentCategory: parentCategory || null, // Set to null if not provided
+      imageUrl,
+    })
+      .then(() => {
+        console.log('Category added successfully');
+        res.redirect('/category'); // Redirect to the category list page
+      })
+      .catch(err => next(err));
+  });
 // Display the category list
 // router.get('/category', (req, res, next) => {
 //   Category.find().populate('parentCategory')// Populate the parentCategory field
