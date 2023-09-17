@@ -1,10 +1,10 @@
-const tbody = document.querySelector('#category table tbody')
+//const tbody = document.querySelector('#category table tbody')
 
 window.addEventListener("load", (event) => {
 //   APIGetCall("/category/all")
 //   .then(response => response.json())
 //   .then(data => {
-//     const categories = data.categoryList; 
+//     const categories = data.categoryList;
 //     console.log(categories)// Replace with the actual data property name
 //     renderCategoryTable(categories);
 //   })

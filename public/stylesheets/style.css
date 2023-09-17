@@ -20,9 +20,9 @@ body {
     position: relative;
   }
   .left-panel-navbar li {
-   
+
     text-align: center;
-   
+
   }
   i.bi {
     margin-right: 5px;
@@ -50,7 +50,7 @@ nav.navbar.left-panel-navbar {
     justify-content: flex-start;
     flex-direction: column;
     align-items:center
-  
+
 }
 .logo {
   width: 70px;
@@ -58,7 +58,7 @@ nav.navbar.left-panel-navbar {
 }
   /* .left-panel-navbar {
     background: #fff;
-  
+
     height: 100%;
     width: 125px;
     display: flex;
@@ -82,7 +82,7 @@ nav.navbar.left-panel-navbar {
   }
   .left-section .form-control {
     padding-left: 40px;
-    background: url(/images/search-icon.png) no-repeat 10px center #fff;
+    background: url("public/images/search-icon.png") no-repeat 10px center #fff;
     font-size: 20px;
     display: inline-block;
     vertical-align: top;
@@ -144,10 +144,11 @@ nav.navbar.left-panel-navbar {
   }
   .card.product {
     margin: 5px;
-    width: 23.5%;
+    width: 200px;
     padding: 10px;
   }
   .product-name {
+    padding: 10px;
     color: #f1743c;
     margin: 0;
   }
@@ -259,7 +260,6 @@ nav.navbar.left-panel-navbar {
     background: #edbca6;
     height: 900px;
     margin: 0;
-    margin: 0;
     width: 91.6%;
     border-radius: 0 20px 20px 0;
   }
@@ -321,7 +321,7 @@ nav.navbar.left-panel-navbar {
     margin-top: 30px;
     height: 45px;
   }
-  .bi-category{width:30px;height:30px;background:url(/images/category.png);
+  .bi-category{width:30px;height:30px;background:url("public/images/category.png");
     display: flex;
     background-size: 100%;
     align-items: center;
@@ -331,7 +331,7 @@ nav.navbar.left-panel-navbar {
   .bi-product{
     width: 35px;
     height: 35px;
-    background: url(/images/add-product.png);
+    background: url("/public/images/add-product.png");
     display: flex;
     background-size: 100%;
     align-items: center;
@@ -681,3 +681,12 @@ nav.navbar.left-panel-navbar {
       margin: 0;
     }
   }
+
+#apply-coupon{
+  background-color:#f1743c ;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 8px;
+}
+

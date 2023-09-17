@@ -5,7 +5,7 @@ window.addEventListener("load", (event) => {
   .then(response => response.json())
   .then(data => {
     const products = data.productList;
-    renderCategoryTable(products);
+    //renderCategoryTable(products);
   })
   .catch(error => {
     console.error("Error fetching products data:", error);
@@ -40,6 +40,6 @@ window.addEventListener("load", (event) => {
 //     tbody.appendChild(row);
 
 
- });
+// });
 // Call the function to render the table with sample data
 
