@@ -1,15 +1,17 @@
-let checkoutBtnCard = document.getElementById("checkoutBtnCard");
-let checkoutPopup = document.getElementById("checkout-popup");
-let checkoutBtnCash = document.getElementById("checkoutBtnCash");
-let close = document.getElementsByClassName("close");
-let index= 0;
+// HTML ELEMENTS
+const checkoutBtnCard = document.getElementById("checkoutBtnCard");
+const checkoutPopup = document.getElementById("checkout-popup");
+const checkoutBtnCash = document.getElementById("checkoutBtnCash");
+const applyCouponButton = document.getElementById("apply-coupon");
+const checkTablePopupBody = document.getElementById('checkout-table-popup-body')
+const checkTableFooterBody = document.getElementById('checkout-table-footer-body')
+
+// GLOBAL VARIABLES
+let index = 0;
 let checkoutOrderNumber = 0;
 
-
 // FUNCTIONS
-
 const addItemToPopupCart = (shoppingItem) => {
-  const checkTablePopupBody = document.getElementById('checkout-table-popup-body')
   const popupCartItem = document.createElement('tr')
 
   const productNameFirstLetterUpperCase = `${shoppingItem.productName.charAt(0).toUpperCase()}${shoppingItem.productName.slice(1)}`
@@ -21,7 +23,6 @@ const addItemToPopupCart = (shoppingItem) => {
     <td>${productNameFirstLetterUpperCase}</td>
     <td>${shoppingItem.noItems}</td>
     <td>$ ${priceSplitTwoDecimal}</td>
-
   `
 
   if (checkTablePopupBody) {
@@ -29,171 +30,133 @@ const addItemToPopupCart = (shoppingItem) => {
   }
 }
 
-//checkout popup card
-
-checkoutBtnCard?.addEventListener("click", function () {
-  checkoutPopup.style.display = "block";
-  const TAX = 1.1
-  const totalPrice = (shoppingCart.reduce((acc, curr) => {
-    return acc + curr.productPrice * curr.noItems
-  }, 0) * TAX).toFixed(2)
-
-  checkoutPopup.innerHTML = `
-     <div class="checkout-content">
-        <span class="close">&times;</span>
-        <h2>Checkout Order: ${checkoutOrderNumber += 1}</h2>
-        <h1>Amount to Pay:<b class="amount-total">$ ${(totalPrice)}</b></h1>
-
-        <p>Cashier: Brenda</p>
-        <p>Paying as customer: Guest</p>
-
-        <div class="coupon-section">
-          <label for="coupon-code">coupon Code:</label>
-          <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
-            max="100">
-          <button id="apply-coupon">Apply</button>
-        </div>
-
-        <table id="checkout-table-popup" class="table">
-          <thead>
-            
-          </thead>
-          <tbody id="checkout-table-popup-body">
-            
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row" colspan="3">Subtotal:</th>
-              <td class="product-total"><span class="checkout-subtotal"><b>$ ${shoppingCart[0].productPrice.toFixed(2)}</b></span></td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="3">Tax:</th>
-              <td class="product-total"><span class="checkout-tax"><b>$ ${shoppingCart[0].productPrice.toFixed(2)*TAX} </b></span></td>
-            </tr>
-
-            <tr>
-              <th scope="row" colspan="3">Total:</th>
-              <td class="product-total"><span class="checkout-total"><b>$ ${(totalPrice)}</b></span></td>
-            </tr>
-
-          </tfoot>
-        </table>
-
-        <button type="button" class="btn btn-primary" id="paymentBtn"> Pay </button>
-
-
-      </div>`
-
-  shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
-
-})
-close?.addEventListener("click", function () {
-  checkoutPopup.style.display = "none";
-})
-
-//checkout popup cash
-
-checkoutBtnCash?.addEventListener("click", function () {
-
-
-  checkoutPopup.style.display = "block";
-
-  checkoutPopup.innerHTML = `
-     <div class="checkout-content">
-        <span class="close">&times;</span>
-        <h2>Checkout Order #3484</h2>
-        <h1>Amount to Pay:<b class="amount-total"> $${(shoppingCart.noItems * shoppingCart.productPrice).toFixed(2)}</b></h1>
-
-        <p>Cashier: Brenda</p>
-        <p>Paying as customer: Guest</p>
-
-        <div class="coupon-section">
-          <label for="coupon-code">coupon Code:</label>
-          <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
-            max="100">
-          <button id="apply-coupon">Apply</button>
-        </div>
-
-        <table id="checkout-table" class="table">
-          <thead>
-            <tr>
-              <th scope="col">index</th>
-              <th scope="col" class="product-name"> ${shoppingCart[0].productName.charAt(0).toUpperCase() + shoppingCart[0].productName.slice(1)}</th>
-              <th scope="col"> ${shoppingCart[0].quantity}</th>
-              <th scope="col">$ ${shoppingCart[0].productPrice.toFixed(2)}</th>
-            </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row" colspan="3">Subtotal:</th>
-              <td class="product-total"><span class="checkout-subtotal"><b>$ ${shoppingCart[0].productPrice.toFixed(2)}</b></span></td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="3">Tax:</th>
-              <td class="product-total"><span class="checkout-tax"><b>$ ${shoppingCart[0].productPrice.toFixed(2) * 0.10}</b></span></td>
-            </tr>
-
-            <tr>
-              <th scope="row" colspan="3">Total:</th>
-              <td class="product-total"><span class="checkout-total"><b>$ ${shoppingCart[0].productPrice.toFixed(2) + shoppingCart[0].productPrice.toFixed(2) * 0.10}</b></span></td>
-            </tr>
-
-          </tfoot>
-        </table>
-
-        <button type="button" class="btn btn-primary" id="paymentBtn"> Pay </button>
-
-
-      </div>`
-
-
-})
-close?.addEventListener("click", function () {
-  checkoutPopup.style.display = "none";
-})
-
-// Discount code
-let totalAmount = shoppingCart.reduce((total, item) => total + item.quantity * item.productPrice, 0)
-
-function applyDiscount() {
+const applyDiscount = () => {
   const couponCodeInput = document.getElementById("coupon-code")
+  const amountToPay = document.getElementById("amount-total")
+
+  let totalAmount = 0
+  let discount = 0.10
+
   const discountCode = couponCodeInput.value;
 
+  shoppingCart.forEach((product) => {
+    totalAmount = totalAmount + product.productPrice * product.noItems
+  })
+
   if (discountCode === "WELCOME10") {
-    const discountAmount = totalAmount * 0.1;
+    const discountAmount = (totalAmount * discount).toFixed(2);
+    console.log(discountAmount)
+    const newAmountAfterDiscount = (totalAmount - discountAmount).toFixed(2)
 
-    totalAmount -= discountAmount;
+    const discountLine = document.createElement('tr');
 
-    const amountTotal = document.querySelector(".product-total");
-    amountTotal.textContent = `$ ${totalAmount.toFixed(2)}`;
+    discountLine.innerHTML = `
+      <th scope="row"> Discount amount: 
+         <td classname = "product-total"> <b> $ ${discountAmount} </b> </td>
+      </th>
+      <th scope="row"> New total: 
+         <td classname = "product-total"> <b> $ ${newAmountAfterDiscount} </b></td>
+      </th>
+      `
+
+    if (checkTableFooterBody) {
+      amountToPay.innerHTML =  `$ ${newAmountAfterDiscount}`
+      checkTableFooterBody.appendChild(discountLine)
+    }
+    // Update the displayed total
+    const amountTotal = document.getElementsByClassName("product-total");
+    amountTotal.textContent = `$ ${newAmountAfterDiscount}`;
   } else {
-    alert("Invalid coupon code. Please try again.")
+    alert("Invalid coupon code. Please try again.");
   }
 }
 
-const applyCouponButton = document.getElementById("apply-coupon");
+// LISTENERS
+checkoutBtnCard?.addEventListener("click", () => {
+  checkoutPopup.style.display = "block";
+
+  const TAX = 1.1
+  const totalPrice = shoppingCart.reduce((acc, curr) => {
+    return acc + curr.productPrice * curr.noItems
+  }, 0).toFixed(2)
+  const totalPriceWithTax = (totalPrice * TAX).toFixed(2)
+  const onlyTax = (totalPriceWithTax - totalPrice).toFixed(2)
+
+  const amountTotalElement = document.getElementById('amount-total')
+  const checkoutOrderNumberElement = document.getElementById('checkout-order-popup')
+  const totalPriceNoTaxElement = document.getElementById('total-price-no-tax')
+  const totalPriceOnlyTaxElement = document.getElementById('total-price-only-tax')
+  const totalPriceWithTaxElement = document.getElementById('total-price-with-tax')
+  const closeButton = document.getElementById("close");
+
+  amountTotalElement.innerHTML = `$ ${totalPriceWithTax}`
+  checkoutOrderNumberElement.innerHTML =  ` ${checkoutOrderNumber + 1}`
+  totalPriceNoTaxElement.innerHTML = `$ ${totalPrice}`
+  totalPriceOnlyTaxElement.innerHTML = `$ ${onlyTax}`
+  totalPriceWithTaxElement.innerHTML = `$ ${totalPriceWithTax}`
+
+  shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
+
+  closeButton.addEventListener("click", function () {
+    checkoutPopup.style.display = "none";
+  });
+  closeButton.style.cursor = "pointer";
+})
+
+checkoutBtnCash?.addEventListener("click", () => {
+  checkoutPopup.style.display = "block";
+
+  const TAX = 1.1
+  const totalPrice = shoppingCart.reduce((acc, curr) => {
+    return acc + curr.productPrice * curr.noItems
+  }, 0).toFixed(2)
+  const totalPriceWithTax = (totalPrice * TAX).toFixed(2)
+  const onlyTax = (totalPriceWithTax - totalPrice).toFixed(2)
+
+  const amountTotalElement = document.getElementById('amount-total')
+  const checkoutOrderNumberElement = document.getElementById('checkout-order-popup')
+  const totalPriceNoTaxElement = document.getElementById('total-price-no-tax')
+  const totalPriceOnlyTaxElement = document.getElementById('total-price-only-tax')
+  const totalPriceWithTaxElement = document.getElementById('total-price-with-tax')
+  const closeButton = document.getElementById("close");
+
+  amountTotalElement.innerHTML = `$ ${totalPriceWithTax}`
+  checkoutOrderNumberElement.innerHTML =  ` ${checkoutOrderNumber + 1}`
+  totalPriceNoTaxElement.innerHTML = `$ ${totalPrice}`
+  totalPriceOnlyTaxElement.innerHTML = `$ ${onlyTax}`
+  totalPriceWithTaxElement.innerHTML = `$ ${totalPriceWithTax}`
+
+  shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
+
+  closeButton.addEventListener("click", function () {
+    checkoutPopup.style.display = "none";
+  });
+  closeButton.style.cursor = "pointer";
+})
+
 applyCouponButton.addEventListener("click", applyDiscount);
 
+//const paymentPopup = document.getElementById("payment-popup");
+//const paymentClose = document.querySelector(".payment-close");
+//const payButton = document.getElementById("paymentBtn");
 
-//processing payment popup
-
-const paymentBtn = document.getElementById("paymentBtn");
-const paymentPopup = document.getElementById("payment-popup");
-const paymentClose = document.querySelector(".payment-close");
-
-
-paymentBtn?.addEventListener("click", function () {
+/*payButton.addEventListener("click", function () {
+  console.log("button clicked")
   paymentPopup.style.display = "block";
   checkoutPopup.style.display = "none";
 
+  const popupMessage = document.createElement("div");
+  popupMessage.innerHTML = `
+        <h1>Please follow the instructions on the terminal</h1>
+    `;
 
-})
+
+  // Append the pop-up message to the body
+  document.body.appendChild(popupMessage);
+});
+
 paymentClose?.addEventListener("click", function () {
   paymentPopup.style.display = "none";
-})
-
+})*/
 
 

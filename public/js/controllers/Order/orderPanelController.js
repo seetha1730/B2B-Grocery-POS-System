@@ -32,7 +32,7 @@ function renderCategories(categories) {
     carouselItem.innerHTML = `
       <img src="" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <span>${category.categoryName}</span>
+        <span class="category-name-carousel">${category.categoryName}</span>
       </div>
     `;
 
@@ -42,8 +42,6 @@ function renderCategories(categories) {
 
 // Call getCategories to populate the list
 getCategories();
-
-
 
 // Function to update the total based on a product
 function updateTotal(product) {
@@ -94,9 +92,10 @@ function displaySearchResults(data) {
 // Function to create a product card
 function createProductCard(product) {
   const productCard = document.createElement("div");
+  const productNameCapitalized = product.productName.charAt(0).toUpperCase()+product.productName.slice(1)
   productCard.classList.add("card", "product", "col-lg-3", "col-md-3");
   productCard.innerHTML = `
-    <h5 class="card-title product-name">${product.productName}</h5>
+    <h5 class="card-title product-name">${productNameCapitalized}</h5>
     <div class="priceAddCart row">
       <p class="col-8 product-quantity">${product.quantity}</p>
       <p class="card-text product-price col-8">$${product.productPrice}</p>
@@ -134,8 +133,8 @@ function clearSearchResults() {
 function updateCartDisplay() {
   productDisplaySection.innerHTML = "";
 
-  shoppingCart.forEach((cartItem) => {
-    const productItem = createCartItem(cartItem);
+  shoppingCart.forEach((product) => {
+    const productItem = createProductCard(product);
     productDisplaySection.appendChild(productItem);
   });
 
@@ -143,6 +142,32 @@ function updateCartDisplay() {
   taxEle.innerHTML = `$ ${parseFloat(tax).toFixed(2)}`;
   totalEle.innerHTML = `$ ${parseFloat(total).toFixed(2)}`;
 }
+/*
+-------------------------------- WIP - display categories and products dynamically on the home page ----------------
+
+// Event listener for the category links in the home page
+const categoryLinks = document.getElementById(".product-container");
+categoryLinks.forEach((categoryLink) => {
+  console.log("Entered the categoryLinks part", categoryLink) /////////// TESTING
+  categoryLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    const selectedCategory = event.target.getAttribute(".category-name-carousel");
+
+    // Fetch products based on the selected category
+    fetch(`/category/${selectedCategory}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Display products for the selected category
+        console.log("updateProductDisplay function: ", data)
+        updateCartDisplay(data);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  });
+});
+*/
+
 
 // Function to create a cart item
 function createCartItem(cartItem) {
@@ -203,3 +228,5 @@ function decrement(event) {
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
+
+
