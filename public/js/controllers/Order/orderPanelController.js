@@ -1,4 +1,4 @@
-
+// HTML ELEMENTS
 const searchForm = document.getElementById("product-search-form");
 const searchInput = document.getElementById("product-search");
 const searchResultsContainer = document.getElementById("product-container");
@@ -9,6 +9,7 @@ const totalEle = document.querySelector(".total");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 
+// GLOBAL VARIABLES
 let shoppingCart = [];
 let subTotal = 0;
 let tax = 0;
@@ -16,6 +17,8 @@ let total = 0;
 let offset = 0;
 let categories = []
 
+
+// Api call
 // Get All Categories from the DB, populate the List
 const getCategories = () => {
   APIGetCall(`/category/all`)
@@ -26,6 +29,8 @@ const getCategories = () => {
     })
     .catch(console.error);
 };
+
+//Functions
   function renderCategories(categories) {
   const categoriesSection = document.querySelector(".categories-section");
 
@@ -41,20 +46,15 @@ const getCategories = () => {
 });
 }
 
-getCategories();
+// Function to fetch search results and display them
+function fetchSearchResults(searchTerm) {
+  // Make an AJAX request to the server to fetch search results
+  APIGetCall(`/search/${searchTerm}`)
+    .then((response) => response.json())
+    .then(displaySearchResults)
+    .catch(console.error);
+}
 
-// Add event listener for the "Previous" button
-prevButton.addEventListener("click", () => {
-  document.querySelector('.categories-section').scrollLeft += -500;
-
-});
-
-// Add event listener for the "Next" button
-nextButton.addEventListener("click", () => {
-
-  document.querySelector('.categories-section').scrollLeft += 500;
-
-});
 
 // Function to update the total based on a product
 function updateTotal(product) {
@@ -65,8 +65,6 @@ function updateTotal(product) {
   updateCartDisplay();
 }
 
-// Event listener for the search input field
-searchInput.addEventListener("input", handleSearchInput);
 
 // Function to handle input in the search field
 function handleSearchInput(event) {
@@ -79,14 +77,6 @@ function handleSearchInput(event) {
   }
 }
 
-// Function to fetch search results and display them
-function fetchSearchResults(searchTerm) {
-  // Make an AJAX request to the server to fetch search results
-  APIGetCall(`/search/${searchTerm}`)
-    .then((response) => response.json())
-    .then(displaySearchResults)
-    .catch(console.error);
-}
 
 // Function to display search results
 function displaySearchResults(data) {
@@ -124,19 +114,6 @@ function createProductCard(product) {
   return productCard;
 }
 
-// Function to handle adding a product to the cart
-function handleAddToCart(event) {
-  const productData = JSON.parse(event.target.getAttribute("data-product"));
-  const findProduct = shoppingCart.find((item) => item._id === productData._id);
-
-  if (!findProduct) {
-    shoppingCart.push({ ...productData, noItems: 1 });
-  } else {
-    findProduct.noItems++;
-  }
-  updateTotal(productData);
-}
-
 // Function to clear search results
 function clearSearchResults() {
   searchResultsContainer.innerHTML = "";
@@ -155,56 +132,19 @@ function updateCartDisplay() {
   taxEle.innerHTML = `$ ${parseFloat(tax).toFixed(2)}`;
   totalEle.innerHTML = `$ ${parseFloat(total).toFixed(2)}`;
 }
-/*
--------------------------------- WIP - display categories and products dynamically on the home page ----------------
-
-// Event listener for the category links in the home page
-const categoryLinks = document.getElementById(".product-container");
-categoryLinks.forEach((categoryLink) => {
-  console.log("Entered the categoryLinks part", categoryLink) /////////// TESTING
-  categoryLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    const selectedCategory = event.target.getAttribute(".category-name-carousel");
-
-    // Fetch products based on the selected category
-    fetch(`/category/${selectedCategory}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Display products for the selected category
-        console.log("updateProductDisplay function: ", data)
-        updateCartDisplay(data);
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  });
-});
-*/
 
 
-// Function to create a cart item
-function createCartItem(cartItem) {
-  const productItem = document.createElement("div");
-  productItem.classList.add("product-add-section");
-  productItem.innerHTML = `
-    <div class="product-in-cart">
-      <p class="product-name">${cartItem.productName}</p>
-      <h4 class="product-price">$${cartItem.productPrice.toFixed(2)}</h4>
-    </div>
-    <div class="input-group">
-      <i class="bi bi-dash decrement" data-id="${cartItem._id}"></i>
-      <span class="input-number form-control quantity">${cartItem.noItems}</span>
-      <i class="bi bi-plus increment" data-id="${cartItem._id}"></i>
-    </div>
-  `;
+// Function to handle adding a product to the cart
+function handleAddToCart(event) {
+  const productData = JSON.parse(event.target.getAttribute("data-product"));
+  const findProduct = shoppingCart.find((item) => item._id === productData._id);
 
-  const incrementButton = productItem.querySelector(".increment");
-  incrementButton.addEventListener("click", increment);
-
-  const decrementButton = productItem.querySelector(".decrement");
-  decrementButton.addEventListener("click", decrement);
-
-  return productItem;
+  if (!findProduct) {
+    shoppingCart.push({ ...productData, noItems: 1 });
+  } else {
+    findProduct.noItems++;
+  }
+  updateTotal(productData);
 }
 
 // Function to handle incrementing a cart item
@@ -237,9 +177,89 @@ function decrement(event) {
   updateCartDisplay();
 }
 
+// Function to create a cart item
+function createCartItem(cartItem) {
+  const productItem = document.createElement("div");
+  productItem.classList.add("product-add-section");
+  productItem.innerHTML = `
+    <div class="product-in-cart">
+      <p class="product-name">${cartItem.productName}</p>
+      <h4 class="product-price">$${cartItem.productPrice.toFixed(2)}</h4>
+    </div>
+    <div class="input-group">
+      <i class="bi bi-dash decrement" data-id="${cartItem._id}"></i>
+      <span class="input-number form-control quantity">${cartItem.noItems}</span>
+      <i class="bi bi-plus increment" data-id="${cartItem._id}"></i>
+    </div>
+  `;
+
+  const incrementButton = productItem.querySelector(".increment");
+  incrementButton.addEventListener("click", increment);
+
+  const decrementButton = productItem.querySelector(".decrement");
+  decrementButton.addEventListener("click", decrement);
+
+  return productItem;
+}
+
+
 // Prevent the form from submitting
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
+
+
+
+
+// Add event listener for the "Previous" button
+prevButton.addEventListener("click", () => {
+  document.querySelector('.categories-section').scrollLeft += -500;
+
+});
+
+// Add event listener for the "Next" button
+nextButton.addEventListener("click", () => {
+
+  document.querySelector('.categories-section').scrollLeft += 500;
+
+});
+
+
+// Event listener for the search input field
+searchInput.addEventListener("input", handleSearchInput);
+
+getCategories();
+
+
+
+
+/*
+-------------------------------- WIP - display categories and products dynamically on the home page ----------------
+
+// Event listener for the category links in the home page
+const categoryLinks = document.getElementById(".product-container");
+categoryLinks.forEach((categoryLink) => {
+  console.log("Entered the categoryLinks part", categoryLink) /////////// TESTING
+  categoryLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    const selectedCategory = event.target.getAttribute(".category-name-carousel");
+
+    // Fetch products based on the selected category
+    fetch(`/category/${selectedCategory}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Display products for the selected category
+        console.log("updateProductDisplay function: ", data)
+        updateCartDisplay(data);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  });
+});
+*/
+
+
+
 
 
