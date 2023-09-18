@@ -1,3 +1,4 @@
+
 const searchForm = document.getElementById("product-search-form");
 const searchInput = document.getElementById("product-search");
 const searchResultsContainer = document.getElementById("product-container");
@@ -5,21 +6,27 @@ const productDisplaySection = document.querySelector(".product-display-section")
 const subTotalEle = document.querySelector(".subtotal");
 const taxEle = document.querySelector(".tax");
 const totalEle = document.querySelector(".total");
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
 
 let shoppingCart = [];
 let subTotal = 0;
 let tax = 0;
 let total = 0;
+let offset = 0;
+let categories = []
 
 // Get All Categories from the DB, populate the List
 const getCategories = () => {
   APIGetCall(`/category/all`)
     .then((response) => response.json())
-    .then(renderCategories)
+    .then(data => {
+      renderCategories(data)
+      categories = data;
+    })
     .catch(console.error);
 };
-  
-function renderCategories(categories) {
+  function renderCategories(categories) {
   const categoriesSection = document.querySelector(".categories-section");
 
   categories.categoryList.forEach((category) => {
@@ -34,9 +41,20 @@ function renderCategories(categories) {
 });
 }
 
-// Call getCategories to populate the list
 getCategories();
 
+// Add event listener for the "Previous" button
+prevButton.addEventListener("click", () => {
+  document.querySelector('.categories-section').scrollLeft += -500;
+
+});
+
+// Add event listener for the "Next" button
+nextButton.addEventListener("click", () => {
+
+  document.querySelector('.categories-section').scrollLeft += 500;
+
+});
 
 // Function to update the total based on a product
 function updateTotal(product) {

@@ -82,7 +82,7 @@ nav.navbar.left-panel-navbar {
   }
   .left-section .form-control {
     padding-left: 40px;
-    background: url("public/images/search-icon.png") no-repeat 10px center #fff;
+    background: url("/images/search-icon.png") no-repeat 10px center #fff;
     font-size: 20px;
     display: inline-block;
     vertical-align: top;
@@ -358,7 +358,7 @@ position: relative;
     margin-top: 30px;
     height: 45px;
   }
-  .bi-category{width:30px;height:30px;background:url("public/images/category.png");
+  .bi-category{width:30px;height:30px;background:url("/images/category.png");
     display: flex;
     background-size: 100%;
     align-items: center;
@@ -368,7 +368,7 @@ position: relative;
   .bi-product{
     width: 35px;
     height: 35px;
-    background: url("/public/images/add-product.png");
+    background: url("/images/add-product.png");
     display: flex;
     background-size: 100%;
     align-items: center;
@@ -703,6 +703,13 @@ position: relative;
 
 
   /* checkout popup  ends*/
+#product-search-form {
+    display: flex;
+    justify-content: space-between;
+}
+input#product-search {
+  width: 55%;
+}
 
 
   /** Table for product ends **/
