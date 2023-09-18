@@ -18,26 +18,20 @@ const getCategories = () => {
     .then(renderCategories)
     .catch(console.error);
 };
-
+  
 function renderCategories(categories) {
-  const carouselInner = document.querySelector(".carousel-inner");
+  const categoriesSection = document.querySelector(".categories-section");
 
-  categories.categoryList.forEach((category, index) => {
-    const carouselItem = document.createElement("div");
-    carouselItem.classList.add("carousel-item", "category", "col-3");
-    if (index === 0) {
-      carouselItem.classList.add("active");
-    }
+  categories.categoryList.forEach((category) => {
+    const categoryDiv = document.createElement("div");
+    categoryDiv.classList.add("category","col-2");
+      categoryDiv.innerHTML = `
+    <img class="category-img" src="${category.imageUrl}"/>
+        <p>${category.categoryName}</p>
+      `;
 
-    carouselItem.innerHTML = `
-      <img src="" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <span>${category.categoryName}</span>
-      </div>
-    `;
-
-    carouselInner.appendChild(carouselItem);
-  });
+    categoriesSection.appendChild(categoryDiv);
+});
 }
 
 // Call getCategories to populate the list

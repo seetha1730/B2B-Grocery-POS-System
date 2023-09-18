@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 
 router.get("/search/:searchTerm", (req, res, next) => {
   const { searchTerm } = req.params;
-  console.log("TEST");
   Product.find({ productName: { 
     
     $regex: searchTerm, $options: "i" } })  // Case-insensitive search

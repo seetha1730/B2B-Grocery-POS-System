@@ -5,6 +5,16 @@ button blue 63a0f1
 button biege ffecec
 panel f6f7fa
 Orange f1743c
+
+lightblue :#8ecae6
+dark lightblue :#219ebc
+dark blue :#023047
+yellow:# ffb703
+
+orange  #fb8500
+light green :#cad2c5
+grey :e5e5e5
+
 */
 
 body {
@@ -89,7 +99,11 @@ nav.navbar.left-panel-navbar {
     height: 60px;
     border-radius: 15px;
   }
-  .loadmore button {
+
+  .categories-section::-webkit-scrollbar{
+    display: none;
+   }
+  /* .loadmore button {
     background: #f1743c;
     color: #f6f7fa;
     border: none;
@@ -101,28 +115,73 @@ nav.navbar.left-panel-navbar {
     align-items: center;
     justify-content: center;
     font-size: 30px;
-  }
-  .loadmore button span {
+  } */
+  /* .loadmore button span {
     margin-top: -15px;
   }
   .loadmore {
     display: flex;
     justify-content: flex-end;
-  }
-  .categories-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
+  } */
+
+  #prev-button {
+    position: absolute;
+    left: 0;
+    background: #f1743c;
+    color: #f6f7fa;
+    border: none;
     border-radius: 15px;
-    padding: 20px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    
+ 
+}
+.categories-container i.bi{
+  
+  color: #f6f7fa;
+  
+ 
+}
+#next-button{
+  position: absolute;
+  right: 0;
+  background: #f1743c;
+  border: none;
+  border-radius: 15px;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  
+
+
+}
+.categories-container{
+position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+ .categories-section {
+  display: flex;
+  
+    align-items: center;
+    border-radius: 15px;
     margin: 20px 0;
-    border: 1px solid #f1743c;
-  }
+    overflow: scroll;
+  } 
   .categories-section .category.active {
     background: #edbca6;
     font-size: 20px;
-  }
+  } 
   .categories-section .category {
     display: flex;
     justify-content: center;
@@ -130,7 +189,15 @@ nav.navbar.left-panel-navbar {
     border-radius: 10px;
     font-size: 20px;
     color: #292c4b;
-  }
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid grey;
+    margin: 0 5px;
+    height: 150px;
+}
+  .categories-section .category-img {
+    width: 60px;
+}
   .right-section {
     display: flex;
     justify-content: center;
@@ -281,7 +348,6 @@ nav.navbar.left-panel-navbar {
     font-size: 1em;
       height: 45px;
       border-radius: 15px;
-      width: 90%;
       color: #f1743c;
       border-color: #edbca6;
   }
@@ -389,11 +455,12 @@ nav.navbar.left-panel-navbar {
   } 
   
   table.table tr:nth-child(odd){
-    background-color: #edbca6;
+    background-color: #e5e5e5;
+   
   }
   
   table.table tr:hover{
-    background-color: #f1743c;
+    background-color: #cad2c5;
   }
   
   table.table tbody td {
@@ -666,7 +733,14 @@ nav.navbar.left-panel-navbar {
   
   
   /* checkout popup  ends*/
+  .carousel-inner .carousel-item .col-3 {
+    float: left;
+  }
   
+  .carousel-inner .carousel-item {
+    display: flex;
+    flex-wrap: wrap;
+  }
   
   /** Table for product ends **/
   @media (min-width: 768px) and (max-width: 1239px) {
