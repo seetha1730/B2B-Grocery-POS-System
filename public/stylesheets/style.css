@@ -92,26 +92,7 @@ nav.navbar.left-panel-navbar {
   .categories-section::-webkit-scrollbar{
     display: none;
    }
-  /* .loadmore button {
-    background: #f1743c;
-    color: #f6f7fa;
-    border: none;
-    border-radius: 15px;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-  } */
-  /* .loadmore button span {
-    margin-top: -15px;
-  }
-  .loadmore {
-    display: flex;
-    justify-content: flex-end;
-  } */
+ 
 
   #prev-button {
     position: absolute;
