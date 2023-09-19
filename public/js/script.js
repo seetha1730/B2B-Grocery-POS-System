@@ -1,8 +1,11 @@
+// HTML ELEMENTS
+const buttons = document.querySelector('.setting-buttons');
+const panels = document.querySelectorAll('.panel');
 
+// FUNCTIONS
 function APIGetCall(link){
   return fetch(link)
 }
-
 
 function updateDateTime() {
   const dateTimeElement = document.getElementById("current-date-time");
@@ -16,19 +19,6 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-// Cache out buttons container, and all of the panels
-const buttons = document.querySelector('.setting-buttons');
-const panels = document.querySelectorAll('.panel');
-const search_input = document.getElementById('product-search');
-
-
-
-// Add an event listener to the buttons container
-buttons?.addEventListener('click', handleClick);
-//search_input?.addEventListener("input", handleSearch )
-
-
-// When a child element of `buttons` is clicked
 function handleClick(e) {
   if (e.target.matches('button')) {
     // Hide all panels by removing the 'show' class
@@ -44,6 +34,10 @@ function handleClick(e) {
     document.querySelector(selector).classList.add('show');
   }
 }
+
+// LISTENERS
+buttons?.addEventListener('click', handleClick);
+
 
 
 
