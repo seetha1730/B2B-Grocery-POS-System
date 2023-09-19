@@ -14,9 +14,7 @@ let shoppingCart = [];
 let subTotal = 0;
 let tax = 0;
 let total = 0;
-let offset = 0;
 let categories = []
-
 
 // Api call
 // Get All Categories from the DB, populate the List
@@ -31,7 +29,7 @@ const getCategories = () => {
 };
 
 //Functions
-  function renderCategories(categories) {
+function renderCategories(categories) {
   const categoriesSection = document.querySelector(".categories-section");
 
   categories.categoryList.forEach((category) => {
@@ -55,7 +53,6 @@ function fetchSearchResults(searchTerm) {
     .catch(console.error);
 }
 
-
 // Function to update the total based on a product
 function updateTotal(product) {
   const productTax = product.productPrice * 0.1; // Assuming 10% tax, adjust as needed
@@ -64,7 +61,6 @@ function updateTotal(product) {
   total = subTotal + tax;
   updateCartDisplay();
 }
-
 
 // Function to handle input in the search field
 function handleSearchInput(event) {
@@ -76,7 +72,6 @@ function handleSearchInput(event) {
     clearSearchResults();
   }
 }
-
 
 // Function to display search results
 function displaySearchResults(data) {
@@ -123,8 +118,8 @@ function clearSearchResults() {
 function updateCartDisplay() {
   productDisplaySection.innerHTML = "";
 
-  shoppingCart.forEach((product) => {
-    const productItem = createProductCard(product);
+  shoppingCart.forEach((cartItem) => {
+    const productItem = createCartItem(cartItem);
     productDisplaySection.appendChild(productItem);
   });
 
@@ -132,7 +127,6 @@ function updateCartDisplay() {
   taxEle.innerHTML = `$ ${parseFloat(tax).toFixed(2)}`;
   totalEle.innerHTML = `$ ${parseFloat(total).toFixed(2)}`;
 }
-
 
 // Function to handle adding a product to the cart
 function handleAddToCart(event) {
@@ -202,28 +196,21 @@ function createCartItem(cartItem) {
   return productItem;
 }
 
-
+// EVENT LISTENERS
 // Prevent the form from submitting
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-
-
-
-// Add event listener for the "Previous" button
 prevButton.addEventListener("click", () => {
   document.querySelector('.categories-section').scrollLeft += -500;
-
 });
 
-// Add event listener for the "Next" button
 nextButton.addEventListener("click", () => {
 
-  document.querySelector('.categories-section').scrollLeft += 500;
+document.querySelector('.categories-section').scrollLeft += 500;
 
 });
-
 
 // Event listener for the search input field
 searchInput.addEventListener("input", handleSearchInput);
