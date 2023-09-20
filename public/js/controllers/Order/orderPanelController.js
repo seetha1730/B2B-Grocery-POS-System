@@ -1,6 +1,6 @@
 // HTML ELEMENTS
 const searchForm = document.getElementById("product-search-form");
-const searchInput = document.getElementById("product-search");
+
 const searchResultsContainer = document.getElementById("product-container");
 const productDisplaySection = document.querySelector(".product-display-section");
 const subTotalEle = document.querySelector(".subtotal");
@@ -15,6 +15,19 @@ let subTotal = 0;
 let tax = 0;
 let total = 0;
 let categories = []
+
+//window onload
+window.addEventListener("DOMContentLoaded", (event) => {
+
+  const searchInput = document.getElementById("product-search");
+// LISTENERS
+// Event listener for the search input field
+searchInput?.addEventListener("input", handleSearchInput);
+//apply coupon
+applyCouponButton?.addEventListener("click", applyDiscount);
+
+  
+});
 
 // Api call
 // Get All Categories from the DB, populate the List
@@ -197,28 +210,7 @@ function createCartItem(cartItem) {
   return productItem;
 }
 
-// EVENT LISTENERS
-// Prevent the form from submitting
-searchForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-});
-
-prevButton.addEventListener("click", () => {
-  document.querySelector('.categories-section').scrollLeft += -500;
-});
-
-nextButton.addEventListener("click", () => {
-
-document.querySelector('.categories-section').scrollLeft += 500;
-
-});
-
-// Event listener for the search input field
-searchInput.addEventListener("input", handleSearchInput);
-
 getCategories();
-
-
 
 
 /*

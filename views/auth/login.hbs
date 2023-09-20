@@ -33,23 +33,29 @@
 
   </head>
   <body>
+    <div class="alert alert-danger" id="error-message" style="display: none;">
+  {{#if errorMessage}}
+  {{errorMessage}}
+  {{/if}}
+</div>
+
 <main class="login-page ">
    <div class="form-container col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
                     <h3 class="title">My Account</h3>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="/login" method="POST">
                         <div class="form-icon">
                             <i class="fa fa-user-circle"></i>
                         </div>
                         <div class="form-group">
                             <span class="input-icon"><i class="fa fa-user"></i></span>
-                            <input type="email" class="form-control" placeholder="Username">
+                            <input type="email" class="form-control" name="email" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <span class="input-icon"><i class="fa fa-lock"></i></span>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
                             <span class="forgot"><a href="">Forgot Password?</a></span>
                         </div>
-                        <button class="btn signin">Login</button>
+                        <button type="submit" class="btn signin">Login</button>
                         <div id="emailHelp" class="form-text mt-2 text-center mb-5 text-dark">Not
               Registered? <a href="/signup" class="text-dark fw-bold"> Create an
                 Account</a>

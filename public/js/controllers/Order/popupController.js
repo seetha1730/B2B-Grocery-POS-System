@@ -134,7 +134,7 @@ checkoutBtnCash?.addEventListener("click", () => {
   closeButton.style.cursor = "pointer";
 })
 
-applyCouponButton.addEventListener("click", applyDiscount);
+
 
 //const paymentPopup = document.getElementById("payment-popup");
 //const paymentClose = document.querySelector(".payment-close");
