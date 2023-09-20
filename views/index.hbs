@@ -1,174 +1,171 @@
+<div class="right-panel col-11">
 
-      <div class="right-panel col-11">
+  <div class="info-details col-12 ">
+    <div class="shop-name col-4">
+      <h5>S & L <p>GROCERY</p>
+      </h5>
+      <span> New Order</span>
+    </div>
 
-     <div class="info-details col-12 ">
-          <div class="shop-name col-4">
-            <h5>S & L <p>GROCERY</p></h5>
-          <span> New Order</span>
-          </div>
-          
-          <div class="cashier-details col-6">
-            <i class="bi bi-person-lock"></i>
-            <img class="cashier-img px-2" src="/images/cashier-img.png" alt=""/>
-            <p class="cashier-name m-0" >cashier name</p>
+    <div class="cashier-details col-6">
+      <i class="bi bi-person-lock"></i>
+      <img class="cashier-img px-2" src="/images/cashier-img.png" alt="/images/cashier-img.png" />
+      <p class="cashier-name m-0">cashier name</p>
 
-          </div>
+    </div>
+  </div>
+
+
+  <!-- Categories and product section starts-->
+
+  <div class="row m-0">
+    <div class="left-section col-8 p-4">
+
+      <!-- Categories  section starts-->
+
+      <section class="categories-container col-12">
+        <div class="categories-section col-12">
+
+        </div>
+        <button id="prev-button"><i class="bi bi-chevron-left"></i></button>
+        <button id="next-button"><i class="bi bi-chevron-right"></i></button>
+
+      </section>
+      <!-- Categories  section ends-->
+      <!-- Search section starts-->
+      <div class="search col-12">
+        <form class="form-inline col-8" id="product-search-form">
+
+
+          <input class=" form-control" id="product-search" type="search" placeholder="Search your Product name"
+            aria-label="Search">
+        </form>
+        <div class="order-date col-4">
+
+          <span class="date-section" id="current-date-time"></span>
         </div>
 
-
-        <!-- Categories and product section starts-->
-
-        <div class="row m-0">
-        <div class="left-section col-8 p-4">
-
- <!-- Categories  section starts-->
-
-
-
-
-         
-         <section class="categories-container col-12">
-      <div class="categories-section col-12">
-
-          </div>
-      <button id="prev-button" ><i class="bi bi-chevron-left"></i></button>
-      <button id="next-button"><i class="bi bi-chevron-right"></i></button>
-
-           </section>
-           <!-- Categories  section ends-->
-          <!-- Search section starts-->
-          <div class="search col-12">
-            <form class="form-inline col-8" id="product-search-form">
-
-      
-              <input class=" form-control" id="product-search" type="search" placeholder="Search your Product name"
-                aria-label="Search">
-            </form>
-     <div class="order-date col-4">
-          
-            <span class="date-section" id="current-date-time"></span>
-          </div>
-
-          </div>
-
-          <!-- Search section ends-->
-         
-          <div class="product-section row" id="product-container">
-
-            <!---render and search the product dynamic-->
-
-          </div>
-        </div>
-        <!-- Categories and product section ends-->
-        <!-- CheckOut section starts-->
-        <div class="right-section cart p-4 col-4">
-
-          <div class="checkout-section col-12 ">
-            <div class="product-display-section">
-
-              <!--append the cart item--->
-
-            </div>
-
-
-            <div class="Total-price">
-              <p>SubTotal <span class="subtotal">$0.00</span></p>
-              <p>Tax <span class="tax">$0.00</span></p>
-              <p><b>Total </b><span class="total"><b>$0.00</b></span></p>
-
-
-            <div class="payment type">
-              <button type="button" class="btn btn-primary checkout-button" id="checkoutBtnCard">
-                Proceed to payment
-              </button>
-              <button type="button" class="clearCartBtn"> Clear cart </button>
-            </div>
-
-
-            </div>
-
-          </div>
-        </div>
-        </div>
       </div>
 
-      <!-- CheckOut section ends-->
+      <!-- Search section ends-->
+
+      <div class="product-section row" id="product-container">
+
+        <!---render and search the product dynamic-->
+
+      </div>
     </div>
-    <!--Right panel starts-->
+    <!-- Categories and product section ends-->
+    <!-- CheckOut section starts-->
+    <div class="right-section cart p-4 col-4">
 
-    <!---checkout popup starts--->
-    <div id="checkout-popup" class="checkoutPopup">
-      <div class="checkout-content">
-        <span id="close">&times;</span>
-        <h2>Checkout Order <span id="checkout-order-popup">#3484</span></h2>
-        <h1>Total balance:<b class="amount-total" id="amount-total"> $0.00</b></h1>
+      <div class="checkout-section col-12 ">
+        <div class="product-display-section">
 
-        <p>Cashier: Brenda</p>
-        <p>Paying as customer: Guest</p>
+          <!--append the cart item--->
 
-        <div class="coupon-section">
-          <label for="coupon-code"> Coupon Code:</label>
-          <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
-            max="100">
-          <button id="apply-coupon">Apply</button>
         </div>
 
-        <table id="checkout-table" class="table">
-          <thead>
-            <tr>
-              <th scope="col">index</th>
-              <th scope="col">Product</th>
-              <th scope="col">Qty</th>
-              <th scope="col">Price</th>
-            </tr>
-          </thead>
-          <tbody id="checkout-table-popup-body">
 
-          </tbody>
-          <tfoot id="checkout-table-footer-body">
-            <tr>
-              <th scope="row" colspan="3">Subtotal:</th>
-              <td class="product-total"><span class="checkout-subtotal"><b id="total-price-no-tax">$0.00</b></span></td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="3">Tax:</th>
-              <td class="product-total"><span class="checkout-tax"><b id="total-price-only-tax">$0.00</b></span></td>
-            </tr>
+        <div class="Total-price">
+          <p>SubTotal <span class="subtotal">$0.00</span></p>
+          <p>Tax <span class="tax">$0.00</span></p>
+          <p><b>Total </b><span class="total"><b>$0.00</b></span></p>
 
-            <tr>
-              <th scope="row" colspan="3">Total:</th>
-              <td class="product-total"><span class="checkout-total"><b id="total-price-with-tax">$0.00</b></span></td>
-            </tr>
 
-          </tfoot>
-        </table>
+          <div class="payment type">
+            <button type="button" class="btn btn-primary checkout-button" id="checkoutBtnCard">
+              Proceed to payment
+            </button>
+            <button type="button" class="clearCartBtn"> Clear cart </button>
+          </div>
+        </div>
 
-        <div class="payment-options">
-        <button type="button" class="btn btn-primary" id="paymentBtn"> <svg xmlns="http://www.w3.org/2000/svg" width="80" height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
-          <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CheckOut section ends-->
+</div>
+<!--Right panel starts-->
+
+<!---checkout popup starts--->
+<div id="checkout-popup" class="checkoutPopup">
+  <div class="checkout-content">
+    <span id="close">&times;</span>
+    <h2>Checkout Order <span id="checkout-order-popup">#3484</span></h2>
+    <h1>Total balance:<b class="amount-total" id="amount-total"> $0.00</b></h1>
+
+    <p>Cashier: Brenda</p>
+    <p>Paying as customer: Guest</p>
+
+    <div class="coupon-section">
+      <label for="coupon-code"> Coupon Code:</label>
+      <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
+        max="100">
+      <button id="apply-coupon">Apply</button>
+    </div>
+
+    <table id="checkout-table" class="table">
+      <thead>
+        <tr>
+          <th scope="col">index</th>
+          <th scope="col">Product</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody id="checkout-table-popup-body">
+
+      </tbody>
+      <tfoot id="checkout-table-footer-body">
+        <tr>
+          <th scope="row" colspan="3">Subtotal:</th>
+          <td class="product-total"><span class="checkout-subtotal"><b id="total-price-no-tax">$0.00</b></span></td>
+        </tr>
+        <tr>
+          <th scope="row" colspan="3">Tax:</th>
+          <td class="product-total"><span class="checkout-tax"><b id="total-price-only-tax">$0.00</b></span></td>
+        </tr>
+
+        <tr>
+          <th scope="row" colspan="3">Total:</th>
+          <td class="product-total"><span class="checkout-total"><b id="total-price-with-tax">$0.00</b></span></td>
+        </tr>
+
+      </tfoot>
+    </table>
+
+    <div class="payment-options">
+      <button type="button" class="btn btn-primary" id="paymentBtn"> <svg xmlns="http://www.w3.org/2000/svg" width="80"
+          height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+          <path
+            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+          <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
         </svg> </button>
 
-        <button type="button" class="btn btn-primary" id="paymentBtn"> <svg xmlns="http://www.w3.org/2000/svg" width="80" height="40" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-          <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-          <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+      <button type="button" class="btn btn-primary" id="paymentBtn"> <svg xmlns="http://www.w3.org/2000/svg" width="80"
+          height="40" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+          <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+          <path
+            d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
         </svg> </button>
-        </div>
-
-
-      </div>
     </div>
 
-    <!---checkout popup end--->
 
-    <!--payment popup starts--->
-    <div id="payment-popup" class="checkoutPopup">
-      <div class="payment-content">
-        <span class="payment-close">&times;</span>
-        <h2>Payment</h2>
-      </div>
-    </div>
+  </div>
+</div>
 
-    <!--payment popup end--->
-    </div>
+<!---checkout popup end--->
 
+<!--payment popup starts--->
+<div id="payment-popup" class="checkoutPopup">
+  <div class="payment-content">
+    <span class="payment-close">&times;</span>
+    <h2>Payment</h2>
+  </div>
+</div>
+
+<!--payment popup end--->
+</div>

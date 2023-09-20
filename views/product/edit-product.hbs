@@ -1,22 +1,22 @@
 
-<div class="right-panel col-lg-11 col-md-11">
+<div class="right-panel col-11">
 
-<div class="add-panel col-lg-4 col-md-4" id="edit-product">
+<div class="add-panel box-shadow p-4 col-4" id="edit-product">
   <h3>Edit product</h3>
   {{#with product}}
   <form action="/product/{{_id}}/edit" method="post" enctype="multipart/form-data">
     <div class="product">
 
       <label class="form-label">Product Name</label>
-      <input class="form-control mr-sm-2" type="text" name="productName" placeholder="Enter Product name"
+      <input class="form-control " type="text" name="productName" placeholder="Enter Product name"
         aria-label="product name" value="{{productName}}" />
 
       <label class="form-label">Quantity</label>
-      <input class="form-control mr-sm-2" type="text" name="quantity" placeholder="Enter your quantity"
+      <input class="form-control " type="text" name="quantity" placeholder="Enter your quantity"
         aria-label="Quantity" value="{{quantity}}" />
 
       <label class="form-label">Product Price</label>
-      <input class="form-control mr-sm-2" type="text" name="productPrice" placeholder="Price" aria-label="price" value="{{productPrice}}" />
+      <input class="form-control" type="text" name="productPrice" placeholder="Price" aria-label="price" value="{{productPrice}}" />
 
 
       <label class="form-label">Category Name </label>
@@ -37,13 +37,13 @@
       <textarea class="form-control description mr-sm-2" type="text" name="description" id="" cols="20" rows="10"
         placeholder="Product Description">{{description}}</textarea>
 
-      <div class="upload-image col-lg-12 col-md-12">
-        <img class="col-lg-3 col-md-3" src="{{imageUrl}}" />
+      <div class="upload-image col-9">
+        <img class="col-3 " src="{{imageUrl}}" />
         <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>
-        <input id="imageInput" class="col-lg-2 col-md-2" type="file" name="image" accept="image/*" style="display: none" />
+        <input id="imageInput" class="col-2" type="file" name="image" accept="image/*" style="display: none" />
       </div>
 
-      <div class="col-lg-12 col-md-12">
+      <div class="col-12">
         <button type="submit" class="btn btn-primary update-btn add-product">Update product</button>
       </div>
 

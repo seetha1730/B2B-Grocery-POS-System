@@ -36,7 +36,7 @@ function renderCategories(categories) {
     const categoryDiv = document.createElement("div");
     categoryDiv.classList.add("category","col-2");
       categoryDiv.innerHTML = `
-    <img class="category-img" src="${category.imageUrl}"/>
+    <img class="category-img" alt="" src="${category.imageUrl}"/>
         <p>${category.categoryName}</p>
       `;
 
@@ -93,11 +93,12 @@ function createProductCard(product) {
   const productNameCapitalized = product.productName.charAt(0).toUpperCase()+product.productName.slice(1)
   productCard.classList.add("card", "product", "col-lg-3", "col-md-3");
   productCard.innerHTML = `
-    <h5 class="card-title product-name">${productNameCapitalized}</h5>
-    <div class="priceAddCart row">
-      <p class="col-8 product-quantity">${product.quantity}</p>
-      <p class="card-text product-price col-8">$${product.productPrice}</p>
-      <button class="btn addCart bi bi-plus col-4" data-product='${JSON.stringify(
+    <h5 class="card-title product-name">${productNameCapitalized}
+    <p class="col-8 product-quantity">${product.quantity}</p></h5>
+    <div class="priceAddCart d-flex ">
+     
+      <p class="card-text product-price col-9">$${product.productPrice}</p>
+      <button class="btn addCart bi bi-plus col-3" data-product='${JSON.stringify(
         product
       )}' value="Add"></button>
     </div>

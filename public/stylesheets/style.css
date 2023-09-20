@@ -7,10 +7,37 @@ panel f6f7fa
 Orange f1743c
 grey => text-color: #8d99ae;
 */
-
+/*** common style***/
 body {
     background: white;
     color: #292c4b;
+  }
+
+ .btn-orange{
+  margin-top: 30px;
+  background-color: #F56365;
+  color: #fff;
+  align-items: center;
+  display: flex;
+  justify-content: center;width:100%;}
+  
+   .green-button{
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    background: #79E8BD;
+    color: #292c4b;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+   }
+   .btn a{text-decoration: none;cursor: pointer;color:#292c4b;width:100%}
+
+  .box-shadow {
+    margin: 20px;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.25);
+    background: #fff; 
   }
   .m-50{
     margin-top:50px;
@@ -26,8 +53,7 @@ body {
       padding: 9px;
   }
   .botton-link{margin-top: 200px;}
- 
- 
+
   i.bi {
     margin-right: 5px;
     color:#fff;
@@ -36,7 +62,7 @@ body {
     font-size: 30px;
   }
   .nav-link {
-    color: #f1743c;
+    color: #F56365;
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -66,6 +92,7 @@ li.nav-item.active {
   padding: 10px;
 }
 
+/*** common style***/
   .right-panel {
     background: #f6f7fa;
    padding:0;
@@ -202,7 +229,7 @@ position: relative;
   .categories-section .category {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     font-size: 20px;
     color: #F56365;
@@ -210,9 +237,10 @@ position: relative;
     align-items: center;
     border: 1px solid #8d99ae;
     margin: 0 5px;
-    height: 208px;
-    width: 173px;
+    height: 160px;
+    width: 15.5%;
     text-align: center;
+    background: #fff;
 }
   .categories-section .category-img {
   
@@ -230,20 +258,23 @@ position: relative;
   background: #fff;
 }
  
-  .card.product {
-    margin: 5px;
-    width: 200px;
-    padding: 10px;
-  }
+.card.product {
+  margin: 20px 10px;
+  width: 200px;
+  padding: 0;
+  border-radius: 0;
+}
   .product-name {
-    padding: 10px;
-    color: #f1743c;
-    margin: 0;
-  }
+    padding: 13px;
+    color: #F56365;
+}
+.card-title.product-name p {
+  margin: 0;
+}
   .checkout-section .input-group {
     position: relative;
     display: flex;
-    width: 38%;
+    width: 30%;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
@@ -279,12 +310,11 @@ position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #edbca6;
-    color: #292c4b;
     font-size: 30px;
     font-weight: bold;
-    color: #f1743c;
     border-radius: 5px;
+    background: #79E8BD;
+    color: #292c4b;
   }
 
   .input-number.form-control {
@@ -305,6 +335,8 @@ position: relative;
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;
+    background: #79E8BD;
+    color: #292c4b;
   }
   input.voucher.form-control {
     padding: 10px;
@@ -383,14 +415,7 @@ position: relative;
     font-size: 1.1em;
       margin-top: 10px;
   }
-  .btn-orange{
-    margin-top: 30px;
-    height: 45px;
-    background-color: #f1743c;
-    color: #fff;
-    align-items: center;
-    display: flex;
-    justify-content: center;width: 80%;}
+ 
   .select-div {
     display: flex;
     flex-direction: row;
@@ -425,112 +450,8 @@ position: relative;
     justify-content: center;
     flex-direction: row;
     margin-left: 10px;}
-  /** Table for product starts **/
-  .table-wrapper {
-    margin: 30px auto;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  }
-  .table-title {
-    padding-bottom: 10px;
-    margin: 0 0 10px;
-  }
-  .table-title h2 {
-    margin: 6px 0 0;
-    font-size: 22px;
-  }
-    .table-title .add-new {
-      float: right;
-      height: 30px;
-      font-weight: bold;
-      font-size: 12px;
-      text-shadow: none;
-      min-width: 100px;
-      border-radius: 50px;
-      line-height: 13px;
-  }
-  .table-title .add-new i {
-      margin-right: 4px;
-  }
-  table.table {
-      table-layout: fixed;
-  }
-  table.table tr th, table.table tr td {
-    border-color: #e9e9e9;
-    background: none;
-    padding: 20px;
-}
-  table.table th i {
-      font-size: 13px;
-      margin: 0 5px;
-      cursor: pointer;
-  }
-  table.table th:last-child {
-      width: 100px;
-  }
-  table.table td a {
-      cursor: pointer;
-      display: inline-block;
-      margin: 0 5px;
-      min-width: 24px;
-  }
-
-  /*table.table tr:nth-child(odd){
-    background-color: #edbca6;
-  }*/
-
-  table.table tr:hover{
-    background-color: #f1743c;
-  }
-
-  table.table tbody td {
-    background-color: #00000000;
-  }
-
-  .column-wider{width: 110px;}
-
-  .table tr:hover, .table tr:active{background:#edbca6;}
-  table.table td a.add {
-      color: #27C46B;
-  }
-  table.table td .edit {
-      color: #FFC107;
-  }
-  table.table td .delete {
-      color: #E34724;
-  }
-  table.table td i {
-      font-size: 19px;
-  }
-  table.table td a.add i {
-      font-size: 24px;
-      margin-right: -1px;
-      position: relative;
-      top: 3px;
-  }
-  table.table .form-control {
-      height: 32px;
-      line-height: 32px;
-      box-shadow: none;
-      border-radius: 2px;
-  }
-  table.table .form-control.error {
-      border-color: #f50000;
-  }
-  table.table td .add {
-      display: none;
-  }
-
-  .description{
-    padding:10px 15px;
-    font-size: 15px;
-    height: 100px;
-    border-radius: 15px;
-    width: 90%;
-    color: #f1743c;
-    border-color: #edbca6;
-  }
+  
+ 
 
   input::placeholder {
     color:#8d99ae !important;
@@ -688,29 +609,30 @@ position: relative;
   justify-content: center;
   }
   /*** Login Style Ends***/
-  td.product-image img ,td.category-image img{
-    width: 80px;
-    height: 80px;
+ 
+  textarea::placeholder{
+    color:#8d99ae !important}
+  .btn.addCart.bi-plus{
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #79E8BD;
+    color: #292c4b;
+    font-size: 30px;
+    font-weight: bold;
   }
-  table.table tbody td {
-    background-color: #00000000;
-    text-align: center;
-    vertical-align: middle;
-  }
-  textarea::placeholder{color:#f1743c !important}
-  .btn.addCart.bi-plus{margin-right: 5px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #edbca6;
-      color: #292c4b;
-      font-size: 30px;
-      font-weight: bold;
-      color: #f1743c;
-      border-radius: 5px;
-  }
+  .product-in-cart .product-name {
+    padding: 0;
+    margin: 0;
+}
+  .card-text.product-price {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
   /* checkout popup  starts*/
   /* The Modal (background) */
   .checkoutPopup,#payment-popup {
@@ -757,6 +679,7 @@ position: relative;
 #product-search-form {
     display: flex;
     justify-content: space-between;
+    margin:0
 }
 input#product-search {
   width: 55%;
@@ -793,14 +716,119 @@ input#product-search {
 #paymentBtn{
   margin: 20px;
 }
-
+.checkout-button:hover {
+  background: #4eebae;
+}
 .clearCartBtn {
-  background: white;
-  color: #f1743c;
+  background: #F56365;
+  color: #fff;
   border: 2px solid #f1743c;
   width: 100%;
   margin-top: 20px;
   padding: 10px;
   font-size: 20px;
   border-radius: 10px;
+}
+
+.product-title.box-shadow {
+  padding: 20px;
+}
+thead tr th {
+  
+  height: 60px;
+  vertical-align: middle;
+}
+
+.table>:not(caption)>*>*{background: #E8F9EC;}
+
+td.product-image img ,td.category-image img{
+  width: 80px;
+  height: 80px;
+}
+table.table tbody td {
+  background-color: #00000000;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/** Table for product starts **/
+.table-wrapper {
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+  padding-bottom: 10px;
+  margin: 0 0 10px;
+}
+.table-title h2 {
+  margin: 6px 0 0;
+  font-size: 22px;
+}
+table.table {
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.25);
+    margin: 0;
+}
+
+table.table tbody td {
+  border: none;
+}
+table.table tbody tr {
+  border-bottom: 1px solid #777;
+}
+
+table.table tr:hover{
+  background-color:#E8F9EC;;
+}
+
+table.table tbody td {
+  background-color: #00000000;
+}
+
+
+
+table.table td a.add {
+    color: #27C46B;
+}
+table.table td .edit {
+  color: #0d6efd;
+    border: 0;
+    background: none;
+}
+table.table td .delete {
+    color: #E34724;
+    border: 0;
+    background: none;
+}
+table.table td i {
+    font-size: 25px;
+}
+table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+table.table .form-control.error {
+    border-color: #f50000;
+}
+table.table td .add {
+    display: none;
+}
+
+.description{
+  padding:10px 15px;
+  font-size: 15px;
+  height: 100px;
+  border-radius: 15px;
+  width: 90%;
+  color: #f1743c;
+  border: 1px solid #8d99ae;
 }
