@@ -34,7 +34,11 @@ const userSchema = new Schema(
     newsletter: {
       type: String,
     },
-   
+   isAdmin: {
+    type:Boolean,
+   default:false 
+   },
+
   },
   {
     timestamps: true,

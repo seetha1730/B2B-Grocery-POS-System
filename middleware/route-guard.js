@@ -14,7 +14,31 @@ const isLoggedIn = (req, res, next) => {
     next();
   };
    
-  module.exports = {
-    isLoggedIn,
-    isLoggedOut
-  };
+
+
+const isAdmin = (req, res, next) => {
+  if (req.session.currentUser && req.session.currentUser.isAdmin) {
+    // User is an admin, allow access
+    next();
+  } else {
+    // User is not authorized, redirect to an error page or show a message
+    res.status(403).send("Access denied: Admin privileges required.");
+  }
+};
+
+const isCashier = (req, res, next) => {
+  if (req.session.currentUser && !req.session.currentUser.isAdmin) {
+    // User is a cashier, allow access
+    next();
+  } else {
+    // User is not authorized, redirect to an error page or show a message
+    res.status(403).send("Access denied: Cashier privileges required.");
+  }
+};
+
+module.exports = {
+  isLoggedIn,
+  isLoggedOut,
+  isAdmin,
+  isCashier
+};

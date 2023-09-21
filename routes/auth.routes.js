@@ -103,9 +103,9 @@ router.post('/login',isLoggedOut, (req, res, next) => {
         res.render('auth/login', { errorMessage: 'Email not registered.', layout: false });
         return;
       }
-
+// Password matches
       if (bcryptjs.compareSync(password, user.passwordHash)) {
-        // Password matches
+        
 
         // Set the session data
         req.session.currentUser = user;
@@ -114,6 +114,7 @@ router.post('/login',isLoggedOut, (req, res, next) => {
         // Check if the user is an admin
         const isAdmin = user.email === 'admin@admin.com';
         console.log('Is Admin:', isAdmin);
+        console.log("useradmin" ,user.isAdmin)
 
 
         res.render('profile', { user, isAdmin });
@@ -123,42 +124,7 @@ router.post('/login',isLoggedOut, (req, res, next) => {
     })
     .catch(error => next(error));
 });
-// router.post('/login', (req, res, next) => {
-//   console.log('SESSION =====> ', req.session);
-//   const { email, password } = req.body;
 
-//   if (email === '' || password === '') {
-//     res.render('auth/login', {
-//       errorMessage: 'Please enter both, email and password to login.',
-//       layout:false
-//     });
-//     return;
-//   }
- 
-//   User.findOne({ email })
-//     .then(user => {
-   
-//       if (!user) {
-//        // console.log("Email not registered. ");
-//         res.render('auth/login', { errorMessage: 'Email not registered.' ,layout:false});
-//         return;
-
-//       }
-//       if (bcryptjs.compareSync(password, user.passwordHash)) {
-//          // Password matches
-//          if (user.email === 'admin@admin.com' && bcryptjs.compareSync('admin123', user.passwordHash)) {
-//           const isAdmin = true;
-//           req.session.currentUser = user; // Make sure this sets the correct user object
-//           res.render('profile', { user, isAdmin });
-//         }
-//       } else {
-       
-//         res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.',layout:false });
-//       }
-//     })
-//     .catch(error => next(error));
-// });
-   
 router.get('/profile', isLoggedIn, (req, res) => {
  const isAdmin = req.session.currentUser.email === 'admin@admin.com';// Check if the current user is admin
 
@@ -172,7 +138,7 @@ console.log("isadmin",isAdmin)
 router.post('/logout', isLoggedIn, (req, res, next) => {
   req.session.destroy(err => {
     if (err) next(err);
-    res.redirect('/');
+    res.redirect('/login');
   });
 });
 module.exports = router;
