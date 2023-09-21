@@ -17,6 +17,10 @@ body {
     padding: 20px;
     color: #000;
   }
+  form#logout-form button {
+    border: 0;
+    background: none;
+}
  .btn-orange{
   margin-top: 30px;
   background-color: #F56365;

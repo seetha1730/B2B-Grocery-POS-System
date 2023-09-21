@@ -75,7 +75,11 @@
            
             
              
-
+        <li class="nav-item">
+              <a class="nav-link" href="/profile"><i class="bi bi-person"></i>
+                
+              </a>
+            </li>
         {{#if user}}  
             <li class="nav-item">
               <form id="logout-form" action="/logout" method="POST">
@@ -83,11 +87,7 @@
               </form>
               
             </li>
-              <li class="nav-item">
-              <a class="nav-link" href="/profile"><i class="bi bi-person"></i>
-                
-              </a>
-            </li>
+             
        {{else}}   
      
        

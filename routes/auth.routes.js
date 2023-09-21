@@ -81,12 +81,12 @@ router.post("/signup", (req, res, next) => {
 //////////// L O G I N ///////////
 
 // GET route ==> to display the login form to users
-router.get('/login', (req, res) => res.render('auth/login'));
+router.get('/login',isLoggedIn, (req, res) => res.render('auth/login'));
 
 
 // POST login route ==> to process form data
 
-router.post('/login', (req, res, next) => {
+router.post('/login',isLoggedIn, (req, res, next) => {
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
