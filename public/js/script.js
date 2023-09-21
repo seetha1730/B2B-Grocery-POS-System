@@ -46,37 +46,6 @@ function handleClick(e) {
   }
 }
 
-// // Add an event listener to the form submission
-// storeForm.addEventListener('submit', function (event) {
-//   event.preventDefault(); // Prevent the default form submission behavior
-
-//   // Get the form data
-//   const formData = new FormData(event.target);
-
-//   // Convert the form data to an object
-//   const formDataObject = {};
-//   formData.forEach((value, key) => {
-//     formDataObject[key] = value;
-//   });
-//   console.log('formDataObject:', formDataObject); 
-//   // Send a POST request to the server
-//   fetch('/store-address', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(formDataObject), // Send the form data as JSON
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // Handle the response from the server
-//       console.log(data);
-//       // You can perform further actions here, such as displaying a success message.
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error);
-//     });
-// });
 
 
 

@@ -75,7 +75,7 @@ const renderCategories = (allCategories = [], allProducts = []) => {
     // add content
     const elementContent = `
       <img class="category-img" src="${category.imageUrl}" alt="image category" />
-      <p class="category">${category.categoryName}</p>
+      <p>${category.categoryName}</p>
     `
 
     categoryItemElement.innerHTML = elementContent
@@ -136,11 +136,13 @@ function createProductCard(product) {
 
   productCard.innerHTML = `
 
-    <h5 class="card-title product-name">${productNameCapitalized}</h5>
-    <div class="priceAddCart row">
-      <p class="col-8 product-quantity">${product.quantity}</p>
-      <p class="card-text product-price col-8">$${product.productPrice}</p>
-      <button class="btn addCart bi bi-plus col-4" value="Add" onclick="handleAddProductClick('${encodeProductForArgument}')"></button>
+    <h5 class="card-title product-name">${productNameCapitalized}
+    
+    <p class="col-8 product-quantity">${product.quantity}</p></h5>
+    <div class="priceAddCart d-flex">
+      
+      <p class="card-text product-price col-9">$${product.productPrice}</p>
+      <button class="btn addCart bi bi-plus col-3" value="Add" onclick="handleAddProductClick('${encodeProductForArgument}')"></button>
 
     </div>
   `
