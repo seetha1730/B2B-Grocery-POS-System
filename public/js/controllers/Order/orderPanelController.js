@@ -1,6 +1,8 @@
 // HTML ELEMENTS
 const searchForm = document.getElementById("product-search-form");
+
 const searchInput = document.getElementById("product-search");
+
 const productDisplaySection = document.querySelector(".product-display-section");
 const subTotalEle = document.querySelector(".subtotal");
 const taxEle = document.querySelector(".tax");
@@ -19,11 +21,14 @@ let total = 0;
 const COLLECTION_CATEGORY_URL = '/category/all'
 const COLLECTION_PRODUCT_URL = '/product/all'
 
+
 // API CALL
+
 
 // Get All Categories and all Products from the DB, populate the List
 const getCategoriesAndProducts = async () => {
   const [categoryResponse, productResponse] = await Promise.all([APIGetCall(COLLECTION_CATEGORY_URL), APIGetCall(COLLECTION_PRODUCT_URL)])
+
 
   const categoryPayload = await categoryResponse.json()
   const productPayload = await productResponse.json()
@@ -37,7 +42,8 @@ const getCategoriesAndProducts = async () => {
 // Function to fetch search results and display them
 function fetchSearchResults(searchTerm) {
   // Make an AJAX request to the server to fetch search results
-  APIGetCall(`/search/${searchTerm}`)
+  
+    (`/search/${searchTerm}`)
     .then((response) => response.json())
     .then(displaySearchResults)
     .catch(console.error);
@@ -129,11 +135,13 @@ function createProductCard(product) {
   const encodeProductForArgument = encodeURIComponent(JSON.stringify(product))
 
   productCard.innerHTML = `
+
     <h5 class="card-title product-name">${productNameCapitalized}</h5>
     <div class="priceAddCart row">
       <p class="col-8 product-quantity">${product.quantity}</p>
       <p class="card-text product-price col-8">$${product.productPrice}</p>
       <button class="btn addCart bi bi-plus col-4" value="Add" onclick="handleAddProductClick('${encodeProductForArgument}')"></button>
+
     </div>
   `
 
@@ -247,6 +255,7 @@ function createCartItem(cartItem) {
 }
 
 
+
 // Function to clear the cart
 function clearCart() {
   localStorage.removeItem('cart')
@@ -274,6 +283,7 @@ searchInput.addEventListener("input", handleSearchInput);
 clearCartButton.addEventListener("click", function () {
   // Call a function to clear the cart (you can define this function)
   clearCart();
+
 });
 
 

@@ -2,13 +2,18 @@
 
   <div class="info-details col-12 ">
     <div class="shop-name col-4">
+
       <h5>S & L <span>GROCERY</span></h5>
+
+
       <span> New Order</span>
     </div>
 
     <div class="cashier-details col-6">
       <i class="bi bi-person-lock"></i>
+
       <img class="cashier-img px-2" src="/images/cashier-img.png" alt=""/>
+
       <p class="cashier-name m-0">cashier name</p>
 
     </div>
@@ -21,6 +26,9 @@
     <div class="left-section col-8 p-4">
 
       <!-- Categories  section starts-->
+
+      <section class="categories-container col-12">
+        <div class="categories-section col-12">
 
 
       <section class="categories-container col-12">
@@ -52,6 +60,7 @@
 
       <div id="product-section" class="row">
 
+
         <!---render and search the product dynamic-->
 
       </div>
@@ -75,10 +84,12 @@
 
 
           <div class="payment type">
+
             <button type="button" class="btn btn-primary checkout-button" id="checkoutBtn">
               Proceed to payment
             </button>
             <button type="button" id="clearCartBtn"> Clear cart</button>
+
           </div>
 
 
@@ -96,33 +107,38 @@
 <!---checkout popup starts--->
 <div id="checkout-popup" class="checkoutPopup">
   <div class="checkout-content">
+
     <span class="close">&times;</span>
     <h2>Checkout Order <span id="checkout-order-popup">#3484</span></h2>
     <h1>Total balance:<b class="amount-total" id="amount-total"> 0.00</b></h1>
+
 
     <p>Cashier: Brenda</p>
     <p>Paying as customer: Guest</p>
 
     <div class="coupon-section">
       <label for="coupon-code"> Coupon Code:</label>
-      <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"
-             max="100">
+      <input type="text" id="coupon-code" class=" form-control" placeholder="Enter your coupon code here" min="4"  max="100">
+
       <button id="apply-coupon">Apply</button>
     </div>
 
     <table id="checkout-table" class="table">
       <thead>
+
       <tr>
         <th scope="col">index</th>
         <th scope="col">Product</th>
         <th scope="col">Qty</th>
         <th scope="col">Price</th>
       </tr>
+
       </thead>
       <tbody id="checkout-table-popup-body">
 
       </tbody>
       <tfoot id="checkout-table-footer-body">
+
       <tr>
         <th scope="row" colspan="3">Subtotal:</th>
         <td class="product-total"><span class="checkout-subtotal"><b id="total-price-no-tax">0.00</b></span></td>
@@ -137,10 +153,12 @@
         <td class="product-total"><span class="checkout-total"><b id="total-price-with-tax">0.00</b></span></td>
       </tr>
 
+
       </tfoot>
     </table>
 
     <div class="payment-options">
+
       <button type="button" class="btn btn-primary" id="paymentBtnCard">
         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="40" fill="currentColor" class="bi bi-credit-card"
              viewBox="0 0 16 16">
@@ -213,3 +231,6 @@
 </div>
 <!-- Success popup end -->
 
+
+<!--payment popup end--->
+</div>

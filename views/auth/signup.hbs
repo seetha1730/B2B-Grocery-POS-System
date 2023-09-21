@@ -34,7 +34,7 @@
   </head>
   <body>
   <main class="login-page ">
-   <div class="form-container col-md-offset-3 col-md-5 col-sm-offset-3 col-sm-6">
+   <div class="form-container box-shadow col-offset-3 col-5">
                     <h3 class="title">Sign up Account</h3>
                     <form class="form-horizontal" action="/signup" method="POST">
                         
@@ -42,15 +42,9 @@
                             <i class="fa fa-user-circle"></i>
                         </div>
                         <!-- Display validation errors here -->
-                        {{#if errors.length}}
-                        <div class="alert alert-danger">
-                          <ul>
-                            {{#each errors}}
-                            <li>{{ this.msg }}</li>
-                            {{/each}}
-                          </ul>
-                        </div>
-                        {{/if}}
+                       {{#if errorMessage}}
+                        <p class="error">{{errorMessage}}</p>
+                      {{/if}}
 
                         <div class="form-group">
                             <span class="input-icon"><i class="fa fa-envelope"></i></span>
@@ -64,21 +58,21 @@
                         </div>
                        
            <div class="first-name">
-            <div class="form-group  col-lg-6 col-md-6">
+            <div class="form-group  col-6">
               <div class="input_field"> <span class="input-icon"><i aria-hidden="true" class="fa fa-user"></i></span>
                 <input type="text" class="form-control" name="firstName" placeholder="First Name" required />
               </div>
             </div>
            
-            <div class="form-group col-lg-6 col-md-6">
+            <div class="form-group col-6">
               <div class="input_field"> <span class="input-icon"><i aria-hidden="true" class="fa fa-user"></i></span>
                 <input type="text" class="form-control" name="lastName" placeholder="Last Name"  />
               </div>
             </div>
          </div>
 
-          <div class="form-group" id="gender">
-          <div class="radio-option">
+          <div class="form-group col-12" id="gender">
+          <div class="radio-option d-flex">
               <input  type="radio" name="gender" value ="Male" id="rd1">
               <label  for="rd1">Male</label>
               <input  type="radio" name="gender" value ="Female" id="rd2">
@@ -87,18 +81,7 @@
               <label for="rd2">No gender</label>
               </div>
          </div>
-         <div class="form-group signup-select">
-              
-                <select class="select-option" name="country">
-                  <option>Select a country</option>
-                  <option value="PT">PT</option>
-                  <option value="NL">NL</option>
-                  <option value="US">NL</option>
-                   <option value="IN">IN</option>
-                </select>
-                <div class="select_arrow"></div>
-             
-     </div>
+       
                  <div class="input_field checkbox-option">
             	<input class="ml-2" type="checkbox" name="terms" id="cb1" required>
     			<label for="cb1">I agree with terms and conditions</label>
@@ -107,9 +90,11 @@
             	<input class="ml-2" type="checkbox" name="newsletter" id="cb2">
     			<label for="cb2">I want to receive the newsletter</label>
             </div>
-          <input class="button btn signup mb-4 mt-4" type="submit" value="Register" />
+          <button type="submit" class=" btn btn-orange p-2 col-5 mb-4 mt-4" type="submit" value="Register" >Register</button>
+          <a class="button btn green-button p-2 col-5 mb-4 mt-4"  href="/login">Login</a>
                       
                     </form>
+              
                 </div>
       
 

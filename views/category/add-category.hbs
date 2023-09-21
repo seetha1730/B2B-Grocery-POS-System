@@ -1,5 +1,5 @@
-<div class="right-panel col-lg-11 col-md-11">
-  <div class="add-panel col-lg-4 col-md-4" id="category">
+<div class="right-panel col-11">
+  <div class="add-panel box-shadow p-4 col-4" id="category">
     <h3>Add New category</h3>
     {{#if errors}}
     <div class="alert alert-danger">
@@ -15,7 +15,7 @@
       <div class="category">
 
         <label class="form-label">Category Name</label>
-        <input class="form-control mr-sm-2" type="text" placeholder="Enter Product name" aria-label="product name"
+        <input class="form-control" type="text" placeholder="Enter Product name" aria-label="product name"
           name="categoryName" />
 
         <label class="form-label">Parent Category</label>
@@ -26,15 +26,15 @@
           {{/each}}
         </select>
 
-        <div class="upload-image col-lg-12 col-md-12">
-          <img class="col-lg-3 col-md-3" src="/images/upload.png" />
+        <div class="upload-image col-3">
+          <img class="col-3" src="/images/upload.png" />
           <label for="inputField" class="btn btn-orange upload-btn">Upload image</label>
-          <input class="col-lg-2 col-md-2 upload-btn" type="file" id="inputField" style="display:none" name="image"
+          <input class="col-5 upload-btn" type="file" id="inputField" style="display:none" name="image"
             accept="image/*" />
 
         </div>
 
-        <div class="col-lg-12 col-md-12">
+        <div class="col-3">
           <button type="submit" class="btn btn-primary btn-blue">Add new category</button>
         </div>
 

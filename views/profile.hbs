@@ -1,5 +1,25 @@
 
       <!-- Right panel starts-->
       <div class="right-panel col-11">
+<div class="box-shadow ">
+   
+
+{{#if isAdmin}}
+<h1>I AM ADMIN</h1>
+{{else}} 
+<h1>I am cashier</h1>
+{{/if }}
+
+  {{#if user}}
+  <h2>Welcome, {{ user.firstName }}{{user.lastname }}!</h2>
+  <p>This is your profile page my friend!</p>
+  <button>
+    <a href="/profile">Reload the page</a>
+  </button>
+{{else}}
+  <p>Still no logged in user, sorry!</p>
+{{/if}}
+</div>
+
 
       </div>

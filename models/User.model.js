@@ -27,10 +27,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Gender is required.'],
     },
-    country: {
-      type: String,
-      required: [true, 'Country is required.'],
-    },
     terms: {
       type: String,
       required: [true, 'Terms is required.'],
@@ -38,6 +34,7 @@ const userSchema = new Schema(
     newsletter: {
       type: String,
     },
+   
   },
   {
     timestamps: true,

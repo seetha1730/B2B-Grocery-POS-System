@@ -55,7 +55,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/setting"><i class="bi bi-card-checklist"></i>
+              <a class="nav-link" href="/"><i class="bi bi-card-checklist"></i>
                 
               </a>
             </li>
@@ -68,23 +68,36 @@
               </a>
             </li>
             <li class="nav-item botton-link">
-              <a class="nav-link" href="/setting"><i class="bi bi-gear"></i>
+              <a class="nav-link" href="/settings"><i class="bi bi-gear"></i>
                 
               </a>
             </li>
+           
+            
+             
 
-             <li class="nav-item">
+        {{#if user}}  
+            <li class="nav-item">
+              <form id="logout-form" action="/logout" method="POST">
+              <button><a class="nav-link" ><i class="bi bi-box-arrow-right"></i></a></button>
+              </form>
+              
+            </li>
+              <li class="nav-item">
               <a class="nav-link" href="/profile"><i class="bi bi-person"></i>
                 
               </a>
             </li>
+       {{else}}   
+     
+       
 
             <li class="nav-item">
-              <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i>
-
-              
+              <a class="nav-link" href="/login"><i class="bi bi-lock"></i>
+                
               </a>
             </li>
+            {{/if}}
 
 
           </ul>
@@ -103,6 +116,7 @@
 <script src="js/script.js"></script>
 <script src="js/controllers/Order/popupController.js"></script>
 <script src="js/controllers/Order/orderPanelController.js"></script>
+
 
 
 </body>

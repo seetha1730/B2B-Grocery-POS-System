@@ -162,7 +162,7 @@ checkoutBtn?.addEventListener("click", () => {
   closeButton.style.cursor = "pointer";
 })
 
-applyCouponButton.addEventListener("click", applyDiscount);
+
 
 
 paymentBtnCard.addEventListener("click", function () {

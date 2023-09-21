@@ -15,20 +15,17 @@ router.get("/inventory", (req, res, next) => {
 })
 
 router.get("/login", (req, res, next) => {
-  res.render('auth/login', { root: 'views' });
+  res.render('auth/login', {root: 'views', layout:false });
 })
 
 router.get("/signup", (req, res, next) => {
-  res.render('auth/signup', { root: 'views' });
+  res.render('auth/signup', {root: 'views',layout:false });
+})
+router.get("profile", (req, res, next) => {
+  res.render('/profile', { root: 'views' });
 })
 
-// router.get("/product", (req, res, next) => {
-//   res.render('product/product', { root: 'views' });
-// })
 
-// router.get("/category", (req, res, next) => {
-//   res.render('category/category', { root: 'views' });
-// })
 
 
 module.exports = router;
