@@ -26,10 +26,10 @@ hbs.registerHelper('inc', function (value, options) {
 });
 
 // Define your routes
+const indexRoutes = require('./routes/index');
 const viewRoutes = require('./routes/view.routes');
 const productRoutes = require('./routes/product.routes');
 const categoryRoutes = require('./routes/category.routes');
-const homeRoutes = require('./routes/home.routes');
 const settingsRoutes = require('./routes/settings.routes');
 const storeRoutes = require('./routes/store.routes');
 
@@ -37,57 +37,45 @@ const authRoutes = require('./routes/auth.routes');
 
 
 // Use the route handlers
+app.use('/', indexRoutes);
 app.use('/', productRoutes);
 app.use('/', categoryRoutes);
-app.use('/', homeRoutes);
 app.use('/', viewRoutes);
 app.use('/', settingsRoutes);
 app.use('/', storeRoutes);
 app.use('/',authRoutes);
 
 
-
-
-app.get("/", (req, res) => {
-
-  res.render("index")
-
-})
-
 app.get("/inventory", (req, res) => {
 
   res.render("inventory")
 
 })
-app.get("/settings", (req, res) => {
-
-  res.render("settings")
-
-})
-
-app.get("/profile", (req, res) => {
-
-  res.render("profile")
-
-})
-
-app.get("/product", (req, res) => {
-
-  res.render("product")
-
-})
-app.get("/auth", (req, res) => {
-
-  res.render("auth")
-
-})
 
 
-app.get("/category", (req, res) => {
+// app.get("/profile", (req, res) => {
 
-  res.render("category")
+//   res.render("profile")
 
-})
+// })
+
+// app.get("/product", (req, res) => {
+
+//   res.render("product")
+
+// })
+// app.get("/auth", (req, res) => {
+
+//   res.render("auth")
+
+// })
+
+
+// app.get("/category", (req, res) => {
+
+//   res.render("category")
+
+// })
 
 
 app.listen(port, () => {

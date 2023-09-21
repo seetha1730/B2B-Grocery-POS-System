@@ -81,12 +81,12 @@ router.post("/signup", (req, res, next) => {
 //////////// L O G I N ///////////
 
 // GET route ==> to display the login form to users
-router.get('/login',isLoggedIn, (req, res) => res.render('auth/login'));
+router.get('/login', (req, res) => res.render('auth/login'));
 
 
 // POST login route ==> to process form data
 
-router.post('/login',isLoggedIn, (req, res, next) => {
+router.post('/login',isLoggedOut, (req, res, next) => {
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
@@ -109,11 +109,11 @@ router.post('/login',isLoggedIn, (req, res, next) => {
 
         // Set the session data
         req.session.currentUser = user;
-        console.log('Session after login:', req.session); // Add this line for debugging
+        console.log('Session after login:', req.session); 
 
         // Check if the user is an admin
         const isAdmin = user.email === 'admin@admin.com';
-        console.log('Is Admin:', isAdmin); // Add this line for debugging
+        console.log('Is Admin:', isAdmin);
 
 
         res.render('profile', { user, isAdmin });
@@ -160,10 +160,9 @@ router.post('/login',isLoggedIn, (req, res, next) => {
 // });
    
 router.get('/profile', isLoggedIn, (req, res) => {
- const isAdmin = req.session.currentUser && req.session.currentUser.email === 'admin@admin.com';// Check if the current user is admin
- //const isAdmin = req.session.currentUser && req.session.currentUser.email === 'admin@admin.com';
- //const isAdmin = req.session.currentUser?.email === 'admin@admin.com';
+ const isAdmin = req.session.currentUser.email === 'admin@admin.com';// Check if the current user is admin
 
+console.log("isadmin",isAdmin)
   res.render('profile', {
     user: req.session.currentUser,
     isAdmin: isAdmin

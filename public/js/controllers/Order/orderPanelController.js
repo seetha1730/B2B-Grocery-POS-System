@@ -43,7 +43,7 @@ const getCategoriesAndProducts = async () => {
 function fetchSearchResults(searchTerm) {
   // Make an AJAX request to the server to fetch search results
   
-    (`/search/${searchTerm}`)
+  APIGetCall(`/search/${searchTerm}`)
     .then((response) => response.json())
     .then(displaySearchResults)
     .catch(console.error);
