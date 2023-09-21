@@ -15,11 +15,11 @@ router.get("/inventory", (req, res, next) => {
 })
 
 router.get("/login", (req, res, next) => {
-  res.render('auth/login', {layout:false });
+  res.render('auth/login', {root: 'views', layout:false });
 })
 
 router.get("/signup", (req, res, next) => {
-  res.render('auth/signup', {layout:false });
+  res.render('auth/signup', {root: 'views',layout:false });
 })
 router.get("profile", (req, res, next) => {
   res.render('/profile', { root: 'views' });

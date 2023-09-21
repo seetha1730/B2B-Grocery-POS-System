@@ -34,6 +34,7 @@ const userSchema = new Schema(
     newsletter: {
       type: String,
     },
+   
   },
   {
     timestamps: true,

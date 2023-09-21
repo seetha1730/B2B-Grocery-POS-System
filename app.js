@@ -1,13 +1,15 @@
+
 const express = require("express")
 // ℹ️ Connects to the database
 require("./db");
 const path = require('path')
 const app = express()
-const port = 3000
+const port = 3001
 const bodyParser = require('body-parser');
 const hbs = require("hbs");
 const cors = require('cors');
-
+// use session here:  
+require('./config/session.config')(app);
 
 app.use(cors()); 
 // Middleware setup
@@ -45,6 +47,7 @@ app.use('/',authRoutes);
 
 
 
+
 app.get("/", (req, res) => {
 
   res.render("index")
@@ -71,6 +74,11 @@ app.get("/profile", (req, res) => {
 app.get("/product", (req, res) => {
 
   res.render("product")
+
+})
+app.get("/auth", (req, res) => {
+
+  res.render("auth")
 
 })
 

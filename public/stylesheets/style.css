@@ -12,7 +12,11 @@ body {
     background: white;
     color: #292c4b;
   }
-
+  .error {
+    background-color: #ef2a63;
+    padding: 20px;
+    color: #000;
+  }
  .btn-orange{
   margin-top: 30px;
   background-color: #F56365;

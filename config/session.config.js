@@ -14,20 +14,20 @@ module.exports = app => {
 
   app.use(
     session({
-      secret: process.env.SESS_SECRET,
+      secret: process.env.SESS_SECRET || "super session secret",
       resave: true,
       saveUninitialized: false,
       cookie: {
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 60000
+        maxAge: 6000000
       }, // ADDED code below !!!
       store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/point-of-sale'
-
+        mongoUrl: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/point-of-sale',
+     
         // ttl => time to live
-        // ttl: 60 * 60 * 24 // 60sec * 60min * 24h => 1 day
+        ttl: 60 * 60 * 24 // 60sec * 60min * 24h => 1 day
       })
     })
   );
