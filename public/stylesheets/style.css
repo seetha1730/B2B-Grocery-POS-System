@@ -58,6 +58,7 @@ body {
   }
   .botton-link{margin-top: 200px;}
 
+
   i.bi {
     margin-right: 5px;
     color:#fff;
@@ -134,7 +135,7 @@ li.nav-item.active {
   border-right: 1px solid #777;
     padding: 20px;
     cursor: pointer;
-}  
+}
 .cashier-name {
   text-transform: capitalize;
   color: #F56365;
@@ -168,7 +169,7 @@ li.nav-item.active {
     height: 60px;
     border-radius: 15px;
   }
-  .categories-section::-webkit-scrollbar{
+  #categories-section::-webkit-scrollbar{
     display: none;
    }
 
@@ -218,7 +219,7 @@ position: relative;
     align-items: center;
     padding: 0 50px;
 }
- .categories-section {
+ #categories-section {
   display: flex;
 
     align-items: center;
@@ -226,11 +227,11 @@ position: relative;
     margin: 20px 0;
     overflow: scroll;
   }
-  .categories-section .category.active {
+  #categories-section .category.active {
     background: #edbca6;
     font-size: 20px;
   }
-  .categories-section .category {
+  #categories-section .category {
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -246,8 +247,8 @@ position: relative;
     text-align: center;
     background: #fff;
 }
-  .categories-section .category-img {
-  
+  #categories-section .category-img {
+
     width: 60px;
     min-height: 60px;
     border-radius: 30px;
@@ -261,6 +262,14 @@ position: relative;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
   background: #fff;
 }
+
+
+  .card.product {
+    margin: 5px;
+    width: 200px;
+    padding: 10px;
+  }
+
  
 .card.product {
   margin: 20px 10px;
@@ -268,6 +277,7 @@ position: relative;
   padding: 0;
   border-radius: 0;
 }
+
   .product-name {
     padding: 13px;
     color: #F56365;
@@ -690,9 +700,12 @@ input#product-search {
   justify-content: center;
 }
 
-#paymentBtn{
+
+
+#paymentBtnCard, #paymentBtnCash {
   margin: 20px;
 }
+
 .checkout-button:hover {
   background: #4eebae;
 }
@@ -705,6 +718,92 @@ input#product-search {
   padding: 10px;
   font-size: 20px;
   border-radius: 10px;
+}
+
+
+.animated-gif{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Styles for the close button */
+#cash-payment-popup .close {
+  position: absolute;
+  top: 120px;
+  right: 260px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Styles for the calculator */
+#cash-payment-popup .calculator {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calculator{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.payment-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#amountGiven{
+  text-align: center;
+  width: 180px !important;
+}
+/* Styles for input field */
+#cash-payment-popup input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Styles for buttons */
+#calculateChangeBtn  {
+  background-color: #f1743c;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#closeOrderBtn{
+  background: white;
+  color: grey;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Styles for the change result */
+#cash-payment-popup #changeResult {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+#card-payment-popup {
+  background-color: white;
+  padding: 32px;
 }
 
 .product-title.box-shadow {
@@ -809,3 +908,4 @@ table.table td .add {
   color: #f1743c;
   border: 1px solid #8d99ae;
 }
+
