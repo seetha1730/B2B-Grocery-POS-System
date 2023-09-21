@@ -4,7 +4,7 @@ const Product = require('../models/Product.model');
 const Category = require('../models/Category.model');
 const fileUploader = require('../config/cloudinary.config');
 
-const path = require('path'); 
+const path = require('path');
 
 //Display the form for adding a new category
 router.get('/product/all', (req, res, next) => {
@@ -43,9 +43,9 @@ router.get('/product/add-product', (req, res, next) => {
 
 // POST request to add a new product
 router.post('/product/add-product', fileUploader.single('image'), (req, res) => {
- 
+
   const { productName, productPrice, quantity, categoryName, stock, description } = req.body;
- 
+
  // Check if productName is empty
  if (!productName) {
   const errors = [{ msg: 'Product name is required.' }];
@@ -86,7 +86,6 @@ if (!quantity) {
     });
 });
 
-// GET request to display the edit product page
 router.get('/product/:id/edit', (req, res, next) => {
   const { id } = req.params;
 
@@ -114,6 +113,7 @@ router.post('/product/:id/edit', fileUploader.single('image'), (req, res, next) 
       next(err);
     });
 });
+
 
 // POST request to delete a product
 router.post('/product/:id/delete', (req, res, next) => {
@@ -143,9 +143,9 @@ router.post('/product/:id/delete', (req, res, next) => {
 
 // // POST request to add a new product
 // router.post('/product/add-product', fileUploader.single('image'), (req, res) => {
- 
+
 //   const { productName, productPrice, quantity, categoryName, stock, description } = req.body;
- 
+
 //  // Check if productName is empty
 //  if (!productName) {
 //   const errors = [{ msg: 'Product name is required.' }];

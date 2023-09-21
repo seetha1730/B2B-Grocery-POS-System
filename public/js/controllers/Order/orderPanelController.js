@@ -1,8 +1,6 @@
 // HTML ELEMENTS
 const searchForm = document.getElementById("product-search-form");
-
 const searchInput = document.getElementById("product-search");
-
 const productDisplaySection = document.querySelector(".product-display-section");
 const subTotalEle = document.querySelector(".subtotal");
 const taxEle = document.querySelector(".tax");
@@ -42,7 +40,7 @@ const getCategoriesAndProducts = async () => {
 // Function to fetch search results and display them
 function fetchSearchResults(searchTerm) {
   // Make an AJAX request to the server to fetch search results
-  
+
   APIGetCall(`/search/${searchTerm}`)
     .then((response) => response.json())
     .then(displaySearchResults)
@@ -256,11 +254,9 @@ function createCartItem(cartItem) {
   return productItem;
 }
 
-
-
 // Function to clear the cart
 function clearCart() {
-  localStorage.removeItem('cart')
+  productDisplaySection.innerHTML = ""
 }
 
 // EVENT LISTENERS
