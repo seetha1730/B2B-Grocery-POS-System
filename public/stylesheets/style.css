@@ -30,7 +30,7 @@ body {
   font-size: 20px;
   display: flex;
   justify-content: center;width:100%;}
-  
+
    .green-button{
     border: none;
     width: 100%;
@@ -47,7 +47,7 @@ body {
   .box-shadow {
     margin: 20px;
     box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.25);
-    background: #fff; 
+    background: #fff;
   }
   .m-50{
     margin-top:50px;
@@ -276,7 +276,7 @@ position: relative;
     padding: 10px;
   }
 
- 
+
 .card.product {
   margin: 20px 10px;
   width: 200px;
@@ -378,7 +378,7 @@ position: relative;
   }
   .setting-menu {
     display: flex;
-    
+
   }
   .setting-menu button {
     background: #FFDE95;
@@ -415,7 +415,7 @@ position: relative;
     font-size: 1.1em;
       margin-top: 10px;
   }
- 
+
   .select-div {
     display: flex;
     flex-direction: row;
@@ -450,7 +450,7 @@ position: relative;
     justify-content: center;
     flex-direction: row;
     margin-left: 10px;}
-  
+
   input::placeholder {
     color:#8d99ae !important;
   }
@@ -518,7 +518,7 @@ position: relative;
   .input_field.radio-option {
     width: 50%;
   }
- 
+
   .form-group.signup-select {
     display: flex;
   }
@@ -600,7 +600,7 @@ position: relative;
   justify-content: center;
   }
   /*** Login Style Ends***/
- 
+
   textarea::placeholder{
     color:#8d99ae !important}
   .btn.addCart.bi-plus{
@@ -805,8 +805,7 @@ input#product-search {
   margin-top: 10px;
 }
 
-#card-payment-popup {
-  background-color: white;
+#card-payment-popup, #cash-payment-popup {
   padding: 32px;
 }
 
@@ -814,7 +813,7 @@ input#product-search {
   padding: 20px;
 }
 thead tr th {
-  
+
   height: 60px;
   vertical-align: middle;
 }
