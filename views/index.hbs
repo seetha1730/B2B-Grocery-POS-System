@@ -8,11 +8,10 @@
 
       <span> New Order</span>
     </div>
+   
 
     <div class="cashier-details col-6">
       <i class="bi bi-person-lock"></i>
-
-      <img class="cashier-img px-2" src="/images/cashier-img.png" alt=""/>
 
       <p class="cashier-name m-0">cashier name</p>
 
@@ -65,9 +64,16 @@
     <!-- Categories and product section ends-->
     <!-- CheckOut section starts-->
     <div class="right-section cart p-4 col-4">
+    
 
-      <div class="checkout-section col-12 ">
-        <div class="product-display-section">
+      <div class="checkout-section box-shadow col-12 ">
+        <div class="customer-input col-12">
+    <input class="form-control col-6" type="text"  id="customerIdInput" placeholder="Search Customer" aria-label="customer" />
+    <button id="searchButton " class="col-4 btn btn-orange" onclick="searchCustomerResult()">Search</button>
+   
+  </div>
+   <p class="col-12 mb-2" id="customer_name"></p>
+        <div class="product-display-section col-12">
 
           <!--append the cart item--->
 

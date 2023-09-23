@@ -7,7 +7,7 @@
    <button data-id="currency" class="button">Currency</button>
   <button data-id="language" class="button">Languges</button>
   <button data-id="store" class="button">Store</button>
-  <button data-id="default-customer" class="button">Default Customer</button>
+  <button data-id="default-customer" class="button">Users</button>
   <button data-id="tax-price" class="button">Price and Tax</button>
 
  </div>
@@ -93,29 +93,86 @@
 
 
   </div>
-
  <div class="panel" id="default-customer">
  
 
-        <h3>Choose Your Default POS Customer</h3>
+          <h3>Add user</h3>
+         <form class="form-horizontal col-7" action="/signup" method="POST">
+                    
+                        <!-- Display validation errors here -->
+                       {{#if errorMessage}}
+                        <p class="error">{{errorMessage}}</p>
+                      {{/if}}
+                    <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                           <input type="text" class="form-control" name="username" placeholder="Username" required />
+                           
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-envelope"></i></span>
+                           <input type="email" class="form-control" name="email" placeholder="Email" required />
+                           
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-lock"></i></span>
+                           <input type="password" class="form-control" name="password" placeholder="Password" required />
+                            
+                        </div>
+                       
+           <div class="first-name">
+            <div class="form-group  col-5">
+              <div class="input_field"> <span class="input-icon"><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="firstName" placeholder="First Name" required />
+              </div>
+            </div>
+           
+            <div class="form-group col-5">
+              <div class="input_field"> <span class="input-icon"><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="lastName" placeholder="Last Name"  />
+              </div>
+            </div>
+         </div>
 
-        <form>
-        <div class="form-row align-items-center m-50">
-          <div class="col-auto  col-12 select-div">
-            <select class="custom-select form-select col-8" aria-label="Default select example">
-              <option selected>Choose default POS customer</option>
-              <option value="1">Admin</option>
-              <option value="2">Guest</option>
-              <option value="3">Cashier</option>
-            </select>
-          </div>
-            <div class="col-2 ">
-            <button type="submit" class="btn btn-primary update-btn">Update</button>
+          <div class="form-group col-12" id="gender">
+          <div class="radio-option d-flex">
+              <input  type="radio" name="gender" value ="Male" id="rd1">
+              <label  for="rd1">Male</label>
+              <input  type="radio" name="gender" value ="Female" id="rd2">
+              <label for="rd2">Female</label>
+              <input  type="radio" name="gender" value ="No-gender" id="rd3">
+              <label for="rd2">No gender</label>
+              </div>
+         </div>
+       
+           <div class="form-group col-5">
+             <span class="input-icon "><i class="fa fa-phone "></i></span>
+            <input type="number" class="form-control" name="phoneNumber" placeholder="phoneNumber" required />
+                            
             </div>
           
+
+      
+          <div class="mt-4 col-5 select-div">
           
-        </div>
-      </form>
+            <select class="custom-select form-select col-8" aria-label="Default select example" name="role">
+              {{#if user.isAdmin}}
+               <option selected value="Customer">Customer</option>
+                <option value="Cashier">Cashier</option>
+            {{else}}
+        <option selected value="Customer">Customer</option>
+
+        {{/if}}
+          
+            </select>
+
+          </div>
+
+            <div class="col-5 ">
+            <button type="submit" class="btn btn-primary update-btn">Create user</button>
+            </div>
+            </form>
+  
+    
 
   </div>
 
