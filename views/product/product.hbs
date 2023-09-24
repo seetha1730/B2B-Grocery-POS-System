@@ -1,76 +1,81 @@
-
-
 <div class="right-panel col-11">
- 
+
   <div class="product-title box-shadow col-9">
-          <div class="row">
-            <div class="col-8">
-              <h2>Product </h2>
-            </div>
-            <div class="col-2">
-              <button type="button" class="btn btn-info green-button">
-                <a href="/product/add-product" >Add Product</a></button>
+    <div class="row">
+      <div class="col-8">
+        <h2>Product </h2>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-info green-button">
+          <a href="/product/add-product">Add Product</a></button>
 
-                
-            </div>
-            <div class="col-2">
-               <button type="button" class="btn btn-info green-button">
-                <a href="/category/add-category" >Add Category</a></button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-info green-button">
+          <a href="/category/add-category">Add Category</a></button>
 
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="show-panel box-shadow col-9" id="product">
 
     <div class="table-responsive">
-     
-       
-        <table class="table col-9">
-          <thead>
-            <tr>
-              <th class="col-1 px-3">ID</th>
-              <th class="col-1">Image</th>
-              <th class="col-2">Name</th>
-              <th class="col-1">Price</th>
-              <th class="col-1">Category</th>
-              <th class="col-1">Stock</th>
-              <th class="column-wider col-2">Desc</th>
-               <th class="col-2">Action</th>
 
-            </tr>
-          </thead>
-          <tbody>
-                  {{#each productList}}
+      <table class="table col-9">
+        <thead>
           <tr>
-  <td class="col-1 px-3">{{inc @index}}</td>
-  <td class="product-image col-1"><img src="{{this.imageUrl}}" /></td>
-  <td class="col-2" >{{this.productName}}<p>{{this.quantity}}</p></td>
-  <td class="col-1" >{{this.productPrice}} euros</td>
-  <td class="col-1" >{{this.categoryName}}</td>
-  <td class="col-1" >{{this.stock}}</td>
-  <td class="col-2">{{this.description}}</td>
-  <td class="col-2 actions">
-    <form action="/product/{{_id}}/edit" method="GET"> <!-- Use GET method to navigate to edit page -->
-      <button type="submit" class="edit" title="Edit"><i class="material-icons">&#xE254;</i></button>
-    </form>
-    <form action="/product/{{_id}}/delete" method="POST">
-      <button type="submit" class="delete" title="Delete"><i class="material-icons">&#xE872;</i></button>
-    </form>
-  </td>
-</tr>
-      
+            <th class="col-1 px-3">ID</th>
+            <th class="col-1">Image</th>
+            <th class="col-2">Name</th>
+            <th class="col-1">Price</th>
+            <th class="col-1">Category</th>
+            <th class="col-1">Stock</th>
+            <th class="column-wider col-2">Desc</th>
+
+
+              <th class="col-2">Action</th>
+          
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each productList}}
+            <tr>
+              <td class="col-1 px-3">{{inc @index}}</td>
+              <td class="product-image col-1"><img
+                  src="{{this.imageUrl}}"
+                /></td>
+              <td class="col-2">{{this.productName}}<p
+                >{{this.quantity}}</p></td>
+              <td class="col-1">{{this.productPrice}} euros</td>
+              <td class="col-1">{{this.categoryName}}</td>
+              <td class="col-1">{{this.stock}}</td>
+              <td class="col-2">{{this.description}}</td>
+             
+                <td class="col-2 actions">
+                  <form action="/product/{{_id}}/edit" method="GET">
+                    <!-- Use GET method to navigate to edit page -->
+                    <button type="submit" class="edit" title="Edit"><i
+                        class="material-icons"
+                      >&#xE254;</i></button>
+                  </form>
+                  <form action="/product/{{_id}}/delete" method="POST">
+                    <button type="submit" class="delete" title="Delete"><i
+                        class="material-icons"
+                      >&#xE872;</i></button>
+                  </form>
+                </td>
+    
+            </tr>
+
           {{/each}}
-            
-          </tbody>
-      
-        </table>
-      
+
+        </tbody>
+
+      </table>
+
     </div>
   </div>
 
 </div>
-
-
-
-

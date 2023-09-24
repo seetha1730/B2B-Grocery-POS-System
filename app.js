@@ -1,4 +1,5 @@
-
+// https://www.npmjs.com/package/dotenv
+require("dotenv").config();
 const express = require("express")
 // ℹ️ Connects to the database
 require("./db");
@@ -32,8 +33,8 @@ const productRoutes = require('./routes/product.routes');
 const categoryRoutes = require('./routes/category.routes');
 const settingsRoutes = require('./routes/settings.routes');
 const storeRoutes = require('./routes/store.routes');
-
 const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 
 
 // Use the route handlers
@@ -44,6 +45,7 @@ app.use('/', viewRoutes);
 app.use('/', settingsRoutes);
 app.use('/', storeRoutes);
 app.use('/',authRoutes);
+app.use('/',userRoutes);
 
 
 app.get("/inventory", (req, res) => {
@@ -51,31 +53,6 @@ app.get("/inventory", (req, res) => {
   res.render("inventory")
 
 })
-
-
-// app.get("/profile", (req, res) => {
-
-//   res.render("profile")
-
-// })
-
-// app.get("/product", (req, res) => {
-
-//   res.render("product")
-
-// })
-// app.get("/auth", (req, res) => {
-
-//   res.render("auth")
-
-// })
-
-
-// app.get("/category", (req, res) => {
-
-//   res.render("category")
-
-// })
 
 
 app.listen(port, () => {

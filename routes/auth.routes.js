@@ -5,16 +5,26 @@ const mongoose = require("mongoose");
 const saltRounds = 10;
 const User = require("../models/User.model");
 
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
+const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 
 // GET route ==> to display the signup form to users
 router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
 // POST route ==> to process form data
 router.post("/signup", (req, res, next) => {
   console.log("The form data: ", req.body);
-
-  const { firstName, lastName, email, password, gender, terms, newsletter } = req.body;
-   //password atleast 6 chars 
+  const min = 10000; // Minimum 5-digit number (inclusive)
+  const max = 99999; // Maximum 5-digit number (inclusive)
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    gender,
+    role,
+    username,
+    phoneNumber,
+  } = req.body;
+  //password atleast 6 chars
   // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   // if (!regex.test(password)) {
   //   res
@@ -24,121 +34,152 @@ router.post("/signup", (req, res, next) => {
   // }
 
   // Custom validation
-  if (!email || !email.trim()) {
-    return res.render("auth/signup", { errorMessage: "Email is required." ,layout:false});
+  if (!email || !email.trim() || !username) {
+    return res.render("auth/signup", {
+      errorMessage: "Email or username is required.",
+    });
   }
   if (!password || password.length < 6) {
-    return res.render("auth/signup", { errorMessage : "Password must be at least 6 characters.",layout:false });
+    return res.render("auth/signup", {
+      errorMessage: "Password must be at least 6 characters.",
+    });
   }
   if (!firstName || !firstName.trim()) {
-    return res.render("auth/signup", { errorMessage : "First Name is required.",layout:false  });
-  }
-  
-  if (!gender || !gender.trim()) {
-    return res.render("auth/signup", { errorMessage: "Gender is required.",layout:false});
-  }
-
-  if (!terms) {
-    return res.render("auth/signup", { errorMessage: "You must agree to the terms and conditions.",layout:false});
-  }
-  
-  bcryptjs
-  .genSalt(saltRounds)
-  .then(salt => bcryptjs.hash(password, salt))
-  .then((hashedPassword) => {
-     User.create({
-      firstName,
-      lastName,
-      email,
-      gender,
-      terms,
-      newsletter,
-      passwordHash: hashedPassword
+    return res.render("auth/signup", {
+      errorMessage: "First Name is required.",
     });
-  })
-  .then((userFromDB) => {
-  // Registration successful
-  console.log("Newly created user is: ", userFromDB);
-  res.redirect('/login');
-  })
-  .catch((error) => {
-    if (error instanceof mongoose.Error.ValidationError) {
-      res.status(500).render('auth/signup', { errorMessage: error.message, layout:false});
-    } else if (error.code === 11000) {
+  }
 
-      //console.log(" ");
+  if (!gender || !gender.trim()) {
+    return res.render("auth/signup", { errorMessage: "Gender is required." });
+  }
 
-      res.status(500).render('auth/signup', {
-        // errorMessage: 'User not found and/or incorrect password.'
-        errorMessage: "Username and email need to be unique. Either username or email is already used. ",layout:false
+  if (!phoneNumber) {
+    return res.render("auth/signup", {
+      errorMessage: "Phone number is requires",
+    });
+  }
+ 
+
+  bcryptjs
+    .genSalt(saltRounds)
+    .then((salt) => bcryptjs.hash(password, salt))
+    .then((hashedPassword) => {
+      User.create({
+        username,
+        firstName,
+        lastName,
+        email,
+        gender,
+        phoneNumber,
+        role,
+        passwordHash: hashedPassword,
+        isAdmin: false,
+        customerId: role === "Customer" ? Math.floor(Math.random() * (max - min + 1)) + min : " "
       });
-    } else {
-      next(error);
-    }
-}) 
+    })
+    .then((userFromDB) => {
+      // Registration successful
+      console.log("Newly created user is: ", userFromDB);
+      res.status(200);
+      res.send({ msg: "created user" });
+    })
+    .catch((error) => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.status(500).render("auth/signup", { errorMessage: error.message });
+      } else if (error.code === 11000) {
+        //console.log(" ");
+
+        res.status(500).render("auth/signup", {
+          // errorMessage: 'User not found and/or incorrect password.'
+          errorMessage:
+            "Username and email need to be unique. Either username or email is already used. ",
+        });
+      } else {
+        next(error);
+      }
+    });
 });
 
 //////////// L O G I N ///////////
 
 // GET route ==> to display the login form to users
-router.get('/login', (req, res) => res.render('auth/login'));
-
+router.get("/login", (req, res, next) => {
+  res.render("auth/login", { root: "views", layout: false });
+});
 
 // POST login route ==> to process form data
 
-router.post('/login',isLoggedOut, (req, res, next) => {
-  const { email, password } = req.body;
+router.post("/login", isLoggedOut, (req, res, next) => {
+  const { email, username, password } = req.body;
 
-  if (email === '' || password === '') {
-    res.render('auth/login', {
-      errorMessage: 'Please enter both, email and password to login.',
-      layout: false
+  if ((email === "" && username === "") || password === "") {
+    res.render("auth/login", {
+      errorMessage:
+        "Please enter either email or username and password to login.",
+      layout: false,
     });
     return;
   }
 
-  User.findOne({ email })
-    .then(user => {
+  const findUser = email ? User.findOne({ email }) : User.findOne({ username });
+
+  findUser
+    .then((user) => {
+      console.log(user)
       if (!user) {
-        res.render('auth/login', { errorMessage: 'Email not registered.', layout: false });
+        res.render("auth/login", {
+          errorMessage: "Email or username not registered.",
+          layout: false,
+        });
         return;
       }
-// Password matches
-      if (bcryptjs.compareSync(password, user.passwordHash)) {
-        
 
+      // Password matches
+      if (bcryptjs.compareSync(password, user.passwordHash)) {
         // Set the session data
         req.session.currentUser = user;
-        console.log('Session after login:', req.session); 
+        console.log("Session after login:", req.session);
+        //Check if the user is an admin
 
-        // Check if the user is an admin
-        const isAdmin = user.email === 'admin@admin.com';
-        console.log('Is Admin:', isAdmin);
-        console.log("useradmin" ,user.isAdmin)
+        if (user.isAdmin) {
+          const isAdmin = true;
+          req.session.currentUser = user; // Make sure this sets the correct user object
+          res.render("profile", { user, isAdmin ,layout: "layout-admin"});
+        } else {
+         
 
+          // Check if the user is a customer, and prevent login if so.
+          if (user.role === "Customer") {
+            
 
-        res.render('profile', { user, isAdmin });
+            res.render("auth/unauthorized", {
+              errorMessage:
+                "Unauthorized access. Customers are not allowed to log in.",
+              layout: false,
+            });
+            return;
+          }
+
+          // Regular user, render their profile
+          res.render("profile", { user,isAdmin ,layout: "layout-admin"});
+        }
       } else {
-        res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.', layout: false });
+        res.render("auth/login", {
+          errorMessage: "User not found and/or incorrect password.",
+          layout: false,
+        });
       }
     })
-    .catch(error => next(error));
+    .catch((error) => next(error));
 });
 
-router.get('/profile', isLoggedIn, (req, res) => {
- const isAdmin = req.session.currentUser.email === 'admin@admin.com';// Check if the current user is admin
 
-console.log("isadmin",isAdmin)
-  res.render('profile', {
-    user: req.session.currentUser,
-    isAdmin: isAdmin
-  });
-});
 
-router.post('/logout', isLoggedIn, (req, res, next) => {
-  req.session.destroy(err => {
+router.post("/logout", isLoggedIn, (req, res, next) => {
+  req.session.destroy((err) => {
     if (err) next(err);
-    res.redirect('/login');
+    res.redirect("/login");
   });
 });
 module.exports = router;

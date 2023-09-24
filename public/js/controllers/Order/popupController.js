@@ -157,7 +157,7 @@ const calculateChange = () => {
   // LISTENERS
 checkoutBtn?.addEventListener("click", () => {
   checkoutPopup.style.display = "block";
-
+  
   const TAX = 1.1
   const totalPrice = shoppingCart.reduce((acc, curr) => {
     return acc + curr.productPrice * curr.noItems

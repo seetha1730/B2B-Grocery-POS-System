@@ -9,12 +9,16 @@ const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 const productSection = document.getElementById('product-section');
 const clearCartButton = document.getElementById("clearCartBtn");
+const searchButton = document.getElementById('searchButton');
+const customerIdInput = document.getElementById('customerIdInput');
+const customerName = document.getElementById('customer_name')
 
 // GLOBAL VARIABLES
 let shoppingCart = [];
 let subTotal = 0;
 let tax = 0;
 let total = 0;
+let customer = '';
 
 const COLLECTION_CATEGORY_URL = '/category/all'
 const COLLECTION_PRODUCT_URL = '/product/all'
@@ -47,6 +51,17 @@ function fetchSearchResults(searchTerm) {
     .catch(console.error);
 }
 
+function searchCustomerResult() {
+  // Make an AJAX request to the server to fetch search results
+  APIGetCall(`/search/customer/${customerIdInput.value}`)
+    .then((response) => response.json())
+    .then(data => {
+      customerName.innerText = `${data[0].firstName} ${data[0].lastName}`
+    })
+    .catch(console.error);
+}
+
+
 // FUNCTIONS
 
 const handleCategoryItemClick = (category, products) => {
@@ -67,13 +82,15 @@ const renderCategories = (allCategories = [], allProducts = []) => {
   allCategories.forEach((category) => {
     const categoryItemElement = document.createElement("div");
     // add element properties
-    categoryItemElement.classList.add('category', 'col-2', 'category-item')
+    categoryItemElement.classList.add('category','box-shadow', 'col-2', 'category-item' ,'card-img-top')
     categoryItemElement.onclick = () => handleCategoryItemClick(category, allProducts)
 
     // add content
     const elementContent = `
-      <img class="category-img" src="${category.imageUrl}" alt="image category" />
-      <p>${category.categoryName}</p>
+    <div class="card-body">
+      <img class="category-img card-img-top " src="${category.imageUrl || 'images/no-image.png' }" />
+      <p class="card-title">${category.categoryName}</p>
+      </div>
     `
 
     categoryItemElement.innerHTML = elementContent
@@ -120,7 +137,7 @@ function displaySearchResults(searchResult) {
 
 const handleAddProductClick = (productEncoded) => {
   const decodeProduct = JSON.parse(decodeURIComponent(productEncoded))
-
+  saveCartLocalStorage(decodeProduct)
   handleAddToCart(decodeProduct)
 }
 

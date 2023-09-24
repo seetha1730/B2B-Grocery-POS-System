@@ -27,7 +27,7 @@ const isAdmin = (req, res, next) => {
 };
 
 const isCashier = (req, res, next) => {
-  if (req.session.currentUser && !req.session.currentUser.isAdmin) {
+  if (req.session.currentUser && !req.session.currentUser.role == "cashier") {
     // User is a cashier, allow access
     next();
   } else {
@@ -36,9 +36,21 @@ const isCashier = (req, res, next) => {
   }
 };
 
+
+const isCustomer = (req, res, next) => {
+  if (req.session.currentUser && !req.session.currentUser.role == "customer") {
+    // User is a cashier, allow access
+    next();
+  } else {
+    // User is not authorized, redirect to an error page or show a message
+    res.status(403).send("Access denied: Should be a customer.");
+  }
+};
+
 module.exports = {
   isLoggedIn,
   isLoggedOut,
   isAdmin,
-  isCashier
+  isCashier,
+  isCustomer
 };

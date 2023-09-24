@@ -16,6 +16,7 @@ body {
     background-color: #ef2a63;
     padding: 20px;
     color: #000;
+    margin-top: 20px;
   }
   form#logout-form button {
     border: 0;
@@ -47,7 +48,8 @@ body {
   .box-shadow {
     margin: 20px;
     box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.25);
-    background: #fff;
+    background: #fff; 
+    border-radius: 5px;
   }
   .m-50{
     margin-top:50px;
@@ -63,7 +65,10 @@ body {
       padding: 9px;
   }
   .botton-link{margin-top: 200px;}
-
+  p.card-title {
+      font-size: 16px;
+      line-height: 18px;
+}
 
   i.bi {
     margin-right: 5px;
@@ -122,6 +127,18 @@ li.nav-item.active {
   width: 60px;
   border-radius: 30px;
 }
+.customer-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.customer-input  input.form-control{width:70%}
+.customer-input button {
+  width: 28%;
+  margin: 0;
+  padding: 6px;
+  margin-left: 10px;
+}
 .cashier-details {
   display: flex;
   align-items: center;
@@ -154,6 +171,7 @@ li.nav-item.active {
   display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
 }
 .info-details span {
   margin: 0 50px;
@@ -182,7 +200,7 @@ li.nav-item.active {
 
   #prev-button {
     position: absolute;
-    left: 0;
+    left: -12px;
     background: #F56365;
     color: #f6f7fa;
     border: none;
@@ -196,15 +214,15 @@ li.nav-item.active {
     font-size: 30px;
 
 }
+.bi-chevron-right::before {
+  padding-left: 9px;
+}
 .categories-container i.bi{
-
   color: #f6f7fa;
-
-
 }
 #next-button{
   position: absolute;
-  right: 0;
+  right: -12px;
   background: #F56365;
   color: #f6f7fa;
   border: none;
@@ -223,13 +241,11 @@ li.nav-item.active {
 position: relative;
     display: flex;
     align-items: center;
-    padding: 0 50px;
 }
  #categories-section {
   display: flex;
 
     align-items: center;
-    border-radius: 15px;
     margin: 20px 0;
     overflow: scroll;
   }
@@ -237,19 +253,25 @@ position: relative;
     background: #edbca6;
     font-size: 20px;
   }
+  #categories-section .category:first-child {
+    margin-left: 0;
+}
+#categories-section .category:last-child {
+  margin-right: 0;
+}
   #categories-section .category {
     display: flex;
     justify-content: center;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 20px;
     color: #F56365;
     flex-direction: column;
     align-items: center;
     border: 1px solid #8d99ae;
     margin: 0 5px;
-    height: 160px;
-    width: 15.5%;
+    height: 125px;
+    width: 11.63%;
     text-align: center;
     background: #fff;
 }
@@ -261,12 +283,10 @@ position: relative;
 }
 .right-section  .checkout-section{
   justify-content: center;
-  gap: 100;
   padding:20px;
   font-size: 20px;
   color: #292c4b;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
-  background: #fff;
+  margin: 20px 20px 20px 0px;
 }
 
 
@@ -398,11 +418,11 @@ position: relative;
   .custom-select, input.form-control {
     padding: 10px 15px;
     font-size: 1em;
-      height: 45px;
-      border-radius: 15px;
-      width: 90%;
-      color: #8d99ae;
-      border-color: #8d99ae;
+    height: 45px;
+    border-radius: 5px;
+    width: 90%;
+    color: #8d99ae;
+    border: 2px solid #e7e7e7;
   }
   .btn-blue{background: #3080ec;
       color: #fff;
@@ -413,7 +433,7 @@ position: relative;
   .form-label {
     color: #292c4b;
     font-size: 1.1em;
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   .select-div {
@@ -422,7 +442,6 @@ position: relative;
     align-items: center;
   }
   .custom-select-label {
-    /* color: #292c4b; */
     font-size: 1.5em;
   }
 
@@ -523,7 +542,7 @@ position: relative;
     display: flex;
   }
   .checkbox-option{color:darkgrey}
-  /* .form-horizontal .form-group:nth-child(3){ margin-bottom: 30px; } */
+  
   .form-horizontal .form-group .input-icon{
 
       font-size: 23px;
@@ -912,3 +931,7 @@ table.table td .add {
   border: 1px solid #8d99ae;
 }
 
+.default-customer .form-horizontal .form-control{
+  width:100%
+   
+}

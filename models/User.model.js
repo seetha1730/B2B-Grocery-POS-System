@@ -2,6 +2,13 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
+    username: {
+    type: String,
+    required: [true, 'Username is required.'],
+    unique: true,
+    lowercase: true,
+    trim: true,
+    },
     email: {
       type: String,
       required: [true, 'Email is required.'],
@@ -23,21 +30,27 @@ const userSchema = new Schema(
       trim: true,
       required: false,
     },
+
     gender: {
       type: String,
       required: [true, 'Gender is required.'],
     },
-    terms: {
-      type: String,
-      required: [true, 'Terms is required.'],
+    phoneNumber: {
+      type: Number,
+      required: [true, 'Phone number  is required.'],
     },
-    newsletter: {
-      type: String,
+  customerId :{
+    type:Number,
     },
-   isAdmin: {
-    type:Boolean,
-   default:false 
-   },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
+    role: {
+      type: String,
+      enum: ['Customer', 'Cashier'],
+      default: 'Customer', 
+    },
 
   },
   {
