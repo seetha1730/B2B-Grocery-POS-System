@@ -13,18 +13,28 @@ const searchButton = document.getElementById('searchButton');
 const customerIdInput = document.getElementById('customerIdInput');
 const customerName = document.getElementById('customer_name')
 
+const localStorageCart = localStorage.getItem('cart')
+const cartData = localStorageCart && JSON.parse(localStorageCart)
+
+
 // GLOBAL VARIABLES
-let shoppingCart = [];
-let subTotal = 0;
-let tax = 0;
-let total = 0;
+let cart = cartData || {
+  shoppingCart: [],
+  subTotal: 0,
+  tax: 0,
+  total: 0
+}
+
+if(cartData){
+  updateCartDisplay()
+}
+
+
 let customer = '';
 
 const COLLECTION_CATEGORY_URL = '/category/all'
 const COLLECTION_PRODUCT_URL = '/product/all'
 
-
-// API CALL
 
 
 // Get All Categories and all Products from the DB, populate the List
@@ -103,9 +113,9 @@ const renderCategories = (allCategories = [], allProducts = []) => {
 // Function to update the total based on a product
 function updateTotal(product) {
   const productTax = product.productPrice * 0.1; // Assuming 10% tax, adjust as needed
-  subTotal += product.productPrice;
-  tax += productTax;
-  total = subTotal + tax;
+  cart.subTotal += product.productPrice;
+  cart.tax += productTax;
+  cart.total = cart.subTotal + cart.tax;
   updateCartDisplay();
 }
 
@@ -137,7 +147,6 @@ function displaySearchResults(searchResult) {
 
 const handleAddProductClick = (productEncoded) => {
   const decodeProduct = JSON.parse(decodeURIComponent(productEncoded))
-  saveCartLocalStorage(decodeProduct)
   handleAddToCart(decodeProduct)
 }
 
@@ -178,7 +187,6 @@ function displayProductsByCategory(category) {
 
   const filteredProducts = products.filter(product => product.category === category);
   console.log("test 2", category)
-
   filteredProducts.forEach(product => {
     console.log("test 3")
     console.log(product.category)
@@ -192,22 +200,24 @@ function displayProductsByCategory(category) {
 function updateCartDisplay() {
   productDisplaySection.innerHTML = "";
 
-  shoppingCart.forEach((cartItem) => {
+  cart.shoppingCart.forEach((cartItem) => {
     const productItem = createCartItem(cartItem);
     productDisplaySection.appendChild(productItem);
   });
 
-  subTotalEle.innerHTML = `$ ${parseFloat(subTotal).toFixed(2)}`;
-  taxEle.innerHTML = `$ ${parseFloat(tax).toFixed(2)}`;
-  totalEle.innerHTML = `$ ${parseFloat(total).toFixed(2)}`;
+  subTotalEle.innerHTML = `$ ${parseFloat(cart.subTotal).toFixed(2)}`;
+  taxEle.innerHTML = `$ ${parseFloat(cart.tax).toFixed(2)}`;
+  totalEle.innerHTML = `$ ${parseFloat(cart.total).toFixed(2)}`;
+  localStorage.setItem('cart', JSON.stringify(cart))
+
 }
 
 // Function to handle adding a product to the cart
 function handleAddToCart(product) {
-  const findProduct = shoppingCart.find((item) => item._id === product._id);
+  const findProduct = cart.shoppingCart.find((item) => item._id === product._id);
 
   if (!findProduct) {
-    shoppingCart.push({...product, noItems: 1});
+    cart.shoppingCart.push({...product, noItems: 1});
   } else {
     findProduct.noItems++;
   }
@@ -218,7 +228,7 @@ function handleAddToCart(product) {
 // Function to handle incrementing a cart item
 function increment(event) {
   const id = event.target.getAttribute("data-id");
-  const findProduct = shoppingCart.find((item) => item._id === id);
+  const findProduct = cart.shoppingCart.find((item) => item._id === id);
 
   if (findProduct) {
     findProduct.noItems++;
@@ -229,18 +239,18 @@ function increment(event) {
 // Function to handle decrementing a cart item
 function decrement(event) {
   const id = event.target.getAttribute("data-id");
-  const findProduct = shoppingCart.find((item) => item._id === id);
+  const findProduct = cart.shoppingCart.find((item) => item._id === id);
 
   if (findProduct) {
     if (findProduct.noItems > 1) {
       findProduct.noItems--;
     } else {
-      shoppingCart = shoppingCart.filter((item) => item._id !== id);
+      cart.shoppingCart = cart.shoppingCart.filter((item) => item._id !== id);
     }
     const productTax = findProduct.productPrice * 0.1; // Assuming 10% tax, adjust as needed
-    subTotal = subTotal - findProduct.productPrice
-    tax -= productTax;
-    total = subTotal + tax;
+    cart.subTotal = cart.subTotal - findProduct.productPrice
+    cart.tax -= productTax;
+    cart.total = cart.subTotal + cart.tax;
   }
   updateCartDisplay();
 }
@@ -274,6 +284,10 @@ function createCartItem(cartItem) {
 // Function to clear the cart
 function clearCart() {
   productDisplaySection.innerHTML = ""
+  taxEle.innerHTML = "$0.00"
+  totalEle.innerHTML ="$0.00"
+  subTotalEle.innerHTML="$0.00"
+  localStorage.removeItem('cart')
 }
 
 // EVENT LISTENERS
