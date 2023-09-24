@@ -11,7 +11,6 @@ const paymentPopUpCash = document.getElementById("cash-payment-popup")
 const closeButtonCash = document.querySelector("#cash-payment-popup .close");
 const closeButtonCard = document.querySelector("#card-payment-popup .close");
 
-
 // GLOBAL VARIABLES
 let index = 0;
 let checkoutOrderNumber = 0;
@@ -83,35 +82,58 @@ const closePaymentPopup = () => {
 
 }
 
-// Function to show payment success message
+// CARD: Function for dummy terminal payment processing
+const terminalPaymentLoad = () => {
+  const paymentContent = document.getElementById("card-payment-popup");
+
+  paymentContent.innerHTML = `
+    <div class="payment-content">
+      <span class="close">&times;</span>
+      <h2>Payment</h2>
+      <br/>
+      <div class="animated-gif">
+        <h6>Please follow the instructions on the terminal</h6>
+        <br/>
+        <img src="/images/giphy.gif" alt="animated gif"/>
+      </div>
+    </div>
+    </div>
+
+    `;
+}
+
+// CARD: Function to show payment success message
 const showPaymentSuccess = () => {
   const paymentContent = document.getElementById("card-payment-popup");
 
   paymentContent.innerHTML = `
+    <div class="payment-content">
       <span class="close" onclick="closePaymentPopup()">&times;</span>
       <h2>Payment successful</h2>
       <br/>
       <p>Printing receipt...</p>
+    </div>
+    </div>
     `;
-
-  setTimeout(showDoneMessage, 3000); // 3 seconds (3000 milliseconds)
 }
 
+// CARD: Function to show the payment is completed
 const showDoneMessage = () => {
-  const paymentContent = document.getElementById("checkout-content");
+  const paymentContent = document.getElementById("card-payment-popup");
 
   paymentContent.innerHTML = `
+    <div class="payment-content">
       <span class="close" onclick="closePaymentPopup()">&times;</span>
       <h2>Done!</h2>
       <h6> Next customer please</h6>
+    </div>
+    </div>
     `;
+
 }
 
-// Call the function to replace content after 5 seconds
-setTimeout(showPaymentSuccess, 5000); // 5 second
 
-
-// Function to calculate the change
+// CASH: Function to calculate the change
 const calculateChange = () => {
   const cashAmountElement = document.getElementById("amountGiven");
   const totalPriceElement = document.getElementById("total-price-with-tax");
@@ -129,6 +151,8 @@ const calculateChange = () => {
     changeResult.textContent = "Change to give: $" + change.toFixed(2);
   }
 }
+
+
 
   // LISTENERS
 checkoutBtn?.addEventListener("click", () => {
@@ -162,12 +186,10 @@ checkoutBtn?.addEventListener("click", () => {
   closeButton.style.cursor = "pointer";
 })
 
-
-
-
 paymentBtnCard.addEventListener("click", function () {
-
-  console.log("button clicked")
+  terminalPaymentLoad()
+  setTimeout(showPaymentSuccess, 3000)
+  setTimeout(showDoneMessage, 6000)
   paymentPopUpCard.style.display = "block";
   checkoutPopup.style.display = "none";
 

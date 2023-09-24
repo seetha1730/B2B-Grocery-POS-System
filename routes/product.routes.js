@@ -47,9 +47,9 @@ router.get('/product/add-product',isAdmin, (req, res, next) => {
 
 // POST request to add a new product
 router.post('/product/add-product', fileUploader.single('image'), (req, res) => {
- 
+
   const { productName, productPrice, quantity, categoryName, stock, description } = req.body;
- 
+
  // Check if productName is empty
  if (!productName) {
   const errors = [{ msg: 'Product name is required.' }];
@@ -90,7 +90,6 @@ if (!quantity) {
     });
 });
 
-// GET request to display the edit product page
 router.get('/product/:id/edit', (req, res, next) => {
   const { id } = req.params;
 
@@ -119,6 +118,7 @@ router.post('/product/:id/edit', fileUploader.single('image'), (req, res, next) 
     });
 });
 
+
 // POST request to delete a product
 router.post('/product/:id/delete',(req, res, next) => {
   const { id } = req.params;
@@ -132,7 +132,6 @@ router.post('/product/:id/delete',(req, res, next) => {
     });
 
 });
-
 
 
 module.exports = router;
