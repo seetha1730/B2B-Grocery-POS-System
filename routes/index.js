@@ -8,17 +8,17 @@ const Category = require("../models/Category.model");
 const { isLoggedIn, isLoggedOut, isAdmin } = require('../middleware/route-guard.js');
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
-const user= req.session.currentUser
+const user = req.session.currentUser
 
 
    if (req.session.currentUser.isAdmin){
       
-      res.render("index",{user:true, layout: 'layout-admin'});
+      res.render("index",{user, layout: 'layout-admin'});
       
    }
    else
    {
-      res.render("index",{user:true});
+      res.render("index",{user});
 
    }
 

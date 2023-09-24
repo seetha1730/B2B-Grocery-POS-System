@@ -13,8 +13,12 @@
     <div class="cashier-details col-6">
       <i class="bi bi-person-lock"></i>
 
-      <p class="cashier-name m-0">cashier name</p>
 
+    {{#if user.role}}
+  <p class="cashier-name m-0" >Cashier:{{ user.firstName }}{{user.lastname }}</p>
+    
+    {{/if}}
+  
     </div>
   </div>
 
@@ -115,9 +119,13 @@
     <h2>Checkout Order <span id="checkout-order-popup">#3484</span></h2>
     <h1>Total balance:<b class="amount-total" id="amount-total"> 0.00</b></h1>
 
-
-    <p>Cashier: Brenda</p>
-    <p>Paying as customer: Guest</p>
+{{#if user.role}}
+      <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
+      <p>Paying as customer: {{ user.customerId }} {{ user.firstName }}</p>
+    {{else}}
+      <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
+      <p>Paying as customer: Guest</p>
+    {{/if}}
 
     <div class="coupon-section">
       <label for="coupon-code"> Coupon Code:</label>

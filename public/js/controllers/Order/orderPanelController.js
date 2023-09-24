@@ -139,7 +139,7 @@ function displaySearchResults(searchResult) {
 
 const handleAddProductClick = (productEncoded) => {
   const decodeProduct = JSON.parse(decodeURIComponent(productEncoded))
-
+  saveCartLocalStorage(decodeProduct)
   handleAddToCart(decodeProduct)
 }
 
