@@ -17,21 +17,18 @@ const ProductSchema = new Schema(
       trim: true,
     },
     productPrice: {
-      type: Number, // Assuming productPrice is a numeric value
-      trim: true,
-      //required: [true, 'Product price is required'],
+      type: Number,
+      trim: true,  
     },
     categoryName: {
       type: String,
-      //required: [true, 'Category name is required'],
     },
     stock: {
-      type: String, // Changed to boolean for stock status
-     // default: true, // This sets the default value to true if not provided
+      type: String, 
     },
     description: {
       type: String,
-      required: false, // Optional field
+      required: false, 
     },
     imageUrl: {
       type: String,

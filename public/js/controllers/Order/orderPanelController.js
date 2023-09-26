@@ -62,11 +62,14 @@ function fetchSearchResults(searchTerm) {
 }
 
 function searchCustomerResult() {
+
+
   // Make an AJAX request to the server to fetch search results
   APIGetCall(`/search/customer/${customerIdInput.value}`)
     .then((response) => response.json())
     .then(data => {
-      customerName.innerText = `${data[0].firstName} ${data[0].lastName}`
+      customerName.innerText = `${data.firstName} ${data.lastName}`
+     localStorage.setItem("customer",  JSON.stringify({firstName: data.firstName,lastName:data.lastName, id: data._id, customerId: data.customerId,phoneNumber:data.phoneNumber}));
     })
     .catch(console.error);
 }

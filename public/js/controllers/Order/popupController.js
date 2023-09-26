@@ -13,7 +13,10 @@ const closeButtonCard = document.querySelector("#card-payment-popup .close");
 
 // GLOBAL VARIABLES
 let index = 0;
-let checkoutOrderNumber = 0;
+const products = []; 
+const min = 1000; // Minimum 5-digit number (inclusive)
+const max = 9999; // Maximum 5-digit number (inclusive)
+let orderNumber = Math.floor(Math.random() * (max - min + 1))
 
 // FUNCTIONS
 const addItemToPopupCart = (shoppingItem) => {
@@ -79,6 +82,44 @@ const applyDiscount = () => {
 const closePaymentPopup = () => {
   document.getElementById("card-payment-popup").style.display = "none";
   document.getElementById("cash-payment-popup").style.display = "none";
+  const shoppingCart = JSON.parse(localStorage.getItem("cart")); // Parse the shopping cart data from local storage
+ const customer =JSON.parse(localStorage.getItem("customer")); 
+  // Map the shopping cart items to the Products array
+  const orderData = {
+    Products: shoppingCart.shoppingCart.map((item) => ({
+      product: item._id,
+      productName: item.productName,
+      quantity: item.quantity,
+    })),
+    total:shoppingCart.total,
+   customerFirstName: customer?.firstName, 
+   customerLastName: customer?.lastName, 
+   customerPhoneNumber: customer?.phoneNumber, 
+    customerId: customer?.customerId ,
+    orderNumber
+  };
+
+  fetch("/orderCreate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orderData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    localStorage.removeItem("customer")
+    localStorage.removeItem("cart")
+    setTimeout(() =>{
+      window.location.reload();
+    },2000)
+
+    console.log("Order created successfully", data);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error("Error creating order", error);
+  });
 
 }
 
@@ -132,7 +173,6 @@ const showDoneMessage = () => {
 
 }
 
-
 // CASH: Function to calculate the change
 const calculateChange = () => {
   const cashAmountElement = document.getElementById("amountGiven");
@@ -151,8 +191,6 @@ const calculateChange = () => {
     changeResult.textContent = "Change to give: $" + change.toFixed(2);
   }
 }
-
-
 
   // LISTENERS
 checkoutBtn?.addEventListener("click", () => {
@@ -173,7 +211,7 @@ checkoutBtn?.addEventListener("click", () => {
   const closeButton = document.querySelector(".close");
 
   amountTotalElement.innerHTML = `$ ${totalPriceWithTax}`
-  checkoutOrderNumberElement.innerHTML =  ` ${checkoutOrderNumber + 1}`
+  checkoutOrderNumberElement.innerHTML =`# ${orderNumber}` ;
   totalPriceNoTaxElement.innerHTML = `$ ${totalPrice}`
   totalPriceOnlyTaxElement.innerHTML = `$ ${onlyTax}`
   totalPriceWithTaxElement.innerHTML = `$ ${totalPriceWithTax}`

@@ -1,0 +1,57 @@
+
+      <!-- Right panel starts-->
+      <div class="right-panel col-11">
+        
+  <div class="category-title box-shadow col-8">
+          <div class="row">
+            <div class="col-8">
+              <h2>Order </h2>
+            </div>
+            
+          </div>
+        </div>
+
+
+  <div class="show-panel box-shadow col-8" id="category">
+    <div class="table-responsive">
+      <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    
+    {{#each Pagination}}
+    <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
+    {{/each}}
+    
+  </ul>
+</nav>
+      
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-1 px-3 text-center">index</th>
+              <th>Order number</th>
+              <th>Total</th>
+              <th>customer details</th>
+              <th>customer Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orderList}}
+            <tr>
+              <td class="col-1 px-3 text-center">{{inc @index}}</td>
+              <td>{{this.orderNumber}}</td>
+              <td>{{this.total}}</td>
+              <td><p>{{this.customerFirstName}}{{this.customerLastName}}</p>
+              <p>{{this.customerPhoneNumber}}</p>
+             </td>
+              <td>{{this.customerId}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+     
+    </div>
+  </div>
+</div>
+
+
+      </div>

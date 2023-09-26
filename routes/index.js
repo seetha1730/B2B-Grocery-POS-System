@@ -41,7 +41,7 @@ router.get("/search/:searchTerm",(req, res, next) => {
 router.get("/search/customer/:customerId",(req, res, next) => {
    const { customerId } = req.params;
    console.log(customerId)
-   User.find({ customerId })  // Case-insensitive search customer
+   User.findOne({ customerId })  // Case-insensitive search customer
  
      .then((customerResult) => {
       console.log(customerResult)

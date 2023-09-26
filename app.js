@@ -35,6 +35,7 @@ const settingsRoutes = require('./routes/settings.routes');
 const storeRoutes = require('./routes/store.routes');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
+const OrderRoutes = require('./routes/order.routes');
 
 
 // Use the route handlers
@@ -46,6 +47,7 @@ app.use('/', settingsRoutes);
 app.use('/', storeRoutes);
 app.use('/',authRoutes);
 app.use('/',userRoutes);
+app.use('/',OrderRoutes);
 
 
 app.get("/inventory", (req, res) => {
@@ -53,6 +55,7 @@ app.get("/inventory", (req, res) => {
   res.render("inventory")
 
 })
+
 
 
 app.listen(port, () => {
