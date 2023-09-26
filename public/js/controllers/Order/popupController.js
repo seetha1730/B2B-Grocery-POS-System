@@ -44,7 +44,7 @@ const applyDiscount = () => {
 
   const discountCode = couponCodeInput.value;
 
-  shoppingCart.forEach((product) => {
+  cart.shoppingCart.forEach((product) => {
     totalAmount = totalAmount + product.productPrice * product.noItems
   })
 
@@ -159,7 +159,7 @@ checkoutBtn?.addEventListener("click", () => {
   checkoutPopup.style.display = "block";
   
   const TAX = 1.1
-  const totalPrice = shoppingCart.reduce((acc, curr) => {
+  const totalPrice = cart.shoppingCart.reduce((acc, curr) => {
     return acc + curr.productPrice * curr.noItems
   }, 0).toFixed(2)
   const totalPriceWithTax = (totalPrice * TAX).toFixed(2)
@@ -178,7 +178,7 @@ checkoutBtn?.addEventListener("click", () => {
   totalPriceOnlyTaxElement.innerHTML = `$ ${onlyTax}`
   totalPriceWithTaxElement.innerHTML = `$ ${totalPriceWithTax}`
 
-  shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
+  cart.shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
 
   closeButton.addEventListener("click", function () {
     checkoutPopup.style.display = "none";
