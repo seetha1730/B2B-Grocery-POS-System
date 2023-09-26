@@ -2,6 +2,8 @@
 const buttons = document.querySelector('.setting-buttons');
 const panels = document.querySelectorAll('.panel');
 const storeForm = document.getElementById('store-form')
+const pageInc = page + 1;
+const pageDec = page - 1;
 
 //window onload
 window.addEventListener("load", (event) => {

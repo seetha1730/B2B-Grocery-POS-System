@@ -4,6 +4,19 @@ const Category = require('../models/Category.model');
 const fileUploader = require('../config/cloudinary.config');
 const { isAdmin } = require('../middleware/route-guard');
 
+
+const generateCPageNumber = (itemLength) => {
+
+  let pages = (itemLength / 5);
+  let pageString = pages.toString().split(".");
+  console.log("Total pages:", pages);
+  if (pageString.length == 2) {
+    const pageCount = parseInt(pageString[0]) + 1;
+    return Array.from({ length: pageCount }, (_, i) => i + 1);
+  }else {
+     return Array.from({ length: pages }, (_, i) => i + 1);
+  }
+};
 // Display the form for adding a new category
 router.get('/category/all', (req, res, next) => {
   Category.find()
@@ -12,7 +25,23 @@ router.get('/category/all', (req, res, next) => {
   })
   .catch(err => next(err));
 });
+router.get("/category/:pageNumber", isAdmin, (req, res, next) => {
+  const { pageNumber } = req.params;
+  const skip = (parseInt(pageNumber) - 1) * 5;
+  Category.find().count()
+  .then((catCount) => {
 
+  Category.find().populate('parentCategory')// Populate the parentCategory field
+  .skip(skip)
+  .limit(5)
+  .then(categoryList => {
+
+      res.render('category/category', { categoryList, categoryPagination: generateCPageNumber(catCount),layout: 'layout-admin' });
+    })
+    
+    .catch((err) => next(err));
+}).catch((err) => next(err));
+});
 
 
 // Display the form for adding a new category
@@ -55,6 +84,7 @@ router.get('/category', isAdmin,(req, res, next) => {
     })
     .catch(err => next(err));
 });
+
 
 // Display the edit category page
 router.get('/category/:id/edit', (req, res, next) => {
