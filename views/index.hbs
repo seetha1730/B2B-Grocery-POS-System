@@ -1,13 +1,15 @@
 <div class="right-panel col-11">
 
   <div class="info-details col-12 ">
-    <div class="shop-name col-4">
+    <div class="shop-name col-2">
 
-      <h5>S & L <p>GROCERY</p></h5>
-
-
-      <span> New Order</span>
+  
     </div>
+   <div class="order-date col-4">
+
+          <span class="date-section" id="current-date-time"></span>
+   </div>
+    
    
 
     <div class="cashier-details col-6">
@@ -42,17 +44,14 @@
       </section>
       <!-- Categories  section ends-->
       <!-- Search section starts-->
-      <div class="search col-12">
+      <div class="search col-12 ">
         <form class="form-inline col-8" id="product-search-form">
 
 
           <input class=" form-control" id="product-search" type="search" placeholder="Search your Product name"
                  aria-label="Search">
         </form>
-        <div class="order-date col-4">
-
-          <span class="date-section" id="current-date-time"></span>
-        </div>
+      
 
       </div>
 
@@ -67,9 +66,8 @@
     </div>
     <!-- Categories and product section ends-->
     <!-- CheckOut section starts-->
-    <div class="right-section cart p-4 col-4">
-    
-
+    <div class="right-section cart col-4  ">
+  
       <div class="checkout-section box-shadow col-12 ">
         <div class="customer-input col-12">
     <input class="form-control col-6" type="text"  id="customerIdInput" placeholder="Search Customer" aria-label="customer" />
@@ -119,7 +117,7 @@
     <h2>Checkout Order <span id="checkout-order-popup">#3484</span></h2>
     <h1>Total balance:<b class="amount-total" id="amount-total"> 0.00</b></h1>
 
-{{#if user.role}}
+    {{#if user.role}}
       <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
       <p>Paying as customer: {{ user.customerId }} {{ user.firstName }}</p>
     {{else}}
