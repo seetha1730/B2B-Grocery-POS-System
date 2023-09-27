@@ -120,11 +120,9 @@
 
     {{#if user.role}}
       <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
-      <p>Paying as customer: {{ user.customerId }} {{ user.firstName }}</p>
-    {{else}}
-      <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
-      <p>Paying as customer: Guest</p>
+          <p id="customer-name">Customer: Guest</p>
     {{/if}}
+
 
     <div class="coupon-section">
       <label for="coupon-code"> Coupon Code:</label>
@@ -352,7 +350,7 @@ const renderCategories = (allCategories = [], allProducts = []) => {
 function fetchSearchResults(searchTerm) {
   // Make an AJAX request to the server to fetch search results
 
-  APIGetCall(`/search/${searchTerm}`)
+  fetch(`/search/${searchTerm}`)
     .then((response) => response.json())
     .then(displaySearchResults)
     .catch(console.error);
@@ -360,7 +358,7 @@ function fetchSearchResults(searchTerm) {
 
 function searchCustomerResult() {
   // Make an AJAX request to the server to fetch search results
-  APIGetCall(`/search/customer/${customerIdInput.value}`)
+  fetch(`/search/customer/${customerIdInput.value}`)
     .then((response) => response.json())
     .then(data => {
       customerName.innerText = `${data.firstName} ${data.lastName}`
@@ -488,12 +486,12 @@ function updateCartDisplay() {
 function handleAddToCart(product) {
   const findProduct = cart.shoppingCart.find((item) => item._id === product._id);
 
-  if (!findProduct) {
-    cart.shoppingCart.push({...product, noItems: 1});
-  } else {
-    findProduct.noItems++;
-  }
+ if (!findProduct) {
+      cart.shoppingCart.push({ ...product, noItems: 1 });
 
+    } else {
+      findProduct.noItems++;
+    }
   updateTotal(product);
 }
 
@@ -560,6 +558,7 @@ function clearCart() {
   totalEle.innerHTML ="$0.00"
   subTotalEle.innerHTML="$0.00"
   localStorage.removeItem('cart')
+   localStorage.removeItem('customer')
 }
 
 getCategoriesAndProducts().then((result) => {

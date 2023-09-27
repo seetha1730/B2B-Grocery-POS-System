@@ -253,6 +253,16 @@ const calculateChange = () => {
 checkoutBtn?.addEventListener("click", () => {
   checkoutPopup.style.display = "block";
 
+  // If the customer is logged in, update the customer name in the checkout popup
+  const customerNameElement = document.getElementById("customer-name");
+  if (localStorage.getItem("customer")) {
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    customerNameElement.textContent = `Customer: ${customer.firstName} ${customer.lastName}`;
+  } else {
+    customerNameElement.textContent = "Customer: Guest";
+  }
+      
+
   const TAX = 1.1
   const totalPrice = cart.shoppingCart.reduce((acc, curr) => {
     return acc + curr.productPrice * curr.noItems
@@ -306,8 +316,6 @@ paymentBtnCash?.addEventListener("click", function () {
 applyCouponButton.addEventListener("click", function(){
   applyDiscount()
 })
-
-
 
 viewOrderBtn?.addEventListener("click", () => {
 
