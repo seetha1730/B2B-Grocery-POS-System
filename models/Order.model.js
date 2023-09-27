@@ -30,6 +30,10 @@ const ordersSchema = new Schema({
 	  },
 	  orderNumber:{
 		type:Number
+	  },
+	  orderDate: {
+		type: Date,  
+		default: Date.now 
 	  }
 	 
 

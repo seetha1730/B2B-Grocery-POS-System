@@ -25,7 +25,7 @@ router.get('/category/all', (req, res, next) => {
   })
   .catch(err => next(err));
 });
-router.get("/category/:pageNumber", isAdmin, (req, res, next) => {
+router.get("/category/goto/:pageNumber", isAdmin, (req, res, next) => {
   const { pageNumber } = req.params;
   const skip = (parseInt(pageNumber) - 1) * 5;
   Category.find().count()
@@ -89,12 +89,18 @@ router.get('/category', isAdmin,(req, res, next) => {
 // Display the edit category page
 router.get('/category/:id/edit', (req, res, next) => {
   const { id } = req.params;
+Category.find().then((allCategory)=>{
 
-  Category.findById(id)
+  Category.findById(id).populate("parentCategory")
     .then(category => {
-      res.render('category/edit-category', { category });
+      console.log(allCategory)
+
+      res.render('category/edit-category', { category,allCategory });
     })
     .catch(err => next(err));
+
+}) 
+  
 });
 
 // Handle the POST request to edit a category

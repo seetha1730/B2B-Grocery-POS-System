@@ -8,18 +8,18 @@
 
         <label class="form-label">Category Name</label>
         <input class="form-control " type="text" placeholder="Enter Product name" aria-label="product name"
-          name="categoryName" />
-
+          name="categoryName" value="{{categoryName}}" />
+{{/with}}
         <label class="form-label">Parent Category</label>
         <select class="custom-select form-select" aria-label="Default select example" name="parentCategory">
           <option value="" selected>Select Parent Category</option>
-          {{#each categoryList}}
+          {{#each allCategory}}
           <option value="{{this._id}}">{{this.categoryName}}</option>
           {{/each}}
         </select>
-
+{{#with category}}
         <div class="upload-image col-9">
-          <img class="col-3" src="{{imageUrl}}" />
+          <img class="col-3" src="{{this.imageUrl}}" />
           <label for="inputField" class="btn btn-orange upload-btn">Upload image</label>
           <input class="col-2 upload-btn" type="file" id="inputField" style="display:none" name="image"
             accept="image/*" />

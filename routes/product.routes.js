@@ -46,7 +46,7 @@ router.get('/product', isAdmin,(req, res, next) => {
     })
     .catch(err => next(err));
 });
-router.get("/product/:pageNumber", isAdmin, (req, res, next) => {
+router.get("/product/goto/:pageNumber", isAdmin, (req, res, next) => {
   const { pageNumber } = req.params;
   const skip = (parseInt(pageNumber) - 1) * 5;
   Category.find()
@@ -79,7 +79,7 @@ router.get("/product/:pageNumber", isAdmin, (req, res, next) => {
 router.get("/product/add-product", isAdmin, (req, res, next) => {
   Category.find()
     .then((categoryList) => {
-      console.log("CATEGORY", categoryList); // Add this line for debugging
+      // Add this line for debugging
       res.render("product/add-product", { categoryList });
     })
     .catch((err) => next(err));
@@ -158,15 +158,24 @@ router.post(
 
 router.get("/product/:id/edit", (req, res, next) => {
   const { id } = req.params;
-
   Product.findById(id)
-    .then((product) => {
-      res.render("product/edit-product", { product });
-    })
-    .catch((err) => {
-      next(err);
-    });
+  .then((product) => {
+    
+    Category.find()
+      .then((categoryList) => {
+        res.render("product/edit-product", { product, categoryList });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  })
+  .catch((err) => {
+    next(err);
+  });
+ 
+   
 });
+
 
 // POST request to edit a product
 router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) => {

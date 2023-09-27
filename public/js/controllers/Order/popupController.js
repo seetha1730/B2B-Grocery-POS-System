@@ -10,7 +10,7 @@ const paymentPopUpCard = document.getElementById("card-payment-popup")
 const paymentPopUpCash = document.getElementById("cash-payment-popup")
 const closeButtonCash = document.querySelector("#cash-payment-popup .close");
 const closeButtonCard = document.querySelector("#card-payment-popup .close");
-
+const viewOrderBtn = document.querySelector("#view-order");
 // GLOBAL VARIABLES
 let index = 0;
 const products = []; 
@@ -84,6 +84,7 @@ const closePaymentPopup = () => {
   document.getElementById("cash-payment-popup").style.display = "none";
   const shoppingCart = JSON.parse(localStorage.getItem("cart")); // Parse the shopping cart data from local storage
  const customer =JSON.parse(localStorage.getItem("customer")); 
+ const orderDate = new Date();
   // Map the shopping cart items to the Products array
   const orderData = {
     Products: shoppingCart.shoppingCart.map((item) => ({
@@ -96,7 +97,8 @@ const closePaymentPopup = () => {
    customerLastName: customer?.lastName, 
    customerPhoneNumber: customer?.phoneNumber, 
     customerId: customer?.customerId ,
-    orderNumber
+    orderNumber,
+    orderDate
   };
 
   fetch("/orderCreate", {
@@ -172,7 +174,75 @@ const showDoneMessage = () => {
     `;
 
 }
+//Order view : Function to close order details popup
+const orderDetailsPopup = (orderId) => {
+  const orderDetailsPopup = document.getElementById("orderDetailsPopup");
+  orderDetailsPopup.style.display = "block";
+  
+  fetch(`/order-history/${orderId}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+    .then(response => response.json())
+    .then(orderData => {
+      // Render data in the order-view popup
+      renderOrderDetails(orderData);
+  })
 
+  
+}
+
+
+//Order view: Function to close order details popup
+const closeOrderDetailsPopup = () => {
+  const orderDetailsPopup = document.getElementById("orderDetailsPopup");
+  orderDetailsPopup.style.display = "none";
+};
+
+55
+
+// const OorderDetails = (orderData) => {
+//   // Update the content of the 'orderDetailsContent' div with the order details
+//   const orderInnerContent = document.queryselector('.inner-content');
+  
+//   // Example rendering (modify as per your data structure)
+//   orderInnerContent.innerHTML = `
+//       <p>Order Number: ${orderData.orderNumber}</p>
+//       <p>Total: ${orderData.total}</p>
+//       <p>Customer Name: ${orderData.customerFirstName} ${orderData.customerLastName}</p>
+//       <p>Customer Phone Number: ${orderData.customerPhoneNumber}</p>
+//       <p>Customer ID: ${orderData.customerId}</p>
+//       <!-- Add more rendering for Products as needed -->
+//   `;
+// }
+const renderOrderDetails = (orderData) => {
+  // Update the content of the 'orderDetailsContent' div with the order details
+  const orderDetailsContent = document.getElementById('popupInnerContent');
+  
+  // Clear existing content
+  orderDetailsContent.innerHTML = '';
+
+  orderDetailsContent.innerHTML = `
+        <p>Order Number: ${orderData.orderNumber}</p>
+        <p>Total: ${orderData.total}</p>
+        <p>Customer Name: ${orderData.customerFirstName} ${orderData.customerLastName}</p>
+        <p>Customer Phone Number: ${orderData.customerPhoneNumber}</p>
+        <p>Customer ID: ${orderData.customerId}</p>
+        <!-- Add more rendering for Products as needed -->
+    `;
+
+     // Render Products
+  orderData.Products.forEach(product => {
+    orderDetailsContent.innerHTML += `
+        <p>Product: ${product.productName}, Quantity: ${product.quantity}</p>
+       
+    `;
+});
+  
+ 
+}
 // CASH: Function to calculate the change
 const calculateChange = () => {
   const cashAmountElement = document.getElementById("amountGiven");
@@ -224,7 +294,7 @@ checkoutBtn?.addEventListener("click", () => {
   closeButton.style.cursor = "pointer";
 })
 
-paymentBtnCard.addEventListener("click", function () {
+paymentBtnCard?.addEventListener("click", function () {
   terminalPaymentLoad()
   setTimeout(showPaymentSuccess, 3000)
   setTimeout(showDoneMessage, 6000)
@@ -236,9 +306,7 @@ closeButtonCard.addEventListener("click", function () {
 });
 })
 
-paymentBtnCash.addEventListener("click", function () {
-
-  console.log("button clicked")
+paymentBtnCash?.addEventListener("click", function () {
   paymentPopUpCash.style.display = "block";
   checkoutPopup.style.display = "none";
 
@@ -246,4 +314,14 @@ paymentBtnCash.addEventListener("click", function () {
     paymentPopUpCash.style.display = "none";
   });
 })
+
+
+
+viewOrderBtn?.addEventListener("click", () => {
+
+  orderDetailsPopup();
+
+ 
+});
+
 
