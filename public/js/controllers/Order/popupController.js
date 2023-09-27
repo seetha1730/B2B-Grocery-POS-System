@@ -201,22 +201,6 @@ const closeOrderDetailsPopup = () => {
   orderDetailsPopup.style.display = "none";
 };
 
-55
-
-// const OorderDetails = (orderData) => {
-//   // Update the content of the 'orderDetailsContent' div with the order details
-//   const orderInnerContent = document.queryselector('.inner-content');
-  
-//   // Example rendering (modify as per your data structure)
-//   orderInnerContent.innerHTML = `
-//       <p>Order Number: ${orderData.orderNumber}</p>
-//       <p>Total: ${orderData.total}</p>
-//       <p>Customer Name: ${orderData.customerFirstName} ${orderData.customerLastName}</p>
-//       <p>Customer Phone Number: ${orderData.customerPhoneNumber}</p>
-//       <p>Customer ID: ${orderData.customerId}</p>
-//       <!-- Add more rendering for Products as needed -->
-//   `;
-// }
 const renderOrderDetails = (orderData) => {
   // Update the content of the 'orderDetailsContent' div with the order details
   const orderDetailsContent = document.getElementById('popupInnerContent');
@@ -265,7 +249,15 @@ const calculateChange = () => {
   // LISTENERS
 checkoutBtn?.addEventListener("click", () => {
   checkoutPopup.style.display = "block";
-  
+  // If the customer is logged in, update the customer name in the checkout popup
+  const customerNameElement = document.getElementById("customer-name");
+  if (localStorage.getItem("customer")) {
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    customerNameElement.textContent = `Customer: ${customer.firstName} ${customer.lastName}`;
+  } else {
+    customerNameElement.textContent = "Customer: Guest";
+  }
+      
   const TAX = 1.1
   const totalPrice = cart.shoppingCart.reduce((acc, curr) => {
     return acc + curr.productPrice * curr.noItems
@@ -314,8 +306,6 @@ paymentBtnCash?.addEventListener("click", function () {
     paymentPopUpCash.style.display = "none";
   });
 })
-
-
 
 viewOrderBtn?.addEventListener("click", () => {
 
