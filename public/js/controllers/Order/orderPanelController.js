@@ -1,3 +1,4 @@
+
 // // HTML ELEMENTS
 // const searchForm = document.getElementById("product-search-form");
 // const searchInput = document.getElementById("product-search");
@@ -12,6 +13,7 @@
 // const searchButton = document.getElementById('searchButton');
 // const customerIdInput = document.getElementById('customerIdInput');
 // const customerName = document.getElementById('customer_name')
+
 
 // const localStorageCart = localStorage.getItem('cart')
 // const cartData = localStorageCart && JSON.parse(localStorageCart)
@@ -168,6 +170,8 @@
 //     <p class="col-8 product-quantity">${product.quantity}</p></h5>
 //     <div class="priceAddCart d-flex">
       
+
+
 //       <p class="card-text product-price col-9">$${product.productPrice}</p>
 //       <button class="btn addCart bi bi-plus col-3" value="Add" onclick="handleAddProductClick('${encodeProductForArgument}')"></button>
 
@@ -324,3 +328,4 @@
 
 //   renderCategories(categoryList, productList)
 // })
+
