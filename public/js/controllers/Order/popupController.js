@@ -13,7 +13,7 @@ const closeButtonCard = document.querySelector("#card-payment-popup .close");
 
 // GLOBAL VARIABLES
 let index = 0;
-const products = []; 
+const products = [];
 const min = 1000; // Minimum 5-digit number (inclusive)
 const max = 9999; // Maximum 5-digit number (inclusive)
 let orderNumber = Math.floor(Math.random() * (max - min + 1))
@@ -53,7 +53,6 @@ const applyDiscount = () => {
 
   if (discountCode === "WELCOME10") {
     const discountAmount = (totalAmount * discount).toFixed(2);
-    console.log(discountAmount)
     const newAmountAfterDiscount = (totalAmount - discountAmount).toFixed(2)
 
     const discountLine = document.createElement('tr');
@@ -83,7 +82,7 @@ const closePaymentPopup = () => {
   document.getElementById("card-payment-popup").style.display = "none";
   document.getElementById("cash-payment-popup").style.display = "none";
   const shoppingCart = JSON.parse(localStorage.getItem("cart")); // Parse the shopping cart data from local storage
- const customer =JSON.parse(localStorage.getItem("customer")); 
+ const customer =JSON.parse(localStorage.getItem("customer"));
   // Map the shopping cart items to the Products array
   const orderData = {
     Products: shoppingCart.shoppingCart.map((item) => ({
@@ -92,9 +91,9 @@ const closePaymentPopup = () => {
       quantity: item.quantity,
     })),
     total:shoppingCart.total,
-   customerFirstName: customer?.firstName, 
-   customerLastName: customer?.lastName, 
-   customerPhoneNumber: customer?.phoneNumber, 
+   customerFirstName: customer?.firstName,
+   customerLastName: customer?.lastName,
+   customerPhoneNumber: customer?.phoneNumber,
     customerId: customer?.customerId ,
     orderNumber
   };
@@ -173,6 +172,7 @@ const showDoneMessage = () => {
 
 }
 
+
 // CASH: Function to calculate the change
 const calculateChange = () => {
   const cashAmountElement = document.getElementById("amountGiven");
@@ -195,7 +195,7 @@ const calculateChange = () => {
   // LISTENERS
 checkoutBtn?.addEventListener("click", () => {
   checkoutPopup.style.display = "block";
-  
+
   const TAX = 1.1
   const totalPrice = cart.shoppingCart.reduce((acc, curr) => {
     return acc + curr.productPrice * curr.noItems
@@ -237,8 +237,6 @@ closeButtonCard.addEventListener("click", function () {
 })
 
 paymentBtnCash.addEventListener("click", function () {
-
-  console.log("button clicked")
   paymentPopUpCash.style.display = "block";
   checkoutPopup.style.display = "none";
 
@@ -247,3 +245,6 @@ paymentBtnCash.addEventListener("click", function () {
   });
 })
 
+applyCouponButton.addEventListener("click", function(){
+  applyDiscount()
+})

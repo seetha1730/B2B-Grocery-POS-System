@@ -1,40 +1,40 @@
 <div class="right-panel col-11">
 
 
-  <div class="category-title box-shadow col-8">
+  <div class="category-title box-shadow">
           <div class="row">
             <div class="col-8">
-              <h2>category </h2>
-            </div>
-            
-            <div class="col-2">
-               <button type="button" class="btn btn-info green-button">
-                <a href="/category/add-category" >Add Category</a></button>
-
+              <h2> Categories </h2>
             </div>
 
             <div class="col-2">
-              <button type="button" class="btn btn-info green-button">
-                <a href="/product/add-product" >Add Product</a></button>
+               <button type="button" class="category-buttons">
+                <a href="/category/add-category" class="add-cat-button" >Add Category</a></button>
 
-                
+            </div>
+
+            <div class="col-2">
+              <button type="button" class="category-buttons" >
+                <a href="/product/add-product" class="add-product-button">Add Product</a></button>
+
+
             </div>
           </div>
         </div>
 
 
-  <div class="show-panel box-shadow col-8" id="category">
+  <div class="show-panel box-shadow" id="category">
     <div class="table-responsive">
       <nav aria-label="Page navigation example">
   <ul class="pagination">
-    
+
     {{#each categoryPagination}}
     <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
     {{/each}}
-    
+
   </ul>
 </nav>
-      
+
         <table class="table">
           <thead>
             <tr>
@@ -64,7 +64,7 @@
             {{/each}}
           </tbody>
         </table>
-     
+
     </div>
   </div>
 </div>

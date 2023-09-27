@@ -9,7 +9,6 @@ const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 const productSection = document.getElementById('product-section');
 const clearCartButton = document.getElementById("clearCartBtn");
-const searchButton = document.getElementById('searchButton');
 const customerIdInput = document.getElementById('customerIdInput');
 const customerName = document.getElementById('customer_name')
 
@@ -185,14 +184,10 @@ function clearProductSection() {
 // Function to display the products of a specific category
 function displayProductsByCategory(category) {
   const products = [];
-  console.log("test 1")
   productSection.innerHTML = "";
 
   const filteredProducts = products.filter(product => product.category === category);
-  console.log("test 2", category)
   filteredProducts.forEach(product => {
-    console.log("test 3")
-    console.log(product.category)
     const productCard = createProductCard(product);
     productSection.appendChild(productCard);
 
@@ -262,11 +257,14 @@ function decrement(event) {
 function createCartItem(cartItem) {
   const productItem = document.createElement("div");
   productItem.classList.add("product-add-section");
+  const productNameCapitalized = cartItem.productName.charAt(0).toUpperCase() + cartItem.productName.slice(1)
+  const productPrice = cartItem.productPrice.toFixed(2)
+
 
   productItem.innerHTML = `
     <div class="product-in-cart">
-      <p class="product-name">${cartItem.productName}</p>
-      <h4 class="product-price">$${cartItem.productPrice.toFixed(2)}</h4>
+      <p class="product-name">${productNameCapitalized}</p>
+      <p class="product-price">$${productPrice}</p>
     </div>
     <div class="input-group">
       <i class="bi bi-dash decrement" data-id="${cartItem._id}"></i>
@@ -294,7 +292,6 @@ function clearCart() {
 }
 
 // EVENT LISTENERS
-// Prevent the form from submitting
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
@@ -311,9 +308,7 @@ nextButton.addEventListener("click", () => {
 
 searchInput.addEventListener("input", handleSearchInput);
 
-// Add an event listener to the button
 clearCartButton.addEventListener("click", function () {
-  // Call a function to clear the cart (you can define this function)
   clearCart();
 
 });

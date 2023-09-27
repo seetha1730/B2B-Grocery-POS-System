@@ -1,21 +1,25 @@
 
       <!-- Right panel starts-->
       <div class="right-panel col-11">
-<div class="box-shadow ">
-   
+    <div class="box-shadow ">
+
 
 {{#if isAdmin}}
-<h1>I AM ADMIN</h1>
-{{else}} 
-<h1>I am cashier</h1>
+<h4> Currently logged in as: Admin</h4>
+{{else}}
+<h4>Currently logged in as: Cashier</h4>
 {{/if }}
 
   {{#if user}}
+    <div class="user-profile-wrapper">
+     <img src="https://media.giphy.com/media/XGhTPVMgzLv7s2TOE6/giphy.gif" width="300px"/>
+      <br/>
   <h2>Welcome, {{ user.firstName }}{{user.lastname }}!</h2>
-  <p>This is your profile page my friend!</p>
-  <button>
-    <a href="/profile">Reload the page</a>
+  <p>This is your profile page my friend.</p>
+  <button class="add-product-button">
+    <a href="/profile" class="reload-button">Reload the page</a>
   </button>
+  </div>
 {{else}}
   <p>Still no logged in user, sorry!</p>
 {{/if}}

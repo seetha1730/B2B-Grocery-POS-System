@@ -1,33 +1,33 @@
 <div class="right-panel col-11">
 
-  <div class="product-title box-shadow col-9">
+  <div class="product-title box-shadow">
     <div class="row">
       <div class="col-8">
-        <h2>Product </h2>
+        <h2>Products </h2>
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-info green-button">
-          <a href="/product/add-product">Add Product</a></button>
+        <button type="button" class="category-buttons">
+          <a href="/product/add-product" class="add-product-button">Add Product</a></button>
 
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-info green-button">
-          <a href="/category/add-category">Add Category</a></button>
+        <button type="button" class="category-buttons">
+          <a href="/category/add-category" class="add-cat-button">Add Category</a></button>
 
       </div>
     </div>
   </div>
 
-  <div class="show-panel box-shadow col-9" id="product">
+  <div class="show-panel box-shadow" id="product">
 
     <div class="table-responsive">
    <nav aria-label="Page navigation example">
   <ul class="pagination">
-    
+
     {{#each pagination}}
     <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
     {{/each}}
-    
+
   </ul>
 </nav>
       <table class="table col-9">
@@ -56,7 +56,7 @@
               <td class="col-1">{{this.categoryName}}</td>
               <td class="col-1">{{this.stock}}</td>
               <td class="col-2">{{this.description}}</td>
-             
+
                 <td class="col-2 actions">
                   <form action="/product/{{_id}}/edit" method="GET">
                     <!-- Use GET method to navigate to edit page -->
@@ -70,7 +70,7 @@
                       >&#xE872;</i></button>
                   </form>
                 </td>
-    
+
             </tr>
 
           {{/each}}

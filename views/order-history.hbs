@@ -1,37 +1,37 @@
 
       <!-- Right panel starts-->
       <div class="right-panel col-11">
-        
-  <div class="category-title box-shadow col-8">
+
+  <div class="category-title box-shadow">
           <div class="row">
             <div class="col-8">
-              <h2>Order </h2>
+              <h2> Completed Orders</h2>
             </div>
-            
+
           </div>
         </div>
 
 
-  <div class="show-panel box-shadow col-8" id="category">
+  <div class="show-panel box-shadow" id="category">
     <div class="table-responsive">
       <nav aria-label="Page navigation example">
   <ul class="pagination">
-    
+
     {{#each Pagination}}
     <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
     {{/each}}
-    
+
   </ul>
 </nav>
-      
+
         <table class="table">
           <thead>
             <tr>
-              <th class="col-1 px-3 text-center">index</th>
+              <th class="col-1 px-3 text-center">Index</th>
               <th>Order number</th>
               <th>Total</th>
-              <th>customer details</th>
-              <th>customer Number</th>
+              <th>Customer Details</th>
+              <th>Customer Number</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +48,7 @@
             {{/each}}
           </tbody>
         </table>
-     
+
     </div>
   </div>
 </div>
