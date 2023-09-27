@@ -1,57 +1,74 @@
+<!-- Right panel starts-->
+<div class="right-panel col-11">
 
-      <!-- Right panel starts-->
-      <div class="right-panel col-11">
-
-  <div class="category-title box-shadow">
-          <div class="row">
+    <div class="category-title box-shadow col-8">
+        <div class="row">
             <div class="col-8">
-              <h2> Completed Orders</h2>
+                <h2>Order </h2>
             </div>
 
-          </div>
+        </div>
+    </div>
+
+
+    <div class="show-panel box-shadow col-8" id="category">
+        <div class="table-responsive">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    {{#each Pagination}}
+                    <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
+                    {{/each}}
+
+                </ul>
+            </nav>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-1 px-3 text-center">index</th>
+                        <th>Order number</th>
+                        <th>Total</th>
+                        <th>Customer details</th>
+                        <th>Customer Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orderList}}
+                    <tr>
+                        <td class="col-1 px-3 text-center">{{inc @index}}</td>
+                        <td>{{this.orderNumber}}</td>
+                        <td>{{this.total}}</td>
+                        <td>
+                            <p>{{this.customerFirstName}} {{this.customerLastName}}</p>
+                            <p>{{this.customerPhoneNumber}}</p>
+                        </td>
+                        <td>{{this.customerId}}</td>
+
+                        <td id="view-order" onclick="orderDetailsPopup('{{this._id}}')"><i class="bi bi-eye"></i></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
         </div>
 
-
-  <div class="show-panel box-shadow" id="category">
-    <div class="table-responsive">
-      <nav aria-label="Page navigation example">
-  <ul class="pagination">
-
-    {{#each Pagination}}
-    <li class="page-item"><a class="page-link" href="{{this}}">{{this}}</a></li>
-    {{/each}}
-
-  </ul>
-</nav>
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="col-1 px-3 text-center">Index</th>
-              <th>Order number</th>
-              <th>Total</th>
-              <th>Customer Details</th>
-              <th>Customer Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each orderList}}
-            <tr>
-              <td class="col-1 px-3 text-center">{{inc @index}}</td>
-              <td>{{this.orderNumber}}</td>
-              <td>{{this.total}}</td>
-              <td><p>{{this.customerFirstName}}{{this.customerLastName}}</p>
-              <p>{{this.customerPhoneNumber}}</p>
-             </td>
-              <td>{{this.customerId}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-
     </div>
+
+
+
+<!-- Order Details Popup -->
+<div class="order-details-popup" id="orderDetailsPopup">
+  
+  <div id="orderDetailsContent">
+    <span class="close" onclick="closeOrderDetailsPopup()">&times;</span>
+  <h2>Order Details</h2>
+  <div Id="popupInnerContent">
+
+  </div>
   </div>
 </div>
 
-
       </div>
+

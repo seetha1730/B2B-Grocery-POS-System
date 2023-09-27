@@ -8,7 +8,6 @@ const { isLoggedIn, isLoggedOut, isAdmin } = require('../middleware/route-guard.
 
 /* GET home page */
 router.get("/order-history", isLoggedIn, (req, res, next) => {
-    console.log('inside')
     Order.find()
     .then((orderList) => {
   console.log(orderList)
@@ -17,6 +16,25 @@ router.get("/order-history", isLoggedIn, (req, res, next) => {
     .catch((err) => next(err));
 
 });
+// New route to handle order details
+router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
+    const orderId = req.params.orderId;
+
+    // Find the order by ID
+    Order.findById(orderId)
+        .then((order) => {
+            if (!order) {
+                // If order not found, you might want to handle this case (e.g., render an error page)
+                return res.status(404).send('Order not found');
+            }
+              // Send the order details as JSON
+        res.json(order);
+        console.log(order)
+        })
+      
+        .catch((err) => next(err));
+});
+
 router.post("/orderCreate", isLoggedIn, (req, res, next) => {
      const { Products, total, customerFirstName, customerLastName, customerPhoneNumber ,customerId,orderNumber} = req.body;
      
@@ -31,7 +49,8 @@ router.post("/orderCreate", isLoggedIn, (req, res, next) => {
          customerLastName,
          customerPhoneNumber,
          customerId,
-         orderNumber
+         orderNumber,
+         orderDate: new Date(), 
 
         })
         .then(() => {

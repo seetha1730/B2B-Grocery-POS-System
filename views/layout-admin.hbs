@@ -16,6 +16,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/stylesheets/style.css"/>
 
@@ -23,7 +24,7 @@
 
 <body>
 <main>
-  <div class="row m-0">
+  <div class="row m-0  inner-content">
     <div class="left-panel col-1">
       <a class="navbar-brand" href="/">SL</a>
 
@@ -44,13 +45,14 @@
 
 
             <li class="nav-item">
-              <a class="nav-link" href="/category/1"><i class="bi bi-category"></i>
 
+              <a class="nav-link" href="/category/goto/1"><i class="bi bi-category"></i>
+                
               </a>
             </li>
 
             <li class="nav-item ">
-              <a class="nav-link " href="/product/1">
+              <a class="nav-link " href="/product/goto/1">
                 <i class="bi bi-product"></i>
 
               </a>
@@ -116,9 +118,8 @@
 </main>
 
 
-<script src="js/script.js"></script>
-<script src="js/controllers/Order/popupController.js"></script>
-<script src="js/controllers/Order/orderPanelController.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/controllers/Order/popupController.js"></script>
 
 
 

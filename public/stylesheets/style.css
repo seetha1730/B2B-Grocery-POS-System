@@ -1,11 +1,20 @@
 /* Body and Common Styles */
 
 body {
+
   background-color: #f6f7fa;
   color: #565656;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif !important;
+
+
 }
+main {
+  background: #f6f7fa;
+  position: relative;
+  height:100vh
+}
+.inner-content{height:100vh}
 
 /*main {
   background: #f6f7fa;
@@ -566,6 +575,7 @@ p.card-title {
   font-size: 20px;
   color: #565656;
   margin: 0px 20px 20px 0px;
+  height: 85vh;    
 }
 
 .checkout-section{
@@ -613,6 +623,16 @@ card.product {
   color: #565656;
   float: right;
   margin-bottom: 20px;
+}
+
+table.table td i.bi.bi-eye {
+  color: #79E8BD;
+}
+.product-display-section {
+  height: 48%;
+  overflow: scroll;
+  width: 100%;
+
 }
 
 .right-section.cart{padding:20px 20px 20px 0px}
@@ -749,10 +769,49 @@ card.product {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  margin-left: 10px;
+
 }
 
+
 /* Login section */
+
+.bi-product {
+  width: 35px;
+  height: 35px;
+  background: url("/images/add-product.png");
+  display: flex;
+  background-size: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  
+}
+
+input::placeholder {
+  color: #8d99ae !important;
+}
+
+.upload-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+.btn-orange:hover {
+  background: #edbca6
+}
+
+.upload-btn {
+  margin-right: 70px;
+  margin-left: 20px;
+}
+
+.btn.btn-primary.add-product {
+  width: 90%;
+}
+
 
 .form-container {
   background: linear-gradient(150deg, #8d99ae 33%, #F56365 34%, #F56365 66%, #455874 67%);
@@ -908,6 +967,101 @@ card.product {
 }
 
 /*** Login Style Ends***/
+
+textarea::placeholder {
+  color: #8d99ae !important
+}
+
+.btn.addCart.bi-plus {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #79E8BD;
+  color: #292c4b;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.product-in-cart .product-name {
+  padding: 0;
+  margin: 0;
+}
+
+.card-text.product-price {
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+/* checkout popup  starts*/
+/* The Modal (background) */
+.checkoutPopup,
+#payment-popup ,#orderDetailsPopup{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.checkout-content,
+.payment-content,#orderDetailsContent {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 70%;
+}
+
+.checkout-content table.table tbody td {
+  text-align: left;
+}
+
+/* The Close Button */
+.checkoutPopup .close,
+#payment-popup .payment-close, #orderDetailsPopup .close{
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* checkout popup  ends*/
+#product-search-form {
+  display: flex;
+  justify-content: space-between;
+  margin: 0
+}
+
+input#product-search {
+  width: 55%;
+}
+
+
+
+#apply-coupon {
+  background-color: #f1743c;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 8px;
+}
 
 
 .payment-options {

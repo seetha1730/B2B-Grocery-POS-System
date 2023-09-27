@@ -1,35 +1,23 @@
 // HTML ELEMENTS
 const buttons = document.querySelector('.setting-buttons');
 const panels = document.querySelectorAll('.panel');
-const storeForm = document.getElementById('store-form')
 
 
-//window onload
-window.addEventListener("load", (event) => {
-  console.log("page is fully loaded");
 // LISTENERS
-buttons?.addEventListener('click', handleClick);
-  
+window.addEventListener("load", (event) => {
+
+ 
+
+  // Event listener for button clicks
+  buttons?.addEventListener('click', handleClick);
 });
 
 // FUNCTIONS
-
-function APIGetCall(link){
+function APIGetCall(link) {
   return fetch(link)
 }
 
-function updateDateTime() {
-  const dateTimeElement = document.getElementById("current-date-time");
-  const currentDate = new Date();
 
-  const formattedDateTime = currentDate.toLocaleString();
-
-  dateTimeElement.textContent = formattedDateTime;
-}
-
-
-updateDateTime();
-setInterval(updateDateTime, 1000);
 
 function handleClick(e) {
   if (e.target.matches('button')) {
@@ -46,11 +34,3 @@ function handleClick(e) {
     document.querySelector(selector).classList.add('show');
   }
 }
-
-
-
-
-
-
-
-

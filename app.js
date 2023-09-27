@@ -25,7 +25,9 @@ app.set("view engine", "hbs");
 hbs.registerHelper('inc', function (value, options) {
   return parseInt(value) + 1;
 });
-
+hbs.registerHelper('eq', function (a, b) {
+  return a === b;
+});
 // Define your routes
 const indexRoutes = require('./routes/index');
 const viewRoutes = require('./routes/view.routes');

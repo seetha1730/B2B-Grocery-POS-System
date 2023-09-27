@@ -1,55 +1,56 @@
-
 <div class="right-panel col-11">
 
-<div class="add-panel box-shadow p-4 col-4" id="edit-product">
-  <h3>Edit product</h3>
-  {{#with product}}
-  <form action="/product/{{_id}}/edit" method="post" enctype="multipart/form-data">
-    <div class="product">
+  <div class="add-panel box-shadow p-4 col-4" id="edit-product">
+    <h3>Edit product</h3>
+    {{#with product}}
+    <form action="/product/{{_id}}/edit" method="post" enctype="multipart/form-data">
+      <div class="product">
 
-      <label class="form-label">Product Name</label>
-      <input class="form-control " type="text" name="productName" placeholder="Enter Product name"
-        aria-label="product name" value="{{productName}}" />
+        <label class="form-label">Product Name</label>
+        <input class="form-control " type="text" name="productName" placeholder="Enter Product name"
+          aria-label="product name" value="{{productName}}" />
 
-      <label class="form-label">Quantity</label>
-      <input class="form-control " type="text" name="quantity" placeholder="Enter your quantity"
-        aria-label="Quantity" value="{{quantity}}" />
+        <label class="form-label">Quantity</label>
+        <input class="form-control " type="text" name="quantity" placeholder="Enter your quantity" aria-label="Quantity"
+          value="{{quantity}}" />
 
-      <label class="form-label">Product Price</label>
-      <input class="form-control" type="text" name="productPrice" placeholder="Price" aria-label="price" value="{{productPrice}}" />
+        <label class="form-label">Product Price</label>
+        <input class="form-control" type="text" name="productPrice" placeholder="Price" aria-label="price"
+          value="{{productPrice}}" />
 
 
-      <label class="form-label">Category Name </label>
-      <select class="custom-select form-select" aria-label="category" name="categoryName">
-        <option value="" selected>Select Category</option>
-        {{#each categoryList}}
+        <label class="form-label">Category Name </label>
+        {{/with}}
+        <select class="custom-select form-select" aria-label="category" name="categoryName">
+          <option value="" selected>Select Category</option>
+
+          {{#each categoryList}}
           <option value="{{this.categoryName}}">{{this.categoryName}}</option>
-        {{/each}}
-      </select>
-      
-      <label class="form-label">Stock</label>
-<select class="custom-select form-select" name="stock" aria-label="stock">
-  <option value="Instock" selected>Instock</option>
-  <option value="Out of Stock">Out of Stock</option>
-</select>
+          {{/each}}
+        </select>
+        {{#with product}}
+        <label class="form-label">Stock</label>
+        <select class="custom-select form-select" name="stock" aria-label="stock">
+          <option value="Instock" selected>Instock</option>
+          <option value="Out of Stock">Out of Stock</option>
+        </select>
 
-      <label class="form-label">Description</label>
-      <textarea class="form-control description mr-sm-2" type="text" name="description" id="" cols="20" rows="10"
-        placeholder="Product Description">{{description}}</textarea>
+        <label class="form-label">Description</label>
+        <textarea class="form-control description mr-sm-2" type="text" name="description" id="" cols="20" rows="10"
+          placeholder="Product Description">{{description}}</textarea>
 
-      <div class="upload-image col-9">
-        <img class="col-3 " src="{{imageUrl}}" />
-        <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>
-        <input id="imageInput" class="col-2" type="file" name="image" accept="image/*" style="display: none" />
+        <div class="upload-image col-9">
+          <img class="col-3 " src="{{imageUrl}}"/>
+          <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>
+          <input id="imageInput" class="col-2" type="file" name="image" accept="image/*" style="display: none" />
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary update-btn add-product">Update product</button>
+        </div>
+        {{/with}}
       </div>
+    </form>
 
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary update-btn add-product">Update product</button>
-      </div>
-
-    </div>
-  </form>
-  {{/with}}
+  </div>
 </div>
- </div>
-
