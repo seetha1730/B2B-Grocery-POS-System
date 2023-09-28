@@ -33,7 +33,6 @@ router.get("/product/all", (req, res, next) => {
 router.get('/product', isAdmin,(req, res, next) => {
   Category.find()
     .then(categoryList => {
-      console.log(categoryList)
       // Fetch categoryList here and render product.hbs
       Product.find()
         .then(productList => {

@@ -8,7 +8,7 @@ const User = require("../models/User.model");
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 
 // GET route ==> to display the signup form to users
-router.get("/signup", isLoggedOut, (req, res) => res.render("setting"));
+router.get("/signup", isLoggedOut, (req, res) => res.render("settings"));
 // POST route ==> to process form data
 router.post("/signup", (req, res, next) => {
   console.log("The form data: ", req.body);
@@ -35,27 +35,27 @@ router.post("/signup", (req, res, next) => {
 
   // Custom validation
   if (!email || !email.trim() || !username) {
-    return res.render("setting", {
+    return res.render("settings", {
       errorMessage: "Email or username is required.",
     });
   }
   if (!password || password.length < 6) {
-    return res.render("setting", {
+    return res.render("settings", {
       errorMessage: "Password must be at least 6 characters.",
     });
   }
   if (!firstName || !firstName.trim()) {
-    return res.render("setting", {
+    return res.render("settings", {
       errorMessage: "First Name is required.",
     });
   }
 
   if (!gender || !gender.trim()) {
-    return res.render("setting", { errorMessage: "Gender is required." });
+    return res.render("settings", { errorMessage: "Gender is required." });
   }
 
   if (!phoneNumber) {
-    return res.render("setting", {
+    return res.render("settings", {
       errorMessage: "Phone number is requires",
     });
   }
@@ -92,7 +92,7 @@ router.post("/signup", (req, res, next) => {
       } else if (error.code === 11000) {
         //console.log(" ");
 
-        res.status(500).render("setting", {
+        res.status(500).render("settings", {
           // errorMessage: 'User not found and/or incorrect password.'
           errorMessage:
             "Username and email need to be unique. Either username or email is already used. ",
@@ -141,13 +141,13 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       if (bcryptjs.compareSync(password, user.passwordHash)) {
         // Set the session data
         req.session.currentUser = user;
-        console.log("Session after login:", req.session);a
+        console.log("Session after login:", req.session);
         //Check if the user is an admin
-
+       
         if (user.isAdmin) {
           const isAdmin = true;
-          req.session.currentUser = user; // Make sure this sets the correct user object
-          res.render("index", { user, isAdmin ,layout: "layout-admin"});
+          req.session.currentUser = user; 
+          res.render("index", { user, isAdmin:isAdmin ,layout: "layout-admin"});
         } else {
          
 
@@ -164,7 +164,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           }
 
           // Regular user, render their profile
-          res.render("profile", { user,isAdmin ,layout: "layout-admin"});
+          res.render("index", { user,isAdmin:false ,layout: "layout"});
         }
       } else {
         res.render("auth/login", {

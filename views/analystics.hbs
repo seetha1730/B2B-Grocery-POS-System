@@ -1,7 +1,7 @@
 
       <!-- Right panel starts-->
       <div class="right-panel col-11">
-            <div class="box-shadow ">
+            <div class=" col-9">
              <canvas id="myChart"></canvas>
      </div>  
       </div>
@@ -18,16 +18,10 @@ function createPieChart(labels, data) {
             label: 'Revenue',
             data: data,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              // Add more colors as needed
+              'rgba(158, 140, 203, 0.2)',
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              // Add more colors as needed
+              'rgba(158, 140,203, 1)',
             ],
             borderWidth: 1,
           },
@@ -37,8 +31,7 @@ function createPieChart(labels, data) {
   }
 
 function calculateRevenue(orderData) {
-    // Perform calculations based on your business logic
-    // For example, summing total revenue per category
+
     const revenuePerCategory = orderData.reduce((acc, order) => {
       const category = order.category; // Replace with your actual category property
       acc[category] = (acc[category] || 0) + order.total;
@@ -52,8 +45,6 @@ function processOrderData(orders) {
   const orderLabels = orders.map(order => order.orderDate);
   const orderTotals = orders.map(order => order.total);
 
-  // Assuming you have a chart library (e.g., Chart.js)
-  // Create a pie chart using orderLabels and orderTotals
   createPieChart(orderLabels, orderTotals);
 }
   fetch('/api/orders')

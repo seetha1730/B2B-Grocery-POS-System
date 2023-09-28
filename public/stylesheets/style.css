@@ -16,10 +16,7 @@ main {
 }
 .inner-content{height:100vh}
 
-/*main {
-  background: #f6f7fa;
-  position: relative;
-} */
+
 
 /* Error Messages */
 
@@ -30,6 +27,12 @@ main {
   margin-top: 20px;
 }
 
+.success {
+  background-color: green;
+  padding: 20px;
+  color: #565656;
+  margin-top: 20px;
+}
 /* Buttons */
 
 form#logout-form button {
@@ -970,7 +973,7 @@ textarea::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #79E8BD;
+  background:#9e8ccb;
   color: #292c4b;
   font-size: 30px;
   font-weight: bold;
