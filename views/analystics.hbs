@@ -1,52 +1,52 @@
+<!-- Right panel starts-->
+<div class="right-panel col-11">
+  <div class=" col-9">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
 
-      <!-- Right panel starts-->
-      <div class="right-panel col-11">
-            <div class=" col-9">
-             <canvas id="myChart"></canvas>
-     </div>  
-      </div>
-
-  <script>
-function createPieChart(labels, data) {
+<script>
+  function createPieChart(labels, revenue, orderCount) {
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
-      type: 'bar',
       data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Revenue',
-            data: data,
-            backgroundColor: [
-              'rgba(158, 140, 203, 0.2)',
-            ],
-            borderColor: [
-              'rgba(158, 140,203, 1)',
-            ],
-            borderWidth: 1,
-          },
-        ],
-      },
+        datasets: [{
+          type: 'bar',
+          label: 'Revenue',
+          data: revenue
+        }, {
+          type: 'line',
+          label: 'Total Orders',
+          data: orderCount,
+        }],
+        labels: labels
+      }
     });
   }
 
-function calculateRevenue(orderData) {
-
-    const revenuePerCategory = orderData.reduce((acc, order) => {
-      const category = order.category; // Replace with your actual category property
-      acc[category] = (acc[category] || 0) + order.total;
-      return acc;
-    }, {});
-    return Object.entries(revenuePerCategory).map(([category, revenue]) => ({ category, revenue }));
+  function convertToDate(date) {
+    return date.split(':')[0].split('T')[0]
   }
 
-function processOrderData(orders) {
-  // Your processing logic here
-  const orderLabels = orders.map(order => order.orderDate);
-  const orderTotals = orders.map(order => order.total);
+  function processOrderData(orders) {
+    const groupedOrdered = {};
+    orders.forEach(order => {
+      const dateKey = convertToDate(order.orderDate);
+      if (groupedOrdered[dateKey]) {
+        groupedOrdered[dateKey].total += order.total;
+        groupedOrdered[dateKey].count++;
+      } else {
+        groupedOrdered[dateKey] = { total: order.total, count: 1 };
+      }
+    });
 
-  createPieChart(orderLabels, orderTotals);
-}
+    const orderLabels = Object.keys(groupedOrdered);
+    const orderRevenue = orderLabels.map(date => groupedOrdered[date].total);
+    const orderCount = orderLabels.map(date => groupedOrdered[date].count);
+
+
+    createPieChart(orderLabels, orderRevenue, orderCount);
+  }
   fetch('/api/orders')
     .then(response => {
       if (!response.ok) {
@@ -55,9 +55,8 @@ function processOrderData(orders) {
       return response.json();
     })
     .then(orders => {
-      const orderData = processOrderData(orders); // Assuming processOrderData is defined
-      const revenueData = calculateRevenue(orderData);
-      createPieChart(revenueData.map(data => data.category), revenueData.map(data => data.revenue));
+      processOrderData(orders); // Assuming processOrderData is defined
+      
     })
     .catch(error => console.error('Error fetching orders:', error));
-  </script>
+</script>
