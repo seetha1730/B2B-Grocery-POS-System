@@ -30,7 +30,7 @@ hbs.registerHelper('eq', function (a, b) {
 });
 // Define your routes
 const indexRoutes = require('./routes/index');
-const viewRoutes = require('./routes/view.routes');
+const analysticsRoutes = require('./routes/analystics.routes');
 const productRoutes = require('./routes/product.routes');
 const categoryRoutes = require('./routes/category.routes');
 const settingsRoutes = require('./routes/settings.routes');
@@ -44,21 +44,12 @@ const OrderRoutes = require('./routes/order.routes');
 app.use('/', indexRoutes);
 app.use('/', productRoutes);
 app.use('/', categoryRoutes);
-app.use('/', viewRoutes);
+app.use('/', analysticsRoutes);
 app.use('/', settingsRoutes);
 app.use('/', storeRoutes);
 app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',OrderRoutes);
-
-
-app.get("/inventory", (req, res) => {
-
-  res.render("inventory")
-
-})
-
-
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

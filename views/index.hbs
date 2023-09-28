@@ -44,7 +44,10 @@
       </section>
       <!-- Categories  section ends-->
       <!-- Search section starts-->
-      
+
+      <!-- Error Message Container -->
+<div id="message-container" class="message-container"></div>
+
       <div class="search col-12 ">
         <form class="form-inline col-8" id="product-search-form">
 
@@ -322,7 +325,24 @@ clearCartButton?.addEventListener("click", function () {
   clearCart();
 
 });
+// Function to display messages
+function displayMessage(message, messageType) {
+  const messageContainer = document.getElementById("message-container");
 
+  // Create a new div for each message
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `message ${messageType}`; // You can style differently based on the message type
+  messageDiv.innerHTML = `<p>${message}</p>`;
+
+  // Append the new div to the container
+  messageContainer.appendChild(messageDiv);
+}
+
+// Function to clear messages
+function clearMessages() {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerHTML = "";
+}
 // Get All Categories and all Products from the DB, populate the List
 const getCategoriesAndProducts = async () => {
   const [categoryResponse, productResponse] = await Promise.all([fetch(URLS.category), fetch(URLS.product)])
@@ -670,6 +690,7 @@ const closePaymentPopup = () => {
   })
   .then(response => response.json())
   .then(data => {
+    displayMessage("Order created successfully!", "success");
     localStorage.removeItem("customer")
     localStorage.removeItem("cart")
     setTimeout(() =>{
@@ -680,6 +701,7 @@ const closePaymentPopup = () => {
   })
   .catch(error => {
     // Handle errors
+     displayMessage("Error creating order. Please try again.", "error");
     console.error("Error creating order", error);
   });
 

@@ -1,99 +1,19 @@
 <div class="right-panel setting col-11">
-<div class="setting-inner-container col-11 box-shadow">
+<div class="setting-inner-container col-11">
 
 
 <div class="setting-menu setting-buttons col-1 ">
-
+<button data-id="user" class="button">Users</button>
    <button data-id="currency" class="button">Currency</button>
   <button data-id="language" class="button">Languges</button>
   <button data-id="store" class="button">Store</button>
-  <button data-id="default-customer" class="button">Users</button>
+  
   <button data-id="tax-price" class="button">Price and Tax</button>
 
  </div>
 <div class="setting-content col-11 p-4 ">
-   <!---Currency option starts-->
-      <div class="panel show" id="currency">
-        <h3>Choose your Currency</h3>
 
-        <form>
-        <div class="form-row align-items-center m-50">
-          <div class=" col-12 select-div">
-            <select class="custom-select form-select col-8" aria-label="Default select example">
-              <option selected>Choose currency..</option>
-              <option value="1">USD</option>
-              <option value="2">EUR</option>
-              <option value="3">INR</option>
-            </select>
-          </div>
-            <div class="col-2 ">
-            <button type="submit" class="btn btn-secondary green-button mt-5">Update</button>
-            </div>
-          
-          
-        </div>
-      </form>
-    </div>
- <!---Currency option ends-->
- <!---Language option starts-->
- <div class="panel" id="language">
- 
-        <h3>Choose Your Language</h3>
-
-        <form>
-        <div class="form-row align-items-center m-50">
-          <div class=" col-12 select-div">
-            <select class="custom-select form-select col-8" aria-label="Default select example">
-              <option selected>Choose languages..</option>
-              <option value="1">En</option>
-              <option value="2">Fr</option>
-              <option value="3">nl</option>
-            </select>
-          </div>
-            <div class="col-2 ">
-            <button type="submit" class="btn btn-primary update-btn">Update</button>
-            </div>
-          
-          
-        </div>
-      </form>
-
-  </div>
-  <!---Language option ends-->
- <div class="panel" id="store">
-
-        <h3>Choose Your Store</h3>
-<!-- setting.hbs -->
-<form id="store-form" action="/store-address" method="POST">
-  <div class="form-row align-items-center m-50">
-    
-    <label class="form-label">Store name</label>
-    <input class="form-control" type="text" name="storeName" placeholder="Store Name" aria-label="Store Name" />
-
-    <label class="form-label">Store address 1</label>
-    <input class="form-control" type="text" name="addressLine1" placeholder="Store Address 1" aria-label="Store Address 1" />
-
-    <label class="form-label">Store address 2</label>
-    <input class="form-control" type="text" name="addressLine2" placeholder="Store Address 2" aria-label="Store Address 2" />
-
-    <label class="form-label">Pincode</label>
-    <input class="form-control" type="text" name="pincode" placeholder="Pincode" aria-label="Pincode" />
-
-    <label class="form-label">Country</label>
-    <input class="form-control" type="text" name="country" placeholder="Country" aria-label="Country" />
-
-    <label class="form-label">State</label>
-    <input class="form-control" type="text" name="state" placeholder="State" aria-label="State" />
-
-    <div class="col-2">
-      <button type="submit" class="btn btn-primary update-btn">Update</button>
-    </div>
-  </div>
-</form>
-
-
-  </div>
- <div class="panel" id="default-customer">
+   <div class="panel show" id="user">
  
 
           <h3>Add user</h3>
@@ -175,6 +95,85 @@
     
 
   </div>
+   <!---Currency option starts-->
+      <div class="panel " id="currency">
+        <h3>Choose your Currency</h3>
+
+        <form>
+        <div class="form-row align-items-center m-50">
+          <div class=" col-12 select-div">
+            <select class="custom-select form-select col-8" aria-label="Default select example">
+              <option selected>Choose currency..</option>
+              <option value="1">USD</option>
+              <option value="2">EUR</option>
+              <option value="3">INR</option>
+            </select>
+          </div>
+            <div class="col-2 ">
+            <button type="submit" class="btn btn-secondary green-button mt-5">Update</button>
+            </div>
+          
+          
+        </div>
+      </form>
+    </div>
+ <!---Currency option ends-->
+ <!---Language option starts-->
+ <div class="panel" id="language">
+ 
+        <h3>Choose Your Language</h3>
+
+        <form>
+        <div class="form-row align-items-center m-50">
+          <div class=" col-12 select-div">
+            <select class="custom-select form-select col-8" aria-label="Default select example">
+              <option selected>Choose languages..</option>
+              <option value="1">En</option>
+              <option value="2">Fr</option>
+              <option value="3">nl</option>
+            </select>
+          </div>
+            <div class="col-2 ">
+            <button type="submit" class="btn btn-primary update-btn">Update</button>
+            </div>
+          
+          
+        </div>
+      </form>
+
+  </div>
+  <!---Language option ends-->
+ <div class="panel" id="store">
+
+        <h3>Choose Your Store</h3>
+<!-- setting.hbs -->
+<form id="store-form" action="/store-address" method="POST">
+  <div class="form-row align-items-center m-50">
+
+    <label class="form-label">Store address 1</label>
+    <input class="form-control" type="text" name="addressLine1" placeholder="Store Address 1" aria-label="Store Address 1" />
+
+    <label class="form-label">Store address 2</label>
+    <input class="form-control" type="text" name="addressLine2" placeholder="Store Address 2" aria-label="Store Address 2" />
+
+    <label class="form-label">Pincode</label>
+    <input class="form-control" type="text" name="pincode" placeholder="Pincode" aria-label="Pincode" />
+
+    <label class="form-label">Country</label>
+    <input class="form-control" type="text" name="country" placeholder="Country" aria-label="Country" />
+
+    <label class="form-label">State</label>
+    <input class="form-control" type="text" name="state" placeholder="State" aria-label="State" />
+
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary update-btn">Update</button>
+    </div>
+  </div>
+</form>
+
+
+  </div>
+
 
  <div class="panel" id="tax-price">
     <h3>Choose Your Preference</h3>

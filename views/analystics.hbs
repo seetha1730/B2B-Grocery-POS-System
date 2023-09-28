@@ -1,0 +1,72 @@
+
+      <!-- Right panel starts-->
+      <div class="right-panel col-11">
+            <div class="box-shadow ">
+             <canvas id="myChart"></canvas>
+     </div>  
+      </div>
+
+  <script>
+function createPieChart(labels, data) {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Revenue',
+            data: data,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              // Add more colors as needed
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              // Add more colors as needed
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+    });
+  }
+
+function calculateRevenue(orderData) {
+    // Perform calculations based on your business logic
+    // For example, summing total revenue per category
+    const revenuePerCategory = orderData.reduce((acc, order) => {
+      const category = order.category; // Replace with your actual category property
+      acc[category] = (acc[category] || 0) + order.total;
+      return acc;
+    }, {});
+    return Object.entries(revenuePerCategory).map(([category, revenue]) => ({ category, revenue }));
+  }
+
+function processOrderData(orders) {
+  // Your processing logic here
+  const orderLabels = orders.map(order => order.orderDate);
+  const orderTotals = orders.map(order => order.total);
+
+  // Assuming you have a chart library (e.g., Chart.js)
+  // Create a pie chart using orderLabels and orderTotals
+  createPieChart(orderLabels, orderTotals);
+}
+  fetch('/api/orders')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(orders => {
+      const orderData = processOrderData(orders); // Assuming processOrderData is defined
+      const revenueData = calculateRevenue(orderData);
+      createPieChart(revenueData.map(data => data.category), revenueData.map(data => data.revenue));
+    })
+    .catch(error => console.error('Error fetching orders:', error));
+  </script>

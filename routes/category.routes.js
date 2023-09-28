@@ -35,7 +35,6 @@ router.get("/category/goto/:pageNumber", isAdmin, (req, res, next) => {
   .skip(skip)
   .limit(5)
   .then(categoryList => {
-
       res.render('category/category', { categoryList, categoryPagination: generateCPageNumber(catCount),layout: 'layout-admin' });
     })
     

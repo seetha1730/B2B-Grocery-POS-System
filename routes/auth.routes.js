@@ -8,7 +8,7 @@ const User = require("../models/User.model");
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 
 // GET route ==> to display the signup form to users
-router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
+router.get("/signup", isLoggedOut, (req, res) => res.render("setting"));
 // POST route ==> to process form data
 router.post("/signup", (req, res, next) => {
   console.log("The form data: ", req.body);
@@ -35,27 +35,27 @@ router.post("/signup", (req, res, next) => {
 
   // Custom validation
   if (!email || !email.trim() || !username) {
-    return res.render("auth/signup", {
+    return res.render("setting", {
       errorMessage: "Email or username is required.",
     });
   }
   if (!password || password.length < 6) {
-    return res.render("auth/signup", {
+    return res.render("setting", {
       errorMessage: "Password must be at least 6 characters.",
     });
   }
   if (!firstName || !firstName.trim()) {
-    return res.render("auth/signup", {
+    return res.render("setting", {
       errorMessage: "First Name is required.",
     });
   }
 
   if (!gender || !gender.trim()) {
-    return res.render("auth/signup", { errorMessage: "Gender is required." });
+    return res.render("setting", { errorMessage: "Gender is required." });
   }
 
   if (!phoneNumber) {
-    return res.render("auth/signup", {
+    return res.render("setting", {
       errorMessage: "Phone number is requires",
     });
   }
@@ -82,15 +82,17 @@ router.post("/signup", (req, res, next) => {
       // Registration successful
       console.log("Newly created user is: ", userFromDB);
       res.status(200);
-      res.send({ msg: "created user" });
+        // If successful
+    res.render("settings", { successMessage: "User created successfully" });
+ 
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
+        res.status(500).render("setting", { errorMessage: error.message });
       } else if (error.code === 11000) {
         //console.log(" ");
 
-        res.status(500).render("auth/signup", {
+        res.status(500).render("setting", {
           // errorMessage: 'User not found and/or incorrect password.'
           errorMessage:
             "Username and email need to be unique. Either username or email is already used. ",
@@ -139,13 +141,13 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       if (bcryptjs.compareSync(password, user.passwordHash)) {
         // Set the session data
         req.session.currentUser = user;
-        console.log("Session after login:", req.session);
+        console.log("Session after login:", req.session);a
         //Check if the user is an admin
 
         if (user.isAdmin) {
           const isAdmin = true;
           req.session.currentUser = user; // Make sure this sets the correct user object
-          res.render("profile", { user, isAdmin ,layout: "layout-admin"});
+          res.render("index", { user, isAdmin ,layout: "layout-admin"});
         } else {
          
 
