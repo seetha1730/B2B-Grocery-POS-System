@@ -7,7 +7,7 @@ const generator = require('generate-password');
 const {
     isLoggedIn,
     isAdmin,
-    isLoggedOut,
+    isLoggedOut
 } = require("../middleware/route-guard");
 const mailjet = require("node-mailjet").apiConnect(
     process.env.MAILJET_API_KEY,

@@ -153,8 +153,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
           // Check if the user is a customer, and prevent login if so.
           if (user.role === "Customer") {
-            
-
             res.render("auth/unauthorized", {
               errorMessage:
                 "Unauthorized access. Customers are not allowed to log in.",

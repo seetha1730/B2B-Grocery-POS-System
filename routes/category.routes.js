@@ -35,6 +35,7 @@ router.get("/category/goto/:pageNumber", isAdmin, (req, res, next) => {
   .skip(skip)
   .limit(5)
   .then(categoryList => {
+
       res.render('category/category', { categoryList, categoryPagination: generateCPageNumber(catCount),layout: 'layout-admin' });
     })
     
@@ -70,7 +71,7 @@ router.post('/category/add-category', fileUploader.single('image'), (req, res, n
     })
       .then(() => {
         console.log('Category added successfully');
-        res.redirect('/category'); // Redirect to the category list page
+        res.redirect('/category/goto/1'); // Redirect to the category list page
       })
       .catch(err => next(err));
   });
@@ -88,7 +89,7 @@ router.get('/category', isAdmin,(req, res, next) => {
 // Display the edit category page
 router.get('/category/:id/edit', (req, res, next) => {
   const { id } = req.params;
-Category.find().then((allCategory)=>{
+Category.find(id).then((allCategory)=>{
 
   Category.findById(id).populate("parentCategory")
     .then(category => {
@@ -121,7 +122,7 @@ router.post('/category/:id/delete', (req, res, next) => {
 
   Category.findByIdAndRemove(id)
     .then(() => {
-      res.redirect('/category');
+      res.redirect('/category/goto/1');
     })
     .catch(err => next(err));
 });

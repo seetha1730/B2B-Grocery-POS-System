@@ -18,7 +18,7 @@ const generateOrderPageNumber = (itemLength) => {
 };
 
 /* GET home page */
-router.get("/order-history", isLoggedIn, (req, res, next) => {
+router.get("/order-history", isLoggedIn,(req, res, next) => {
   Order.find()
     .then((orderList) => {
 console.log("currentuser",req.session.currentUser)

@@ -146,7 +146,7 @@ router.post(
     })
       .then(() => {
         console.log("Product added successfully");
-        res.redirect("/product"); // Redirect to the product list page
+        res.redirect("/product/goto/1"); // Redirect to the product list page
       })
       .catch((err) => {
         console.error(err);
@@ -186,8 +186,9 @@ router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) 
       categoryName,
       stock,
       description,
+      imageUrl
     } = req.body;
-    const imageUrl = req.file ? req.file.path : "";
+   
     Product.findByIdAndUpdate(id, {
       productName,
       productPrice,
@@ -195,10 +196,10 @@ router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) 
       categoryName,
       stock,
       description,
-      imageUrl,
+      imageUrl : req.file.path || imageUrl
     })
       .then(() => {
-        res.redirect("/product");
+        res.redirect("/product/goto/1");
       })
       .catch((err) => {
         console.log(err);
@@ -212,7 +213,7 @@ router.post("/product/:id/delete", (req, res, next) => {
 
   Product.findByIdAndRemove(id)
     .then(() => {
-      res.redirect("/product");
+      res.redirect("/product/goto/1");
     })
     .catch((err) => {
       next(err);

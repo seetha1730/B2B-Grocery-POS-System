@@ -1,23 +1,23 @@
 <div class="right-panel col-11">
 
   <div class="info-details col-12 ">
-    <div class="shop-name col-2">
-
-
-    </div>
-   <div class="order-date col-4">
+    
+   <div class="order-date col-8">
           <span class="date-section" id="current-date-time">
           </span>
    </div>
 
 
 
-    <div class="cashier-details col-6">
+    <div class="cashier-details col-4">
       <i class="bi bi-person-lock"></i>
 
+{{#if user.isAdmin}}
+  <p class="cashier-name m-0" >Admin: {{ user.firstName }} {{user.lastName }}</p>
 
-    {{#if user.role}}
-  <p class="cashier-name m-0" >Cashier: {{ user.firstName }}{{user.lastname }}</p>
+ {{else}}
+
+  <p class="cashier-name m-0" >Cashier: {{ user.firstName }} {{user.lastName }}</p>
 
     {{/if}}
 
@@ -49,7 +49,7 @@
 <div id="message-container" class="message-container"></div>
 
       <div class="search col-12 ">
-        <form class="form-inline col-8" id="product-search-form">
+        <form class="form-inline col-12" id="product-search-form">
 
 
           <input class=" form-control" id="product-search" type="search" placeholder="Search product"
@@ -122,7 +122,7 @@
     <h1>Total balance:<b class="amount-total" id="amount-total"> 0.00</b></h1>
 
     {{#if user.role}}
-      <p>Cashier: {{ user.firstName }} {{ user.lastName }}</p>
+      <p>{{user.role}}: {{ user.firstName }} {{ user.lastName }}</p>
           <p id="customer-name">Customer: Guest</p>
     {{/if}}
 
