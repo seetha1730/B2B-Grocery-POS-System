@@ -33,6 +33,14 @@ main {
   color: #565656;
   margin-top: 20px;
 }
+
+
+.notification {
+  background-color:goldenrod;
+  padding: 20px;
+  color: #565656;
+  margin-top: 20px;
+}
 /* Buttons */
 
 form#logout-form button {

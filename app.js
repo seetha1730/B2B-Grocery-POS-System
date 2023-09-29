@@ -38,6 +38,7 @@ const storeRoutes = require('./routes/store.routes');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const OrderRoutes = require('./routes/order.routes');
+const emailRoutes = require('./routes/email.routes');
 
 
 // Use the route handlers
@@ -50,6 +51,7 @@ app.use('/', storeRoutes);
 app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',OrderRoutes);
+app.use('/',emailRoutes);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

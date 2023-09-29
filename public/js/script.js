@@ -17,8 +17,6 @@ function APIGetCall(link) {
   return fetch(link)
 }
 
-
-
 function handleClick(e) {
   if (e.target.matches('button')) {
     // Hide all panels by removing the 'show' class
