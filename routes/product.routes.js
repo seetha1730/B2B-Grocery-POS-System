@@ -196,7 +196,7 @@ router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) 
       categoryName,
       stock,
       description,
-      imageUrl : req.file.path || imageUrl
+      imageUrl : req.file?.path || imageUrl
     })
       .then(() => {
         res.redirect("/product/goto/1");

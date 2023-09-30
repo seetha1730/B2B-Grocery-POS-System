@@ -109,6 +109,11 @@ router.post("/signup", (req, res, next) => {
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { root: "views", layout: false });
 });
+// GET route ==> to display the login form to users
+router.get("/auth/unauthorized", (req, res, next) => {
+  res.render("auth/unauthorized", { root: "views", layout: false });
+});
+
 
 // POST login route ==> to process form data
 
@@ -136,30 +141,32 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         });
         return;
       }
-
+   // Check if the user is a customer, and prevent login if so.
+   if (user.role === "Customer") {
+    res.render("auth/unauthorized", {
+      errorMessage:
+        "Unauthorized access. Customers are not allowed to log in.",
+      layout: false,
+    });
+    return;
+  }
       // Password matches
       if (bcryptjs.compareSync(password, user.passwordHash)) {
         // Set the session data
         req.session.currentUser = user;
         console.log("Session after login:", req.session);
+        console.log("Session after login:", user);
         //Check if the user is an admin
        
         if (user.isAdmin) {
           const isAdmin = true;
+
           req.session.currentUser = user; 
           res.render("index", { user, isAdmin:isAdmin ,layout: "layout-admin"});
         } else {
          
 
-          // Check if the user is a customer, and prevent login if so.
-          if (user.role === "Customer") {
-            res.render("auth/unauthorized", {
-              errorMessage:
-                "Unauthorized access. Customers are not allowed to log in.",
-              layout: false,
-            });
-            return;
-          }
+       
 
           // Regular user, render their profile
           res.render("index", { user,isAdmin:false ,layout: "layout"});
