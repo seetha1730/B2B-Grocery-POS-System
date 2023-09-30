@@ -79,7 +79,7 @@ router.get("/product/add-product", isAdmin, (req, res, next) => {
   Category.find()
     .then((categoryList) => {
       // Add this line for debugging
-      res.render("product/add-product", { categoryList });
+      res.render("product/add-product", { categoryList , layout: 'layout-admin'});
     })
     .catch((err) => next(err));
 });
@@ -106,6 +106,7 @@ router.post(
         productName,
         productPrice,
         quantity,
+        layout: 'layout-admin'
       });
     }
 
@@ -119,6 +120,7 @@ router.post(
         productName,
         productPrice,
         quantity,
+        layout: 'layout-admin'
       });
     }
 
@@ -130,6 +132,7 @@ router.post(
         productName,
         productPrice,
         quantity,
+        layout: 'layout-admin'
       });
     }
     // Continue with creating the product without image
@@ -162,7 +165,7 @@ router.get("/product/:id/edit", (req, res, next) => {
     
     Category.find()
       .then((categoryList) => {
-        res.render("product/edit-product", { product, categoryList });
+        res.render("product/edit-product", { product, categoryList , layout: 'layout-admin'});
       })
       .catch((err) => {
         next(err);

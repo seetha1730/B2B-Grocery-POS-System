@@ -34,7 +34,8 @@ router.post("/signup", (req, res, next) => {
   // }
 
   // Custom validation
-  if (!email || !email.trim() || !username) {
+    
+  if (!email || !email.trim() || !username ) {
     return res.render("settings", {
       errorMessage: "Email or username is required.",
     });
@@ -83,7 +84,18 @@ router.post("/signup", (req, res, next) => {
       console.log("Newly created user is: ", userFromDB);
       res.status(200);
         // If successful
-    res.render("settings", { successMessage: "User created successfully" });
+
+        if (req.session.currentUser.isAdmin){
+            
+          res.render("settings",{user:req.session.currentUser, layout: 'layout-admin',successMessage: "User created successfully" });
+          
+      }
+      else
+      {
+        
+     res.render('settings', {user: req.session.currentUser,layout:'layout'});
+   }
+   
  
     })
     .catch((error) => {

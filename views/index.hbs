@@ -788,16 +788,20 @@
   }
 
   // LISTENERS
-  checkoutBtn?.addEventListener("click", () => {
+  checkoutBtn?.addEventListener("click", () => { 
+ checkTablePopupBody.innerHTML ="";
+  index = 0;
     checkoutPopup.style.display = "block";
 
     // If the customer is logged in, update the customer name in the checkout popup
     const customerNameElement = document.getElementById("customer-name");
+    if(customerNameElement){
     if (localStorage.getItem("customer")) {
       const customer = JSON.parse(localStorage.getItem("customer"));
       customerNameElement.textContent = `Customer: ${customer.firstName} ${customer.lastName}`;
     } else {
       customerNameElement.textContent = "Customer: Guest";
+    }
     }
 
 

@@ -124,7 +124,7 @@ router.post("/order-history/:id/delete", (req, res, next) => {
 
   Order.findByIdAndRemove(id)
     .then(() => {
-      res.redirect("/order-history");
+      res.redirect("/order-history/goto/1");
     })
     .catch((err) => {
       next(err);

@@ -1,7 +1,7 @@
 <!-- Right panel starts-->
 <div class="right-panel col-11">
 
-    <div class="category-title box-shadow col-8">
+    <div class="category-title box-shadow col-12">
         <div class="row">
             <div class="col-8">
                 <h2>Order </h2>
@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="show-panel box-shadow col-8" id="category">
+    <div class="show-panel col-12" id="category">
         <div class="table-responsive">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -41,10 +41,21 @@
                         <td>{{this.orderNumber}}</td>
                         <td>{{this.total}}</td>
                         <td>
+                          {{#if this.customerId}}
                             <p>{{this.customerFirstName}} {{this.customerLastName}}</p>
                             <p>{{this.customerPhoneNumber}}</p>
+                            {{else}}
+                           <p>Guest</p>
+                           {{/if}}
                         </td>
-                        <td>{{this.customerId}}</td>
+                        
+                        <td>
+                           {{#if this.customerId}}
+                          {{this.customerId}}
+                           {{else}}
+                           <p>-</p>
+                           {{/if}}
+                          </td>
 
                         <td  class="actions"><i id="view-order" onclick="orderDetailsPopup('{{this._id}}')" class="bi bi-eye"></i>
                          <form action="/order-history/{{_id}}/delete" method="POST">

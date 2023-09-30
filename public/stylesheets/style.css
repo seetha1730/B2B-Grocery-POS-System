@@ -139,7 +139,7 @@ form#logout-form button {
 }
 
 .update-btn {
-  background-color: #CBC3E3;
+  background-color: #9e8ccb;
   color: #fff;
   width: 80%;
   margin-top: 30px;
@@ -147,21 +147,14 @@ form#logout-form button {
 }
 
 .setting-menu button {
-  background: #FFDE95;
-  color: #565656;
+  color: #fff;
   padding: 15px;
   text-decoration: none;
   display: block;
   text-align: center;
+  background-color: #9e8ccb;
+  border: 1px solid #fff;
 }
-
-/* .btn-blue {
-  background: #3080ec;
-  color: #fff;
-  width: 80%;
-  margin-top: 30px;
-  height: 45px;
-} */
 
 .checkoutPopup .close,
 #payment-popup .payment-close {
@@ -379,8 +372,10 @@ li.nav-item.active:hover{
 
 .setting-menu {
   display: flex;
+  margin-left: 20px;
 }
 
+.setting .form-horizontal .form-control{background:none}
 .panel {
   display: none;
 }
@@ -1214,6 +1209,7 @@ table.table tbody td {
 
 .table-responsive{
   margin: 20px;
+  margin-top: 0px;
 }
 .table-wrapper {
   margin: 30px auto;
@@ -1333,11 +1329,11 @@ nav.navbar.left-panel-navbar {
    margin-top: 0px;
     width: 100%;
 }
-
+i.bi{color:#fff;}
 .navbar-brand{display: none;}
 .nav-link{padding:0}
 .left-panel-navbar li{padding:0;height: 30px;}
-.left-panel{width:100%; display: flex; flex-direction: row; position: fixed;
+.left-panel{width:100%; display: flex;    background: #9e8ccb; flex-direction: row; position: fixed;
   bottom:0;    z-index: 999;}
 body{overflow: auto;}
 li.nav-item.active{background:none;}

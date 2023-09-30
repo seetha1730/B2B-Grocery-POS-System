@@ -48,7 +48,7 @@ router.get("/category/goto/:pageNumber", isAdmin, (req, res, next) => {
 router.get('/category/add-category', isAdmin,(req, res, next) => {
   Category.find()
     .then(categoryList => {
-      res.render('category/add-category', { categoryList });
+      res.render('category/add-category', { categoryList,layout: 'layout-admin' });
     })
     .catch(err => next(err));
 });
@@ -58,7 +58,7 @@ router.post('/category/add-category', fileUploader.single('image'), (req, res, n
   
     if (!categoryName) {
       const errors = [{ msg: 'Category name is required.' }];
-      return res.render('category/add-category', { errors, categoryName, parentCategory });
+      return res.render('category/add-category', { errors, categoryName, parentCategory,layout: 'layout-admin' });
     }
   
     // Continue with creating the category
@@ -89,13 +89,13 @@ router.get('/category', isAdmin,(req, res, next) => {
 // Display the edit category page
 router.get('/category/:id/edit', (req, res, next) => {
   const { id } = req.params;
-Category.find(id).then((allCategory)=>{
+Category.find().then((allCategory)=>{
 
   Category.findById(id).populate("parentCategory")
     .then(category => {
       console.log(allCategory)
 
-      res.render('category/edit-category', { category,allCategory });
+      res.render('category/edit-category', { category,allCategory ,layout: 'layout-admin'});
     })
     .catch(err => next(err));
 
