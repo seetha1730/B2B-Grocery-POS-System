@@ -28,11 +28,10 @@ router.post('/store-address', (req, res) => {
     StoreAddress.findOneAndUpdate(query, update, options)
       .then((result) => {
         if (result) {
-          console.log('Store address updated successfully');
-          res.redirect('/settings'); // Redirect to the settings page
+          res.redirect('/settings'); 
         } else {
-          console.log('Store address not found; a new one was created');
-          res.redirect('/settings'); // Redirect to the settings page
+        
+          res.redirect('/settings'); 
         }
       })
       .catch((err) => {

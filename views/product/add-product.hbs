@@ -1,6 +1,6 @@
 
  <div class="right-panel col-11">
- <div class="show-panel box-shadow p-4" id="product">
+ <div class="show-panel p-4 col-7" id="product">
 <div class="add-panel" id="add-product">
     <h3>Add new product</h3>
      {{#if errors}}
@@ -48,14 +48,14 @@
           
 
           
-        <div class="upload-image col-3">
-          <img class="col-3 " src="/images/upload.png" />
+        <div class="upload-image col-8">
+          <img class="col-2 " src="/images/upload.png" />
          <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>
-      <input id="imageInput" class="col-5" type="file" name="image" accept="image/*" style="display: none" />
+      <input id="imageInput" class="col-4" type="file" name="image" accept="image/*" style="display: none" />
 
         </div>
 
-        <div class=" col-3">
+        <div class=" col-5">
           <button type="submit" class="btn btn-primary update-btn add-product">Add new
             product</button>
         </div>

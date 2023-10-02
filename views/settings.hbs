@@ -97,8 +97,17 @@
  <div class="panel" id="store">
 
         <h3>Choose Your Store</h3>
+         <!-- Display validation errors here -->
+    {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    {{#if successMessage}}
+        <p class="success">{{successMessage}}</p>
+    {{/if}}
 <!-- setting.hbs -->
 <form id="store-form" action="/store-address" method="POST">
+
+  
   <div class="form-row align-items-center m-50">
 
     <label class="form-label">Store address 1</label>

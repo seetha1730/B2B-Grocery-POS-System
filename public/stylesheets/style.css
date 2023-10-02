@@ -4,7 +4,6 @@ body {
 
   background-color: #f6f7fa;
   color: #565656;
-  overflow: hidden;
   font-family: 'Montserrat', sans-serif !important;
 
 
@@ -23,14 +22,14 @@ main {
 .error {
   background-color: #ef2a63;
   padding: 20px;
-  color: #565656;
+  color: #fff;
   margin-top: 20px;
 }
 
 .success {
   background-color: green;
   padding: 20px;
-  color: #565656;
+  color: #fff;
   margin-top: 20px;
 }
 
@@ -220,8 +219,11 @@ form#logout-form button {
   background-color: #9e8ccb;
   color: white;
 }
-
-.category-buttons{
+.violet-btn {
+  background-color: #9e8ccb;
+  color: white;
+}
+.category-buttons,.upload-btn{
   background-color: #CBC3E3;
   border: 1px solid #CBC3E3;
   border-radius: 8px;
@@ -1308,8 +1310,7 @@ table.table td .add {
 }
 .show-panel{
  width:100%;
-}
-
+}#category{width:100%}
 .category-buttons{
   
   padding: 5px 7%;

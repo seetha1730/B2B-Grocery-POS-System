@@ -11,7 +11,6 @@ const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 router.get("/signup", isLoggedOut, (req, res) => res.render("settings"));
 // POST route ==> to process form data
 router.post("/signup", (req, res, next) => {
-  console.log("The form data: ", req.body);
   const min = 10000; // Minimum 5-digit number (inclusive)
   const max = 99999; // Maximum 5-digit number (inclusive)
   const {
@@ -34,8 +33,8 @@ router.post("/signup", (req, res, next) => {
   // }
 
   // Custom validation
-    
-  if (!email || !email.trim() || !username ) {
+
+  if (!email || !email.trim() || !username) {
     return res.render("settings", {
       errorMessage: "Email or username is required.",
     });
@@ -60,7 +59,7 @@ router.post("/signup", (req, res, next) => {
       errorMessage: "Phone number is requires",
     });
   }
- 
+
 
   bcryptjs
     .genSalt(saltRounds)
@@ -81,29 +80,26 @@ router.post("/signup", (req, res, next) => {
     })
     .then((userFromDB) => {
       // Registration successful
-      console.log("Newly created user is: ", userFromDB);
+      successMessage("Newly created user is: ", userFromDB);
       res.status(200);
-        // If successful
+      // If successful
 
-        if (req.session.currentUser.isAdmin){
-            
-          res.render("settings",{user:req.session.currentUser, layout: 'layout-admin',successMessage: "User created successfully" });
-          
+      if (req.session.currentUser.isAdmin) {
+
+        res.render("settings", { user: req.session.currentUser, layout: 'layout-admin', successMessage: "User created successfully" });
+
       }
-      else
-      {
-        
-     res.render('settings', {user: req.session.currentUser,layout:'layout'});
-   }
-   
- 
+      else {
+
+        res.render('settings', { user: req.session.currentUser, layout: 'layout' });
+      }
+
+
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).render("setting", { errorMessage: error.message });
       } else if (error.code === 11000) {
-        //console.log(" ");
-
         res.status(500).render("settings", {
           // errorMessage: 'User not found and/or incorrect password.'
           errorMessage:
@@ -145,7 +141,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
   findUser
     .then((user) => {
-      console.log(user)
+    
       if (!user) {
         res.render("auth/login", {
           errorMessage: "Email or username not registered.",
@@ -153,35 +149,33 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         });
         return;
       }
-   // Check if the user is a customer, and prevent login if so.
-   if (user.role === "Customer") {
-    res.render("auth/unauthorized", {
-      errorMessage:
-        "Unauthorized access. Customers are not allowed to log in.",
-      layout: false,
-    });
-    return;
-  }
+      // Check if the user is a customer, and prevent login if so.
+      if (user.role === "Customer") {
+        res.render("auth/unauthorized", {
+          errorMessage:
+            "Unauthorized access. Customers are not allowed to log in.",
+          layout: false,
+        });
+        return;
+      }
       // Password matches
       if (bcryptjs.compareSync(password, user.passwordHash)) {
         // Set the session data
         req.session.currentUser = user;
-        console.log("Session after login:", req.session);
-        console.log("Session after login:", user);
+
         //Check if the user is an admin
-       
         if (user.isAdmin) {
           const isAdmin = true;
 
-          req.session.currentUser = user; 
-          res.render("index", { user, isAdmin:isAdmin ,layout: "layout-admin"});
+          req.session.currentUser = user;
+          res.render("index", { user, isAdmin: isAdmin, layout: "layout-admin" });
         } else {
-         
 
-       
+
+
 
           // Regular user, render their profile
-          res.render("index", { user,isAdmin:false ,layout: "layout"});
+          res.render("index", { user, isAdmin: false, layout: "layout" });
         }
       } else {
         res.render("auth/login", {

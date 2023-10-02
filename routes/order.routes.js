@@ -21,7 +21,7 @@ const generateOrderPageNumber = (itemLength) => {
 router.get("/order-history", isLoggedIn,(req, res, next) => {
   Order.find()
     .then((orderList) => {
-console.log("currentuser",req.session.currentUser)
+
 
       if (req.session.currentUser.isAdmin) {
 
@@ -86,7 +86,7 @@ router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
       }
       // Send the order details as JSON
       res.json(order);
-      console.log(order)
+    
     })
 
     .catch((err) => next(err));

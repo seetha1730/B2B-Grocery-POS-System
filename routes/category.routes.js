@@ -9,7 +9,6 @@ const generateCPageNumber = (itemLength) => {
 
   let pages = (itemLength / 5);
   let pageString = pages.toString().split(".");
-  console.log("Total pages:", pages);
   if (pageString.length == 2) {
     const pageCount = parseInt(pageString[0]) + 1;
     return Array.from({ length: pageCount }, (_, i) => i + 1);
@@ -57,9 +56,9 @@ router.post('/category/add-category', fileUploader.single('image'), (req, res, n
     const { categoryName, parentCategory } = req.body;
   
     if (!categoryName) {
-      const errors = [{ msg: 'Category name is required.' }];
-      return res.render('category/add-category', { errors, categoryName, parentCategory,layout: 'layout-admin' });
-    }
+      const errorMessage = 'Category name is required.';
+      return res.render('category/add-category', { errorMessage, categoryName, parentCategory, layout: 'layout-admin' });
+  }
   
     // Continue with creating the category
     const imageUrl = req.file ? req.file.path : '';
@@ -70,7 +69,7 @@ router.post('/category/add-category', fileUploader.single('image'), (req, res, n
       imageUrl,
     })
       .then(() => {
-        console.log('Category added successfully');
+
         res.redirect('/category/goto/1'); // Redirect to the category list page
       })
       .catch(err => next(err));
@@ -93,7 +92,6 @@ Category.find().then((allCategory)=>{
 
   Category.findById(id).populate("parentCategory")
     .then(category => {
-      console.log(allCategory)
 
       res.render('category/edit-category', { category,allCategory ,layout: 'layout-admin'});
     })

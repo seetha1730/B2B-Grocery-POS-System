@@ -148,7 +148,7 @@ router.post(
       imageUrl,
     })
       .then(() => {
-        console.log("Product added successfully");
+
         res.redirect("/product/goto/1"); // Redirect to the product list page
       })
       .catch((err) => {
@@ -205,7 +205,7 @@ router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) 
         res.redirect("/product/goto/1");
       })
       .catch((err) => {
-        console.log(err);
+       
         next(err);
       });
   });

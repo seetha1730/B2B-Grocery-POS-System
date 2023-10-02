@@ -1,6 +1,6 @@
 <div class="right-panel col-11">
 
-  <div class="add-panel box-shadow p-4 col-4" id="edit-product">
+  <div class="add-panel box-shadow p-4 col-8" id="edit-product">
     <h3>Edit product</h3>
     {{#with product}}
     <form action="/product/{{_id}}/edit" method="post" enctype="multipart/form-data">
@@ -39,14 +39,14 @@
         <textarea class="form-control description mr-sm-2" type="text" name="description" id="" cols="20" rows="10"
           placeholder="Product Description">{{description}}</textarea>
 
-        <div class="upload-image col-9">
+        <div class="upload-image col-8">
           <img class="col-3 " src="{{imageUrl}}"/>
           <label for="imageInput" class="btn btn-orange upload-btn">Upload image</label>
           <input id="imageInput" class="col-2" type="file" name="image" accept="image/*" style="display: none" />
         </div>
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary update-btn add-product">Update product</button>
+        <div class="col-6">
+          <button type="submit" class="btn add-new-category update-btn add-product">Update product</button>
         </div>
         {{/with}}
       </div>

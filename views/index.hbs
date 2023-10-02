@@ -334,7 +334,7 @@
 
     // Create a new div for each message
     const messageDiv = document.createElement("div");
-    messageDiv.className = `message ${messageType}`; // You can style differently based on the message type
+    messageDiv.className = `message ${messageType}`; 
     messageDiv.innerHTML = `<p>${message}</p>`;
 
     // Append the new div to the container
@@ -698,18 +698,17 @@
     })
       .then(response => response.json())
       .then(data => {
-        displayMessage("Order created successfully!", "success");
+        successMessage("Order created successfully!", "success");
         localStorage.removeItem("customer")
         localStorage.removeItem("cart")
         setTimeout(() => {
           window.location.reload();
         }, 2000)
-
-        console.log("Order created successfully", data);
+  successMessage("Order created successfully ", data);
       })
       .catch(error => {
         // Handle errors
-        displayMessage("Error creating order. Please try again.", "error");
+        successMessage("Error creating order. Please try again.", "error");
         console.error("Error creating order", error);
       });
 

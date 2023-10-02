@@ -1,15 +1,13 @@
 <div class="right-panel col-11">
-  <div class="add-panel box-shadow p-4 col-4" id="category">
+  <div class="add-panel p-4 col-7" id="category">
     <h3>Add New category</h3>
-    {{#if errors}}
-    <div class="alert alert-danger">
-      <ul>
-        {{#each errors}}
-        <li>{{this.msg}}</li>
-        {{/each}}
-      </ul>
-    </div>
-    {{/if}}
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+       
+         {{#if successMessage}}
+        <p class="success">{{successMessage}}</p>
+        {{/if}}
     <form action="/category/add-category" method="post" enctype="multipart/form-data">
 
       <div class="category">
@@ -26,16 +24,16 @@
           {{/each}}
         </select>
 
-        <div class="upload-image col-3">
-          <img class="col-3" src="/images/upload.png" />
-          <label for="inputField" class="btn btn-orange upload-btn">Upload image</label>
-          <input class="col-5 upload-btn" type="file" id="inputField" style="display:none" name="image"
+        <div class="upload-image col-8">
+          <img class="col-2" src="/images/upload.png" />
+          <label for="inputField" class="btn upload-btn">Upload image</label>
+          <input class="col-4 upload-btn" type="file" id="inputField" style="display:none" name="image"
             accept="image/*" />
 
         </div>
 
-        <div class="col-3">
-          <button type="submit" class="btn btn-primary btn-blue">Add new category</button>
+        <div class="col-5">
+          <button type="submit" class="btn violet-btn mt-5">Add new category</button>
         </div>
 
       </div>

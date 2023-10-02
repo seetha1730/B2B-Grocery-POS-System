@@ -1,5 +1,5 @@
 <div class="right-panel col-11">
-  <div class="add-panel box-shadow p-4 col-4" id="category">
+  <div class="add-panel box-shadow p-4 col-8" id="category">
     <h3>Edit category</h3>
     {{#with category}}
     <form action="/category/add-category" method="post" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
           {{/each}}
         </select>
 {{#with category}}
-        <div class="upload-image col-9">
+        <div class="upload-image col-8">
           <img class="col-3" src="{{this.imageUrl}}" />
           <label for="inputField" class="btn btn-orange upload-btn">Upload image</label>
           <input class="col-2 upload-btn" type="file" id="inputField" style="display:none" name="image"
@@ -26,8 +26,8 @@
 
         </div>
 
-        <div class="col-12">
-          <button type="submit" class="add-new-category">Add new category</button>
+        <div class="col-6">
+          <button type="submit" class=" btn add-new-category  update-btn mt-3">Add new category</button>
         </div>
 
       </div>
