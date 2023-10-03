@@ -1,20 +1,14 @@
-
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product.model");
 const User = require("../models/User.model");
-const Category = require("../models/Category.model");
+const { isLoggedIn} = require('../middleware/route-guard.js');
 
-const { isLoggedIn, isLoggedOut, isAdmin } = require('../middleware/route-guard.js');
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
 const user = req.session.currentUser
-
-
    if (req.session.currentUser.isAdmin){
-      
-      res.render("index",{user, layout: 'layout-admin'});
-      
+       res.render("index",{user, layout: 'layout-admin'}); 
    }
    else
    {
@@ -23,12 +17,12 @@ const user = req.session.currentUser
    }
 
 });
-
+//GET the search result of product
 router.get("/search/:searchTerm",(req, res, next) => {
   const { searchTerm } = req.params;
   Product.find({ productName: {
 
-    $regex: searchTerm, $options: "i" } })  // Case-insensitive search
+    $regex: searchTerm, $options: "i" } }) 
 
 
     .then((searchResults) => {
@@ -37,7 +31,7 @@ router.get("/search/:searchTerm",(req, res, next) => {
     .catch((err) => next(err));
 });
 
-
+//GET the search customer 
 router.get("/search/customer/:customerId",(req, res, next) => {
    const { customerId } = req.params;
 

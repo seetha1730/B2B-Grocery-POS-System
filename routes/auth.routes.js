@@ -60,7 +60,6 @@ router.post("/signup", (req, res, next) => {
     });
   }
 
-
   bcryptjs
     .genSalt(saltRounds)
     .then((salt) => bcryptjs.hash(password, salt))
@@ -75,7 +74,10 @@ router.post("/signup", (req, res, next) => {
         role,
         passwordHash: hashedPassword,
         isAdmin: false,
-        customerId: role === "Customer" ? Math.floor(Math.random() * (max - min + 1)) + min : " "
+        customerId:
+          role === "Customer"
+            ? Math.floor(Math.random() * (max - min + 1)) + min
+            : " ",
       });
     })
     .then((userFromDB) => {
@@ -85,16 +87,17 @@ router.post("/signup", (req, res, next) => {
       // If successful
 
       if (req.session.currentUser.isAdmin) {
-
-        res.render("settings", { user: req.session.currentUser, layout: 'layout-admin', successMessage: "User created successfully" });
-
+        res.render("settings", {
+          user: req.session.currentUser,
+          layout: "layout-admin",
+          successMessage: "User created successfully",
+        });
+      } else {
+        res.render("settings", {
+          user: req.session.currentUser,
+          layout: "layout",
+        });
       }
-      else {
-
-        res.render('settings', { user: req.session.currentUser, layout: 'layout' });
-      }
-
-
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
@@ -122,7 +125,6 @@ router.get("/auth/unauthorized", (req, res, next) => {
   res.render("auth/unauthorized", { root: "views", layout: false });
 });
 
-
 // POST login route ==> to process form data
 
 router.post("/login", isLoggedOut, (req, res, next) => {
@@ -141,7 +143,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
   findUser
     .then((user) => {
-    
       if (!user) {
         res.render("auth/login", {
           errorMessage: "Email or username not registered.",
@@ -168,12 +169,12 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           const isAdmin = true;
 
           req.session.currentUser = user;
-          res.render("index", { user, isAdmin: isAdmin, layout: "layout-admin" });
+          res.render("index", {
+            user,
+            isAdmin: isAdmin,
+            layout: "layout-admin",
+          });
         } else {
-
-
-
-
           // Regular user, render their profile
           res.render("index", { user, isAdmin: false, layout: "layout" });
         }
@@ -186,8 +187,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     })
     .catch((error) => next(error));
 });
-
-
 
 router.post("/logout", isLoggedIn, (req, res, next) => {
   req.session.destroy((err) => {

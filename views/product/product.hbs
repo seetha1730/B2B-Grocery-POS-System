@@ -52,12 +52,12 @@
                 /></td>
               <td class="col-2">{{productName}}<p
                 >{{quantity}}</p></td>
-              <td class="col-1">{{productPrice}} euros</td>
+              <td class="col-1">$ {{productPrice}}</td>
             
-              <td class="col-1">{{this.categoryName}}</td>
+              <td class="col-2">{{this.categoryName}}</td>
               
               <td class="col-1">{{stock}}</td>
-              <td class="col-2">{{description}}</td>
+              <td class="col-3">{{description}}</td>
 
                 <td class="col-2 actions">
                   <form action="/product/{{_id}}/edit" method="GET">

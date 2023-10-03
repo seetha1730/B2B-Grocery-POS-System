@@ -1,8 +1,7 @@
-
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order.model");
-const { isLoggedIn, isLoggedOut, isAdmin } = require('../middleware/route-guard.js');
+const { isLoggedIn } = require('../middleware/route-guard.js');
 
 const generateOrderPageNumber = (itemLength) => {
 
@@ -17,7 +16,7 @@ const generateOrderPageNumber = (itemLength) => {
   }
 };
 
-/* GET home page */
+/* GET order page */
 router.get("/order-history", isLoggedIn,(req, res, next) => {
   Order.find()
     .then((orderList) => {
@@ -37,7 +36,7 @@ router.get("/order-history", isLoggedIn,(req, res, next) => {
 
 });
 
-// API routefor all order
+// API route for all order
 router.get("/api/orders", isLoggedIn, (req, res, next) => {
   Order.find()
     .then((orderList) => {
@@ -45,7 +44,7 @@ router.get("/api/orders", isLoggedIn, (req, res, next) => {
     })
     .catch((err) => next(err));
 });
-
+// API route for all order
 router.get("/order-history/goto/:pageNumber", (req, res, next) => {
   const { pageNumber } = req.params;
   const skip = (parseInt(pageNumber) - 1) * 5;
@@ -73,7 +72,7 @@ router.get("/order-history/goto/:pageNumber", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-// New route to handle order details
+//Get call view the order
 router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
   const orderId = req.params.orderId;
 
@@ -81,7 +80,7 @@ router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
   Order.findById(orderId)
     .then((order) => {
       if (!order) {
-        // If order not found, you might want to handle this case (e.g., render an error page)
+        // If order not found
         return res.status(404).send('Order not found');
       }
       // Send the order details as JSON
@@ -97,7 +96,7 @@ router.post("/orderCreate", isLoggedIn, (req, res, next) => {
 
   Order.create({
     Products: Products.map((product, index) => ({
-      product: product.productId, // Assuming productId is sent in the request
+      product: product.productId,
       productName: product.productName,
       quantity: product.quantity,
     })),
@@ -112,6 +111,7 @@ router.post("/orderCreate", isLoggedIn, (req, res, next) => {
   })
     .then(() => {
       res.status(200);
+
       res.send({ msg: 'order added successfully' })
 
     })

@@ -157,7 +157,7 @@ router.post(
       });
   }
 );
-
+// GET request to edit a product
 router.get("/product/:id/edit", (req, res, next) => {
   const { id } = req.params;
   Product.findById(id)
@@ -177,7 +177,6 @@ router.get("/product/:id/edit", (req, res, next) => {
  
    
 });
-
 
 // POST request to edit a product
 router.post("/product/:id/edit", fileUploader.single("image"), (req, res, next) => {

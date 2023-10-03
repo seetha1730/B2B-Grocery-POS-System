@@ -3,7 +3,6 @@ const router = express.Router();
 const StoreAddress = require('../models/Store.model');
 
 // Create a new store address for a specific branch
-// Update a specific store address
 router.post('/store-address', (req, res) => {
     const { storeName, addressLine1, addressLine2, pincode, country, state } = req.body;
   
@@ -39,8 +38,5 @@ router.post('/store-address', (req, res) => {
         res.status(500).send('Error updating the store address');
       });
   });
-  
-
-
 
 module.exports = router;
