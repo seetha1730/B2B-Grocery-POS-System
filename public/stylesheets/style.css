@@ -1139,6 +1139,8 @@ input#product-search {
   background: #dacff4;
   border: 2px solid #cbc3e3;
   border-radius: 8px;
+  background: rgba(192, 173, 238, 0.2);
+          border: rgba(54, 49, 50,1)
 }
 
 td.actions {

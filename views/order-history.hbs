@@ -136,7 +136,7 @@ const renderOrderDetails = (orderData) => {
   orderDetailsContent.innerHTML = `
         <p>Order Number: ${orderData.orderNumber}</p>
         <p>Total: ${parseFloat(orderData.total).toFixed(2)}</p>
-        <p> Order Date: ${orderData.date}
+        <p> Order Date: ${orderData.orderDate}
   `;
   
   // Check if there is customer data
@@ -158,8 +158,9 @@ const renderOrderDetails = (orderData) => {
 
   // Render Products
   orderData.Products.forEach(product => {
+    console.log(product)
     orderDetailsContent.innerHTML += `
-        <p>Product: ${product.productName}, Quantity: ${product.noItems}</p>
+        <p>Product: ${product.productName}, Quantity: ${product.quantity}</p>
     `;
   });
 }

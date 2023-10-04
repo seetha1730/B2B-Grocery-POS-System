@@ -11,14 +11,22 @@
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
       data: {
-        datasets: [{
-          type: 'bar',
-          label: 'Revenue',
-          data: revenue
-        }, {
+        datasets: [
+         {
           type: 'line',
           label: 'Total Orders',
           data: orderCount,
+          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          borderColor: 'rgba(54, 49, 50,1)'
+
+        },
+        
+        {
+          type: 'bar',
+          label: 'Revenue',
+          data: revenue,
+          backgroundColor: 'rgba(192, 173, 238, 0.7)',
+          borderColor: 'rgba(54, 49, 50,1)'
         }],
         labels: labels
       }
@@ -57,7 +65,7 @@
     })
     .then(orders => {
       processOrderData(orders); // Assuming processOrderData is defined
-      
+
     })
     .catch(error => console.error('Error fetching orders:', error));
 </script>

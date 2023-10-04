@@ -824,6 +824,7 @@
 
   // LISTENERS
   checkoutBtn?.addEventListener("click", () => { 
+    if (cart.shoppingCart.length > 0) {
  checkTablePopupBody.innerHTML ="";
   index = 0;
     checkoutPopup.style.display = "block";
@@ -840,7 +841,7 @@
     }
 
 
-    const TAX = 1.1
+    const TAX = 0.1
     const totalPrice = cart.shoppingCart.reduce((acc, curr) => {
       return acc + curr.productPrice * curr.noItems
     }, 0).toFixed(2)
@@ -866,6 +867,12 @@
       checkoutPopup.style.display = "none";
     });
     closeButton.style.cursor = "pointer";
+
+
+    }else{
+      // Display a message or handle the case where the cart is empty
+    alert("Please add items to the cart before proceeding to checkout.");
+    }
   })
 
   paymentBtnCard?.addEventListener("click", function () {

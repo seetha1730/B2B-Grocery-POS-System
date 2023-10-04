@@ -128,9 +128,9 @@ router.get("/auth/unauthorized", (req, res, next) => {
 // POST login route ==> to process form data
 
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { email, username, password } = req.body;
+  const { user, password } = req.body;
 
-  if ((email === "" && username === "") || password === "") {
+  if ((!user ) || !password) {
     res.render("auth/login", {
       errorMessage:
         "Please enter either email or username and password to login.",
@@ -139,9 +139,12 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     return;
   }
 
-  const findUser = email ? User.findOne({ email }) : User.findOne({ username });
-
-  findUser
+  User.findOne({
+    $or: [
+      { email: { $regex: new RegExp(user, "i") } },
+      { username: { $regex: new RegExp(user, "i") } },
+    ],
+  })
     .then((user) => {
       if (!user) {
         res.render("auth/login", {

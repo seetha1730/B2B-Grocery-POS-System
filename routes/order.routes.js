@@ -65,7 +65,8 @@ const generateOrderPageNumber = (itemLength) => {
 router.get("/order-history", isLoggedIn,(req, res, next) => {
   Order.find()
     .then((orderList) => {
-
+  
+        
 
       if (req.session.currentUser.isAdmin) {
 
@@ -116,7 +117,9 @@ router.get("/order-history/goto/:pageNumber", (req, res, next) => {
         .skip(skip)
         .limit(10)
         .then((orderList) => {
-          
+          orderList.forEach(item => item.total = parseFloat(item.total).toFixed(2))
+      
+
       if (req.session.currentUser.isAdmin) {
 
         res.render("order-history", { user: req.session.currentUser,orderPagination: generateOrderPageNumber(orderCount), orderList, layout: 'layout-admin' });
