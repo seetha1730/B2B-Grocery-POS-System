@@ -400,6 +400,7 @@
         categoryItemElement.innerHTML = elementContent
 
         // Add to category section
+
         categoriesSectionElement.appendChild(categoryItemElement)
       }
     })
@@ -444,10 +445,12 @@
 
   // Function to update the total based on a product
   function updateTotal(product) {
+    
     const productTax = product.productPrice * 0.1; // Assuming 10% tax, adjust as needed
     cart.subTotal += product.productPrice;
     cart.tax += productTax;
     cart.total = cart.subTotal + cart.tax;
+    console.log(cart)
     updateCartDisplay();
   }
 
@@ -647,7 +650,7 @@
 
     let totalAmount = 0
     let discount = 0.10
-
+  let tax = 0.10
     const discountCode = couponCodeInput.value;
 
     cart.shoppingCart.forEach((product) => {
@@ -657,15 +660,27 @@
     if (discountCode === "WELCOME10") {
       const discountAmount = (totalAmount * discount).toFixed(2);
       const newAmountAfterDiscount = (totalAmount - discountAmount).toFixed(2)
+      const newTaxed = parseFloat(newAmountAfterDiscount) * tax;
+      const afterdiscountedTotal = parseFloat(newAmountAfterDiscount) + newTaxed;
+
+      localStorage.setItem('total', parseFloat(afterdiscountedTotal).toFixed(2))
+      localStorage.setItem('tax', parseFloat(newTaxed).toFixed(2))
+      localStorage.setItem('subTotal', parseFloat(newAmountAfterDiscount).toFixed(2))
+      cart.total = Number(parseFloat(afterdiscountedTotal).toFixed(2));
+      cart.subTotal =  Number(parseFloat(newAmountAfterDiscount).toFixed(2));
+
+      cart.tax = newTaxed;
+
+      updateCartDisplay()
 
       const discountLine = document.createElement('tr');
 
       discountLine.innerHTML = `
       <th scope="row"> Discount amount: 
-         <td classname = "product-total"> <b>  ${discountAmount} </b> </td>
+         <td classname = "product-total"> <b> - $ ${discountAmount} </b> </td>
       </th>
       <th scope="row"> New total: 
-         <td classname = "product-total"> <b>  ${newAmountAfterDiscount} </b></td>
+         <td classname = "product-total"> <b> $ ${parseFloat(afterdiscountedTotal).toFixed(2)} </b></td>
       </th>
       `
 
@@ -789,10 +804,11 @@
 
   // CASH: Function to calculate the change
   const calculateChange = () => {
+     const applyDiscount = JSON.parse(localStorage.getItem("discount")); 
     const cashAmountElement = document.getElementById("amountGiven");
     const totalPriceElement = document.getElementById("total-price-with-tax");
 
-    const totalPriceAmount = totalPriceElement.innerHTML.substring(1)
+    const totalPriceAmount = cart.total;
     const amountGiven = parseFloat(cashAmountElement.value);
     const amountToPay = parseFloat(totalPriceAmount);
 
@@ -840,7 +856,7 @@
 
     amountTotalElement.innerHTML = `$ ${parseFloat(totalPriceWithTax).toFixed(2)}`
     checkoutOrderNumberElement.innerHTML = `# ${orderNumber}`;
-    totalPriceNoTaxElement.innerHTML = `$ ${parseFloat(tototalPricealPriceWithTax).toFixed(2)}`
+    totalPriceNoTaxElement.innerHTML = `$ ${parseFloat(totalPrice).toFixed(2)}`
     totalPriceOnlyTaxElement.innerHTML = `$ ${parseFloat(onlyTax).toFixed(2)}`
     totalPriceWithTaxElement.innerHTML = `$ ${parseFloat(totalPriceWithTax).toFixed(2)}`
 

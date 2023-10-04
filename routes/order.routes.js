@@ -32,9 +32,9 @@ const productsBlock =  { type: 'table', lines: [
 ] }
 
 const totalInfo =  { type: 'properties', lines: [
-  { name: 'TAX (10.00%)', value: `${parsefloat(order.tax).toFixed(2)}` },
-  { name: 'SubTotal amount (excl. TAX)', value: `${parsefloat(order.subTotal).toFixed(2)}` },
-  { name: 'Total amount (incl. TAX)', value: `${parsefloat(order.total).toFixed(2)}` }
+  { name: 'TAX (10.00%)', value: `${parseFloat(order.tax).toFixed(2)}` },
+  { name: 'SubTotal amount (excl. TAX)', value: `${parseFloat(order.subTotal).toFixed(2)}` },
+  { name: 'Total amount (incl. TAX)', value: `${parseFloat(order.total).toFixed(2)}` }
 ] }
 
 console.log(productsBlock)
