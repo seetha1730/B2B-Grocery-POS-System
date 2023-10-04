@@ -136,7 +136,7 @@ router.post(
       });
     }
     // Continue with creating the product without image
-    const imageUrl = req.file ? req.file.path : "";
+    const imageUrl = req.file ? req.file.path : "/images/no-image.png";
 
     Product.create({
       productName,

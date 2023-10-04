@@ -11,11 +11,20 @@ const ordersSchema = new Schema({
 		},
 		quantity:{
 			type:String
+		},
+		price:{
+			type:Number
 		}
     }],
 	  total: {
 		type: Number,
 	  },
+	  subTotal:{
+		type: Number,
+	  },
+	  tax:{
+		type: Number
+	 },
 	  customerFirstName:{
 		type: String,
 	  },

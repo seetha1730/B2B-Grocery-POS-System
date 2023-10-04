@@ -4,20 +4,21 @@
     <div class="box-shadow ">
     <div class="user-profile-wrapper">
 
+
 {{#if isAdmin}}
 <h4> Currently logged in as: Admin</h4>
+ <img src="https://media.giphy.com/media/XGhTPVMgzLv7s2TOE6/giphy.gif" width="300px"/>
 {{else}}
 <h4>Currently logged in as: Cashier</h4>
+ <img src="/images/cashier.gif" width="300px"/>
 {{/if }}
 
   {{#if user}}
-     <img src="https://media.giphy.com/media/XGhTPVMgzLv7s2TOE6/giphy.gif" width="300px"/>
+    
       <br/>
   <h2>Welcome, {{ user.firstName }} {{user.lastName }}!</h2>
-  <p>This is your profile page my friend.</p>
-  <button class="add-product-button">
-    <a href="/profile" class="reload-button">Reload the page</a>
-  </button>
+  <p>This is your profile page</p>
+
   </div>
 {{else}}
   <p>Still no logged in user, sorry!</p>

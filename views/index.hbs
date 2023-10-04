@@ -76,7 +76,7 @@
         <div class="customer-input col-12">
           <input class="form-control col-6" type="text" id="customerIdInput" placeholder="Search Customer"
             aria-label="customer" />
-          <button id="searchButton " class="col-4 btn btn" onclick="searchCustomerResult()">Search</button>
+          <button id="searchButton " class="col-4 btn btn" onclick="searchCustomerResult()">Add</button>
 
         </div>
         <p class="col-12 mb-2" id="customer_name"></p>
@@ -223,16 +223,17 @@
     <h2>Payment</h2>
     <br />
     <div class="calculator">
-      <h6> Change calculator </h6>
+      <h6> Reminder change calculator </h6>
       <p>Enter the amount given:</p>
       <input type="text" id="amountGiven" placeholder="Amount in cash" />
       <br />
       <br />
-      <button onclick="calculateChange()" id="calculateChangeBtn">Calculate Change</button>
+      <button class="btn btn-secondary" onclick="calculateChange()" id="calculateChangeBtn">Calculate Change</button>
       <h6 id="changeResult"></h6>
       <br />
 
       <button type="submit" onclick="closePaymentPopup()" id="closeOrderBtn"> Completed. Close order</button>
+      <button type="submit" class="btn violet-btn mt-3" onclick="closePaymentPopup()" id="printReceiptBtn§">Print Receipt</button>
 
     </div>
   </div>
@@ -328,6 +329,23 @@
     clearCart();
 
   });
+
+   document.getElementById('printReceiptBtn')?.addEventListener('click', function() {
+    printReceipt();
+  });
+
+  function printReceipt(orderNumber) {
+      // Make an AJAX request to the server to fetch search results
+    fetch(`api/printReceipt/${orderNumber}`)
+      .then((response) => response.json())
+      .then(data => {
+        console.log(data)
+      })
+     .catch(error => {
+      console.error("Error fetching receipt:", error);
+      // Add logic to handle the error and update the UI
+    });
+  }
   // Function to display messages
   function displayMessage(message, messageType) {
     const messageContainer = document.getElementById("message-container");
@@ -388,7 +406,6 @@
   }
   // Function to fetch search results and display them
   function fetchSearchResults(searchTerm) {
-    // Make an AJAX request to the server to fetch search results
 
     fetch(`/search/${searchTerm}`)
       .then((response) => response.json())
@@ -397,8 +414,8 @@
   }
 
   function searchCustomerResult() {
-    // Make an AJAX request to the server to fetch search results
-    fetch(`/search/customer/${customerIdInput.value}`)
+ 
+   fetch(`/search/customer/${customerIdInput.value}`)
       .then((response) => response.json())
       .then(data => {
         customerName.innerText = `${data.firstName} ${data.lastName}`
@@ -485,7 +502,6 @@
 
     </div>
   `
-
     return productCard
   }
 
@@ -678,9 +694,13 @@
       Products: shoppingCart.shoppingCart.map((item) => ({
         product: item._id,
         productName: item.productName,
-        quantity: item.quantity,
+        quantity: item.noItems,
+        price: item.productPrice,
+
       })),
       total: shoppingCart.total,
+      tax: shoppingCart.tax,
+      subTotal: shoppingCart.subTotal,
       customerFirstName: customer?.firstName,
       customerLastName: customer?.lastName,
       customerPhoneNumber: customer?.phoneNumber,
@@ -702,7 +722,8 @@
         localStorage.removeItem("customer")
         localStorage.removeItem("cart")
         setTimeout(() => {
-          window.location.reload();
+          printReceipt(orderNumber);
+         // window.location.reload();
         }, 2000)
       })
       .catch(error => {
@@ -817,11 +838,11 @@
     const totalPriceWithTaxElement = document.getElementById('total-price-with-tax')
     const closeButton = document.querySelector(".close");
 
-    amountTotalElement.innerHTML = `$ ${totalPriceWithTax}`
+    amountTotalElement.innerHTML = `$ ${parseFloat(totalPriceWithTax).toFixed(2)}`
     checkoutOrderNumberElement.innerHTML = `# ${orderNumber}`;
-    totalPriceNoTaxElement.innerHTML = `$ ${totalPrice}`
-    totalPriceOnlyTaxElement.innerHTML = `$ ${onlyTax}`
-    totalPriceWithTaxElement.innerHTML = `$ ${totalPriceWithTax}`
+    totalPriceNoTaxElement.innerHTML = `$ ${parseFloat(tototalPricealPriceWithTax).toFixed(2)}`
+    totalPriceOnlyTaxElement.innerHTML = `$ ${parseFloat(onlyTax).toFixed(2)}`
+    totalPriceWithTaxElement.innerHTML = `$ ${parseFloat(totalPriceWithTax).toFixed(2)}`
 
     cart.shoppingCart.forEach((shoppingItem) => addItemToPopupCart(shoppingItem))
 

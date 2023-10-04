@@ -75,7 +75,7 @@ router.post(
     }
 
     // Continue with creating the category with or without image
-    const imageUrl = req.file ? req.file.path : "";
+    const imageUrl = req.file ? req.file.path : "/images/no-image.png";
 
     Category.create({
       categoryName,
@@ -103,8 +103,10 @@ router.get("/category/:id/edit", (req, res, next) => {
   const { id } = req.params;
   Category.find().then((allCategory) => {
     Category.findById(id)
+
       .populate("parentCategory")
       .then((category) => {
+      
         res.render("category/edit-category", {
           category,
           allCategory,
@@ -121,12 +123,12 @@ router.post(
   fileUploader.single("image"),
   (req, res, next) => {
     const { id } = req.params;
-    const { categoryName, parentCategory } = req.body;
-    const imageUrl = req.file.path;
+    const { categoryName, parentCategory ,imageUrl} = req.body;
+   
 
-    Category.findByIdAndUpdate(id, { categoryName, parentCategory, imageUrl })
+    Category.findByIdAndUpdate(id, { categoryName, parentCategory: parentCategory || null, imageUrl : req.file?.path || imageUrl })
       .then(() => {
-        res.redirect(`/category/${id}`); // Redirect to the edited category's page
+        res.redirect(`/category/goto/1`); // Redirect to the edited category's page
       })
       .catch((err) => next(err));
   }

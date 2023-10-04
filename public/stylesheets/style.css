@@ -17,21 +17,21 @@ main {
 /* Error Messages */
 
 .error {
-  background-color: #ef2a63;
+  background-color: #eb809e;
   padding: 20px;
   color: #fff;
   margin-top: 20px;
 }
 
 .success {
-  background-color: green;
+  background-color: rgb(161, 239, 161);
   padding: 20px;
   color: #fff;
   margin-top: 20px;
 }
 
 .notification {
-  background-color: goldenrod;
+  background-color: rgb(240, 206, 118);
   padding: 20px;
   color: #565656;
   margin-top: 20px;
@@ -499,7 +499,8 @@ a {
 
 .pagination li a {
   border-radius: 8px;
-  color: #cbc3e3;
+  color: #565656;
+  border: 2px solid #ccc;
 }
 
 .btn a {
@@ -1097,7 +1098,6 @@ input#product-search {
 
 /* Styles for buttons */
 #calculateChangeBtn {
-  background-color: #cbc3e3;
   color: #fff;
   padding: 10px 15px;
   border: none;
@@ -1136,14 +1136,11 @@ input#product-search {
   padding: 10px;
   float: right;
   margin-bottom: 0;
-  background-color: white;
+  background: #dacff4;
   border: 2px solid #cbc3e3;
   border-radius: 8px;
 }
 
-.pagination li {
-  border: none;
-}
 td.actions {
   display: flex;
   justify-content: center;
@@ -1174,7 +1171,7 @@ table.table tbody td {
 }
 
 /** Table for product starts **/
-
+.form-container{width:35%}
 .table-responsive {
   margin: 20px;
   margin-top: 0px;
@@ -1232,7 +1229,6 @@ table.table td .delete {
   border: 0;
   background: none;
 }
-
 table.table td i {
   font-size: 25px;
 }

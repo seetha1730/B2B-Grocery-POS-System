@@ -2,10 +2,55 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order.model");
 const { isLoggedIn } = require('../middleware/route-guard.js');
+const StoreAddress = require('../models/Store.model');
+const receiptGenerator = require('../config/receipt.config')
+const receipt = require('receipt');
 
+receipt.config.currency = '$'; // The currency symbol to use in output.
+receipt.config.width = 50;     // The amount of characters used to give the output a "width".
+receipt.config.ruler = '='; 
+
+const generateRecipt = (store, order ) => {
+  const receiptContantArray = []
+  const addresslock = { type: 'text', value: [
+    store.addressLine1,
+    store.addressLine2,
+    store.country,
+    store.pincode,
+], align: 'center' }
+
+const emptyLine = { type: 'empty' }
+const orderInfo = { type: 'properties', lines: [
+  { name: 'Order Number', value: order.orderNumber },
+  { name: 'Date', value: order.orderDate }
+] }
+const productsBlock =  { type: 'table', lines: [
+
+   ...order.Products.map(item => ({
+    
+     item: item.productName, qty: parseInt(item.quantity), cost: (item.price * 100) }))
+] }
+
+const totalInfo =  { type: 'properties', lines: [
+  { name: 'TAX (10.00%)', value: `${parsefloat(order.tax).toFixed(2)}` },
+  { name: 'SubTotal amount (excl. TAX)', value: `${parsefloat(order.subTotal).toFixed(2)}` },
+  { name: 'Total amount (incl. TAX)', value: `${parsefloat(order.total).toFixed(2)}` }
+] }
+
+console.log(productsBlock)
+receiptContantArray.push(addresslock);
+receiptContantArray.push(emptyLine);
+receiptContantArray.push(orderInfo)
+receiptContantArray.push(productsBlock)
+receiptContantArray.push(emptyLine);
+receiptContantArray.push(totalInfo)
+
+
+    return receipt.create(receiptContantArray)
+}
 const generateOrderPageNumber = (itemLength) => {
 
-  let pages = (itemLength / 5);
+  let pages = (itemLength / 10);
   let pageString = pages.toString().split(".");
 
   if (pageString.length == 2) {
@@ -35,7 +80,23 @@ router.get("/order-history", isLoggedIn,(req, res, next) => {
     .catch((err) => next(err));
 
 });
-
+router.get("/api/printReceipt/:orderNumber", (req, res) => {
+  StoreAddress.find()
+    .then((storeData) => {
+      Order.findOne({orderNumber: req.params.orderNumber})
+        .then((orderList) => {
+          console.log(generateRecipt(storeData[0],orderList))
+        })
+        .catch((error) => {
+          console.error("Error fetching order:", error);
+          res.status(500).json({ error: "Internal Server Error" });
+        });
+    })
+    .catch((error) => {
+      console.error("Error fetching store data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
 // API route for all order
 router.get("/api/orders", isLoggedIn, (req, res, next) => {
   Order.find()
@@ -47,13 +108,13 @@ router.get("/api/orders", isLoggedIn, (req, res, next) => {
 // API route for all order
 router.get("/order-history/goto/:pageNumber", (req, res, next) => {
   const { pageNumber } = req.params;
-  const skip = (parseInt(pageNumber) - 1) * 5;
+  const skip = (parseInt(pageNumber) - 1) * 10;
 
   Order.find().count()
     .then((orderCount) => {
       Order.find()
         .skip(skip)
-        .limit(5)
+        .limit(10)
         .then((orderList) => {
           
       if (req.session.currentUser.isAdmin) {
@@ -92,15 +153,20 @@ router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
 });
 
 router.post("/orderCreate", isLoggedIn, (req, res, next) => {
-  const { Products, total, customerFirstName, customerLastName, customerPhoneNumber, customerId, orderNumber } = req.body;
+  const { Products, total,tax, subTotal,customerFirstName, customerLastName, customerPhoneNumber, customerId, orderNumber } = req.body;
+console.log(req.body)
 
   Order.create({
     Products: Products.map((product, index) => ({
       product: product.productId,
       productName: product.productName,
       quantity: product.quantity,
+      price: product.price,
+      
     })),
     total,
+    tax,
+    subTotal,
     customerFirstName,
     customerLastName,
     customerPhoneNumber,

@@ -58,8 +58,14 @@
             <tr>
               <td class="col-1 px-3 text-center">{{inc @index}}</td>
               <td class="category-image"><img src="{{this.imageUrl}}" /></td>
-              <td>{{this.categoryName}}</td>
-              <td>{{this.parentCategory.categoryName}}</td>
+              
+              <td>{{#if parentCategory}}
+             {{this.categoryName}}
+                {{else}}
+                  <b>{{this.categoryName}}</b>
+                {{/if}}
+              </td>
+              <td><b>{{this.parentCategory.categoryName}}</b></td>
               <td class="actions">
                 <form action="/category/{{_id}}/edit" method="GET">
                   <button type="submit" class="edit" title="Edit"><i class="bi bi-pencil-square"></i></button>

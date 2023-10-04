@@ -38,8 +38,8 @@
                     {{#each orderList}}
                     <tr>
                         <td class="col-1 px-3 text-center">{{inc @index}}</td>
-                        <td>{{this.orderNumber}}</td>
-                        <td>{{this.total}}</td>
+                        <td>{{orderNumber}}</td>
+                        <td>{{total}}</td>
                         <td>
                           {{#if this.customerId}}
                             <p>{{this.customerFirstName}} {{this.customerLastName}}</p>
@@ -125,30 +125,44 @@ const closeOrderDetailsPopup = () => {
   orderDetailsPopup.style.display = "none";
 };
 
+// Render order details function
 const renderOrderDetails = (orderData) => {
-  // Update the content of the 'orderDetailsContent' div with the order details
+  // Update the content of the 'popupInnerContent' div with the order details
   const orderDetailsContent = document.getElementById('popupInnerContent');
-  
+
   // Clear existing content
   orderDetailsContent.innerHTML = '';
 
   orderDetailsContent.innerHTML = `
         <p>Order Number: ${orderData.orderNumber}</p>
-        <p>Total: ${orderData.total}</p>
+        <p>Total: ${parseFloat(orderData.total).toFixed(2)}</p>
+        <p> Order Date: ${orderData.date}
+  `;
+  
+  // Check if there is customer data
+  if (orderData.customerId) {
+    orderDetailsContent.innerHTML += `
         <p>Customer Name: ${orderData.customerFirstName} ${orderData.customerLastName}</p>
         <p>Customer Phone Number: ${orderData.customerPhoneNumber}</p>
         <p>Customer ID: ${orderData.customerId}</p>
-        <!-- Add more rendering for Products as needed -->
-    `;
-
-     // Render Products
-  orderData.Products.forEach(product => {
-    orderDetailsContent.innerHTML += `
-        <p>Product: ${product.productName}, Quantity: ${product.quantity}</p>
        
     `;
-});
-  
- 
+  } else {
+    // If no customer data, display 'Guest'
+    orderDetailsContent.innerHTML += `sa  
+        <p>Customer: Guest</p>
+         <p>Customer Phone Number: - </p>
+          <p>Customer ID: - </p>
+    `;
+  }
+
+  // Render Products
+  orderData.Products.forEach(product => {
+    orderDetailsContent.innerHTML += `
+        <p>Product: ${product.productName}, Quantity: ${product.noItems}</p>
+    `;
+  });
 }
+  
+
 </script>

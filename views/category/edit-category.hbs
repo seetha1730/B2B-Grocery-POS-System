@@ -2,7 +2,7 @@
   <div class="add-panel box-shadow p-4 col-8" id="category">
     <h3>Edit category</h3>
     {{#with category}}
-    <form action="/category/add-category" method="post" enctype="multipart/form-data">
+    <form action="/category/{{_id}}/edit" method="post" enctype="multipart/form-data">
 
       <div class="category">
 
@@ -14,12 +14,14 @@
         <select class="custom-select form-select" aria-label="Default select example" name="parentCategory">
           <option value="" selected>Select Parent Category</option>
           {{#each allCategory}}
+          {{#if (eq this.parentCategory null)}}
           <option value="{{this._id}}">{{this.categoryName}}</option>
+          {{/if}}
           {{/each}}
         </select>
 {{#with category}}
         <div class="upload-image col-8">
-          <img class="col-3" src="{{this.imageUrl}}" />
+          <img class="col-3" src="{{imageUrl}}" />
           <label for="inputField" class="btn btn-orange upload-btn">Upload image</label>
           <input class="col-2 upload-btn" type="file" id="inputField" style="display:none" name="image"
             accept="image/*" />
@@ -27,7 +29,7 @@
         </div>
 
         <div class="col-6">
-          <button type="submit" class=" btn add-new-category  update-btn mt-3">Add new category</button>
+          <button type="submit" class=" btn add-new-category  update-btn mt-3">update category</button>
         </div>
 
       </div>
