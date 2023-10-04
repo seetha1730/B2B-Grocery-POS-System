@@ -39,7 +39,7 @@
                     <tr>
                         <td class="col-1 px-3 text-center">{{inc @index}}</td>
                         <td>{{orderNumber}}</td>
-                        <td>{{total}}</td>
+                        <td>$ {{total}}</td>
                         <td>
                           {{#if this.customerId}}
                             <p>{{this.customerFirstName}} {{this.customerLastName}}</p>
@@ -135,7 +135,7 @@ const renderOrderDetails = (orderData) => {
 
   orderDetailsContent.innerHTML = `
         <p>Order Number: ${orderData.orderNumber}</p>
-        <p>Total: ${parseFloat(orderData.total).toFixed(2)}</p>
+        <p>Total: $ ${parseFloat(orderData.total).toFixed(2)}</p>
         <p> Order Date: ${orderData.orderDate}
   `;
   
