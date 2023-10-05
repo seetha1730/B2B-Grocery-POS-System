@@ -1,0 +1,18 @@
+                 LS grocery store                 
+               Simon stevinlaan 1145              
+                    Ijsselstein                   
+                    Netherlands                   
+                    Netherlands                   
+                      3401AA                      
+                                                  
+Order Number:    3968
+Date:            Thu Oct 05 2023 17:21:22 GMT+0200 (Central European Summer Time)
+==================================================
+Qty   Product                                Total
+==================================================
+6     tomato                                €11.40
+==================================================
+                                                  
+TAX (10.00%)                         :    €1.14
+SubTotal amount (excl. TAX)          :     €11.40
+Total amount (incl. TAX)             :    €12.54

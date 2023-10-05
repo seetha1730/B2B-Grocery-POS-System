@@ -3,19 +3,19 @@ const router = express.Router();
 const Order = require("../models/Order.model");
 const { isLoggedIn } = require('../middleware/route-guard.js');
 const StoreAddress = require('../models/Store.model');
-const receiptGenerator = require('../config/receipt.config')
 const receipt = require('receipt');
+const fs = require('fs');
 
 receipt.config.currency = '€'; // The currency symbol to use in output.
 receipt.config.width = 50;     // The amount of characters used to give the output a "width".
 receipt.config.ruler = '='; 
 
 const generateRecipt = (store, order ) => {
-  const receiptContantArray = []
+  const receiptContentArray = []
   const addresslock = { type: 'text', value: [
-    store.addressLine1,
-    store.addressLine2,
-    store.country,
+    store.storeName,
+    store.addressLine1,store.addressLine2,
+    store.country,store.country,
     store.pincode,
 ], align: 'center' }
 
@@ -32,21 +32,19 @@ const productsBlock =  { type: 'table', lines: [
 ] }
 
 const totalInfo =  { type: 'properties', lines: [
-  { name: 'TAX (10.00%)', value: `€ ${parseFloat(order.tax).toFixed(2)}` },
-  { name: 'SubTotal amount (excl. TAX)', value: ` € ${parseFloat(order.subTotal).toFixed(2)}` },
-  { name: 'Total amount (incl. TAX)', value: `€ ${parseFloat(order.total).toFixed(2)}` }
+  { name: 'TAX (10.00%)                         ', value: `€${parseFloat(order.tax).toFixed(2)}` },
+  { name: 'SubTotal amount (excl. TAX)          ', value: ` €${parseFloat(order.subTotal).toFixed(2)}` },
+  { name: 'Total amount (incl. TAX)             ', value: `€${parseFloat(order.total).toFixed(2)}` }
 ] }
+receiptContentArray.push(addresslock);
+receiptContentArray.push(emptyLine);
+receiptContentArray.push(orderInfo)
+receiptContentArray.push(productsBlock)
+receiptContentArray.push(emptyLine);
+receiptContentArray.push(totalInfo)
 
 
-receiptContantArray.push(addresslock);
-receiptContantArray.push(emptyLine);
-receiptContantArray.push(orderInfo)
-receiptContantArray.push(productsBlock)
-receiptContantArray.push(emptyLine);
-receiptContantArray.push(totalInfo)
-
-
-    return receipt.create(receiptContantArray)
+    return receipt.create(receiptContentArray)
 }
 const generateOrderPageNumber = (itemLength) => {
 
@@ -82,11 +80,14 @@ router.get("/order-history", isLoggedIn,(req, res, next) => {
 
 });
 router.get("/api/printReceipt/:orderNumber", (req, res) => {
+  console.log(req.params.orderNumber)
   StoreAddress.find()
     .then((storeData) => {
       Order.findOne({orderNumber: req.params.orderNumber})
         .then((orderList) => {
-          res.send(generateRecipt(storeData[0],orderList))
+          console.log(generateRecipt(storeData[0],orderList))
+          fs.writeFile(`recipts/${req.params.orderNumber}.txt`, generateRecipt(storeData[0],orderList),(data) => console.log(data))
+          res.send( generateRecipt(storeData[0],orderList))
         })
         .catch((error) => {
           console.error("Error fetching order:", error);
@@ -180,7 +181,7 @@ router.post("/orderCreate", isLoggedIn, (req, res, next) => {
     .then(() => {
       res.status(200);
 
-      res.send({ msg: 'order added successfully' })
+      res.send({ msg: 'order added successfully',orderNumber })
 
     })
     .catch(err => next(err));
