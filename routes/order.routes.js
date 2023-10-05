@@ -6,7 +6,7 @@ const StoreAddress = require('../models/Store.model');
 const receiptGenerator = require('../config/receipt.config')
 const receipt = require('receipt');
 
-receipt.config.currency = '$'; // The currency symbol to use in output.
+receipt.config.currency = '€'; // The currency symbol to use in output.
 receipt.config.width = 50;     // The amount of characters used to give the output a "width".
 receipt.config.ruler = '='; 
 
@@ -32,12 +32,12 @@ const productsBlock =  { type: 'table', lines: [
 ] }
 
 const totalInfo =  { type: 'properties', lines: [
-  { name: 'TAX (10.00%)', value: `${parseFloat(order.tax).toFixed(2)}` },
-  { name: 'SubTotal amount (excl. TAX)', value: `${parseFloat(order.subTotal).toFixed(2)}` },
-  { name: 'Total amount (incl. TAX)', value: `${parseFloat(order.total).toFixed(2)}` }
+  { name: 'TAX (10.00%)', value: `€ ${parseFloat(order.tax).toFixed(2)}` },
+  { name: 'SubTotal amount (excl. TAX)', value: ` € ${parseFloat(order.subTotal).toFixed(2)}` },
+  { name: 'Total amount (incl. TAX)', value: `€ ${parseFloat(order.total).toFixed(2)}` }
 ] }
 
-console.log(productsBlock)
+
 receiptContantArray.push(addresslock);
 receiptContantArray.push(emptyLine);
 receiptContantArray.push(orderInfo)
@@ -86,7 +86,7 @@ router.get("/api/printReceipt/:orderNumber", (req, res) => {
     .then((storeData) => {
       Order.findOne({orderNumber: req.params.orderNumber})
         .then((orderList) => {
-          console.log(generateRecipt(storeData[0],orderList))
+          res.send(generateRecipt(storeData[0],orderList))
         })
         .catch((error) => {
           console.error("Error fetching order:", error);
@@ -157,7 +157,6 @@ router.get("/order-history/:orderId", isLoggedIn, (req, res, next) => {
 
 router.post("/orderCreate", isLoggedIn, (req, res, next) => {
   const { Products, total,tax, subTotal,customerFirstName, customerLastName, customerPhoneNumber, customerId, orderNumber } = req.body;
-console.log(req.body)
 
   Order.create({
     Products: Products.map((product, index) => ({
