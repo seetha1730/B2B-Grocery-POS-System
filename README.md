@@ -17,6 +17,7 @@ A Point of Sale (POS) system tailored for B2B use, primarily targeting grocery s
 3. **Checkout:**
    - Seamlessly navigate the checkout process, including the application of discounts.
    - A success popup confirms the successful completion of the transaction.
+   - Allows for discount codes (in this case, you can try the code WELCOME10!)
 
 4. **Payment Processing:**
    - Support for various payment methods, including card and cash.
