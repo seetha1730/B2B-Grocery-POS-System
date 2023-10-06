@@ -232,9 +232,7 @@
       <h6 id="changeResult"></h6>
       <br />
 
-      <button type="submit" onclick="closePaymentPopup()" id="closeOrderBtn"> Completed. Close order</button>
-      <button type="submit" class="btn violet-btn mt-3" onclick="closePaymentPopup()" id="printReceiptBtn">Print Receipt</button>
-
+      <button type="submit" class="btn violet-btn" onclick="closePaymentPopup()" id="closeOrderBtn"> Completed  Order</button>
     </div>
   </div>
 </div>
@@ -328,21 +326,51 @@
 
   });
 
-   document.getElementById('printReceiptBtn')?.addEventListener('click', function() {
-    printReceipt();
-  });
 
 
-function printReceipt(orderNumber) {
-  //printing receipts API
-  fetch(`/api/printReceipt/${orderNumber}`)
-  .then(receipt => {
-      console.log(receipt)
-      // Create a new window to print the receipt
+
+async function printReceipt(orderNumber){
+
+  try {
+  const response = await fetch(`/api/printReceipt/${orderNumber}`);
+    const receiptContent = await response.json();
+
+    const paymentContent = document.querySelector('#cash-payment-popup .payment-content');
+    paymentContent.innerHTML = '';
+
+    // Create a new div for the receipt popup
+    const receiptPopupDiv = document.createElement('div');
+    receiptPopupDiv.classList.add('receiptPopup');
+
+    // Add the close button and heading
+    receiptPopupDiv.innerHTML = `
+    <i class="bi bi-printer"></i>
+      <span onclick="closePopup()" class="close text-end">&times;</span>
       
-    })
-    .catch(error => console.error('Error printing receipt:', error));
+      <h2>Receipt</h2>
+      
+      <div class="card-body">
+        ${receiptContent} <!-- Assuming receiptContent is HTML -->
+      </div>
+    `;
+
+    // Append the new div to the payment content
+    paymentContent.appendChild(receiptPopupDiv);
+   
+
+  } catch (err) {
+    console.log("ERROR: ", err);
+  }
 }
+function closePopup() {
+  // Close the popup
+  const paymentPopup = document.querySelector('#cash-payment-popup');
+  paymentPopup.style.display = 'none';
+
+  // Reload the window
+  window.location.reload();
+}
+
   // Function to display messages
   function displayMessage(message, messageType) {
     const messageContainer = document.getElementById("message-container");
@@ -695,12 +723,13 @@ function printReceipt(orderNumber) {
     }
   }
 
+  
+
   const closePaymentPopup = () => {
-    document.getElementById("card-payment-popup").style.display = "none";
-    document.getElementById("cash-payment-popup").style.display = "none";
+   document.getElementById("card-payment-popup").style.display = "none";
     const shoppingCart = JSON.parse(localStorage.getItem("cart")); // Parse the shopping cart data from local storage
 
-    const customer = JSON.parse(localStorage.getItem("customer"));
+    const customer = JSON.parse(localStorage.getItem("customer"));// Parse the customer cart data from local storage
     const orderDate = new Date();
 
     // Map the shopping cart items to the Products array
@@ -737,10 +766,9 @@ function printReceipt(orderNumber) {
         localStorage.removeItem("cart")
 
         setTimeout(() => {
-
-          printReceipt(orderNumber)
+         printReceipt(orderNumber)
            displayMessage("Order created successfully!", "success");
-          //window.location.reload();
+          
         }, 2000)
       })
       .catch(error => {

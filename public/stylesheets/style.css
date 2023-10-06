@@ -174,7 +174,7 @@ form#logout-form button {
   margin-left: 20px;
 }
 
-.btn.btn-primary.add-product {
+.btn.btn-secondary.add-product {
   width: 90%;
 }
 
@@ -772,7 +772,7 @@ input::placeholder {
   margin-left: 20px;
 }
 
-.btn.btn-primary.add-product {
+.btn.btn-secondary.add-product {
   width: 90%;
 }
 
@@ -982,6 +982,11 @@ textarea::placeholder {
   border: 1px solid #888;
   width: 70%;
 }
+#cash-payment-popup .receiptPopup{width:100%}
+
+#cash-payment-popup .payment-content {
+  width: 30%;
+}
 
 .checkout-content table.table tbody td {
   text-align: left;
@@ -1106,8 +1111,8 @@ input#product-search {
 }
 
 #closeOrderBtn {
-  background: white;
-  color: #565656;
+  background: #9e8ccb;
+  color: #fff;
   border: 1px solid #565656;
   padding: 10px 15px;
   border-radius: 8px;
@@ -1434,5 +1439,9 @@ table.table td .add {
   td.category-image img {
     width: 40px;
     height: 40px;
+  }
+
+  .receiptPopup{
+    max-width: 560px;
   }
 }

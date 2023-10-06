@@ -11,35 +11,51 @@ receipt.config.width = 50;     // The amount of characters used to give the outp
 receipt.config.ruler = '='; 
 
 const generateRecipt = (store, order ) => {
+ 
   const receiptContentArray = []
+  
   const addresslock = { type: 'text', value: [
-    store.storeName,
-    store.addressLine1,store.addressLine2,
-    store.country,store.country,
-    store.pincode,
+    `<p class="text-center">${store.storeName}</p>`,
+    `<p class="text-center">${store.addressLine1,store.addressLine2}</p>`,
+    `<p class="text-center">${store.country,store.country}</p>`,
+    `<p class="text-center">${store.pincode}</p>`,
 ], align: 'center' }
 
 const emptyLine = { type: 'empty' }
-const orderInfo = { type: 'properties', lines: [
-  { name: 'Order Number', value: order.orderNumber },
-  { name: 'Date', value: order.orderDate }
-] }
-const productsBlock =  { type: 'table', lines: [
+const orderInfo = { type: 'text', value: [
+  `<p><span>Order Number: </span><span>${order.orderNumber}<span></p>`,
+  `<p><span>Date: </span><span>${order.orderDate}<span></p>`
+] ,align: 'center'}
 
-   ...order.Products.map(item => ({
-    
-     item: item.productName, qty: parseInt(item.quantity), cost: (item.price * 100) }))
+const lineBock = { type: 'text', value: ['<hr/>']}
+const productsBlock =  { type: 'text', value: [
+  '<table class="w-100">',
+  '<thead>',
+  '<tr>',
+  '<th class="col-7">Product</th>',
+  '<th class="col-2">Qty</th>',
+  '<th class="col-3">Price</th>',
+  '</tr>',
+  '<thead>',
+  '<tbody>',
+   ...order.Products.map(item => `<tr><td>${item.productName}</td><td>${parseInt(item.quantity)}</td><td>€ ${item.price * parseInt(item.quantity)}</td></tr>`),
+  '</table>'
 ] }
 
-const totalInfo =  { type: 'properties', lines: [
-  { name: 'TAX (10.00%)                         ', value: `€${parseFloat(order.tax).toFixed(2)}` },
-  { name: 'SubTotal amount (excl. TAX)          ', value: ` €${parseFloat(order.subTotal).toFixed(2)}` },
-  { name: 'Total amount (incl. TAX)             ', value: `€${parseFloat(order.total).toFixed(2)}` }
+const totalInfo =  { type: 'text', value: [
+  `<p class="row" ><span class="col-9">Subtotal  </span><span class="col-3">: € ${parseFloat(order.subTotal).toFixed(2)} </span>`,
+  `<p class="row"><span class="col-9">TAX (10.00%)  </span><span class="col-3">: € ${parseFloat(order.tax).toFixed(2)} </span>`,
+  `<p class="row" ><span class="col-9" >Total  </span><span class="col-3">: € ${parseFloat(order.total).toFixed(2)} </span>`
 ] }
+
 receiptContentArray.push(addresslock);
 receiptContentArray.push(emptyLine);
+receiptContentArray.push(lineBock)
+receiptContentArray.push(emptyLine);
 receiptContentArray.push(orderInfo)
+receiptContentArray.push(lineBock)
 receiptContentArray.push(productsBlock)
+receiptContentArray.push(lineBock)
 receiptContentArray.push(emptyLine);
 receiptContentArray.push(totalInfo)
 
@@ -80,14 +96,13 @@ router.get("/order-history", isLoggedIn,(req, res, next) => {
 
 });
 router.get("/api/printReceipt/:orderNumber", (req, res) => {
-  console.log(req.params.orderNumber)
+
   StoreAddress.find()
     .then((storeData) => {
       Order.findOne({orderNumber: req.params.orderNumber})
         .then((orderList) => {
-          console.log(generateRecipt(storeData[0],orderList))
-          fs.writeFile(`recipts/${req.params.orderNumber}.txt`, generateRecipt(storeData[0],orderList),(data) => console.log(data))
-          res.send( generateRecipt(storeData[0],orderList))
+          const receiptContent = generateRecipt(storeData[0],orderList)
+          res.status(201).json( receiptContent );
         })
         .catch((error) => {
           console.error("Error fetching order:", error);

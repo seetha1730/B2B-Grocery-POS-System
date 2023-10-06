@@ -31,7 +31,9 @@
         <select class="custom-select form-select" aria-label="category" name="categoryName">
   <option value="" selected>Select Category</option>
   {{#each categoryList}}
+   {{#if this.parentCategory}}
     <option value="{{this.categoryName}}">{{this.categoryName}}</option>
+   {{/if}}
   {{/each}}
 </select>
 
@@ -56,7 +58,7 @@
         </div>
 
         <div class=" col-5">
-          <button type="submit" class="btn btn-primary update-btn add-product">Add new
+          <button type="submit" class="btn btn-secondary update-btn add-product">Add new
             product</button>
         </div>
 
