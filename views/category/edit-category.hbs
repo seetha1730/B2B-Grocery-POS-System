@@ -14,9 +14,9 @@
         <select class="custom-select form-select" aria-label="Default select example" name="parentCategory">
           <option value="" selected>Select Parent Category</option>
           {{#each allCategory}}
-          {{#if (eq this.parentCategory null)}}
+         
           <option value="{{this._id}}">{{this.categoryName}}</option>
-          {{/if}}
+        
           {{/each}}
         </select>
 {{#with category}}

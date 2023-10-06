@@ -25,9 +25,9 @@
           <option value="" selected>Select Category</option>
 
           {{#each categoryList}}
-           {{#if this.parentCategory}}
+          
           <option value="{{this.categoryName}}">{{this.categoryName}}</option>
-          {{/if}}
+          
           {{/each}}
         </select>
         {{#with product}}
