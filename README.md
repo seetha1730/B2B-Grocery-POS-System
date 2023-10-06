@@ -43,7 +43,7 @@ Click the "Fork" button at the top right corner of this repository's page. This 
 2. Clone the Repository:
 Open your terminal and navigate to the directory where you want to store the project.
 Use the following command to clone the repository to your local machine, replacing <your-username> with your GitHub username:
-$ git clone https://github.com/<your-username>/B2B-Grocery-POS-System.git
+$ git clone https://github.com/seetha1730/B2B-Grocery-POS-System.git
 
 3. Navigate to the Project Directory:
 Enter the project directory using the following command:
@@ -58,10 +58,10 @@ After the installation is complete, start the application with the following com
 $ npm start
 
 5. Access the Application:
-Open your web browser and navigate to http://localhost:3001 to access the B2B Grocery Store POS System.
+Open your web browser and navigate to http://localhost:3000 to access the B2B Grocery Store POS System.
 
 Now you have the project up and running locally, ready to manage your grocery store's point of sale system. Enjoy using the system, and feel free to customize it according to your specific needs.
-
+ 
 ## Usage
 
 The B2B Grocery Store POS System provides three user profiles, each with distinct privileges:
