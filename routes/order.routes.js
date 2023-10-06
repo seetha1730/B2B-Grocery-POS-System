@@ -43,9 +43,9 @@ const productsBlock =  { type: 'text', value: [
 ] }
 
 const totalInfo =  { type: 'text', value: [
-  `<p class="row" ><span class="col-9">Subtotal  </span><span class="col-3">: € ${parseFloat(order.subTotal).toFixed(2)} </span>`,
+  `<p class="row" ><span class="col-9">Subtotal  </span><span class="col-3">: € ${(order.subTotal).toFixed(2)} </span>`,
   `<p class="row"><span class="col-9">TAX (10.00%)  </span><span class="col-3">: € ${parseFloat(order.tax).toFixed(2)} </span>`,
-  `<p class="row" ><span class="col-9" >Total  </span><span class="col-3">: € ${parseFloat(order.total).toFixed(2)} </span>`
+  `<p class="row" ><span class="col-9" >Total  </span><span class="col-3">: € ${(order.total).toFixed(2)} </span>`
 ] }
 
 receiptContentArray.push(addresslock);

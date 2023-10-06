@@ -82,15 +82,14 @@ router.post("/signup", (req, res, next) => {
     })
     .then((userFromDB) => {
       // Registration successful
-      successMessage("Newly created user is: ", userFromDB);
       res.status(200);
-      // If successful
 
       if (req.session.currentUser.isAdmin) {
-        res.render("settings", {
+       return  res.render("settings", {
           user: req.session.currentUser,
-          layout: "layout-admin",
           successMessage: "User created successfully",
+          layout: "layout-admin",
+          
         });
       } else {
         res.render("settings", {
@@ -100,18 +99,14 @@ router.post("/signup", (req, res, next) => {
       }
     })
     .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("setting", { errorMessage: error.message });
-      } else if (error.code === 11000) {
-        res.status(500).render("settings", {
+      console.error("Error during registration:", error);
+       return res.render("settings", {
           // errorMessage: 'User not found and/or incorrect password.'
           errorMessage:
-            "Username and email need to be unique. Either username or email is already used. ",
-        });
-      } else {
-        next(error);
-      }
+            "Username and email need to be unique. Either username or email is already used. ",layout: "layout"
+      
     });
+});
 });
 
 //////////// L O G I N ///////////
