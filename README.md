@@ -1,5 +1,5 @@
 READ ME
-
+App deployed with Cyclic : https://easy-ruby-viper-cape.cyclic.cloud
 # B2B Grocery Store POS System
 
 A Point of Sale (POS) system tailored for B2B use, primarily targeting grocery stores. This system provides a user-friendly interface for managing products, shopping carts, and payment processing.
