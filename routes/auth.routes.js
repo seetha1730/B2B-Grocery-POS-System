@@ -4,8 +4,32 @@ const bcryptjs = require("bcryptjs");
 const mongoose = require("mongoose");
 const saltRounds = 10;
 const User = require("../models/User.model");
-
+const mailjet = require("node-mailjet").apiConnect(
+  process.env.MAILJET_API_KEY,
+  process.env.MAILJET_API_SECRET
+);
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
+
+sendGeneralMail = function (mail,sub, msg) {
+  return mailjet.post("send", { version: "v3.1" }).request({
+    Messages: [
+      {
+        From: {
+          Name: process.env.NAME,
+          Email: process.env.EMAIL,
+        },
+        To: [
+          {
+            Email: mail,
+            Name: "Admin",
+          },
+        ],
+        Subject: sub,
+        TextPart: msg,
+      },
+    ],
+  });
+};
 
 // GET route ==> to display the signup form to users
 router.get("/signup", isLoggedOut, (req, res) => res.render("settings"));
@@ -13,6 +37,7 @@ router.get("/signup", isLoggedOut, (req, res) => res.render("settings"));
 router.post("/signup", (req, res, next) => {
   const min = 10000; // Minimum 5-digit number (inclusive)
   const max = 99999; // Maximum 5-digit number (inclusive)
+  const customerId = Math.floor(Math.random() * (max - min + 1)) + min;
   const {
     firstName,
     lastName,
@@ -76,14 +101,22 @@ router.post("/signup", (req, res, next) => {
         isAdmin: false,
         customerId:
           role === "Customer"
-            ? Math.floor(Math.random() * (max - min + 1)) + min
+            ? customerId
             : " ",
       });
     })
     .then((userFromDB) => {
       // Registration successful
       res.status(200);
+     
+      if(role === 'Customer'){
+        sendGeneralMail(email,'Your Membership from LS Grocery',`Your Membership number - ${customerId}`)
+      }
 
+      if(role === 'Cashier') {
+        sendGeneralMail(email, 'Your Login details for LS Grocery',`Your username : ${username} and your password: ${password}`)
+      }
+      
       if (req.session.currentUser.isAdmin) {
        return  res.render("settings", {
           user: req.session.currentUser,
