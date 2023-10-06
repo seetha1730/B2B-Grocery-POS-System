@@ -88,7 +88,7 @@ Email: customer1@gmail.com
 Password: Customer123
 
 Logging In:
-Visit the application by opening your web browser and navigating to http://localhost:3001 after starting the application as described in the Installation section.
+Visit the application by opening your web browser and navigating to http://localhost:3000 after starting the application as described in the Installation section.
 You will be presented with a login screen.
 Choose the appropriate user profile you'd like to test (Admin, Cashier, or Customer).
 Enter the corresponding email and password based on the user profile you selected.
