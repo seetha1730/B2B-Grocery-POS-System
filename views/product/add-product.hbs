@@ -31,9 +31,9 @@
         <select class="custom-select form-select" aria-label="category" name="categoryName">
   <option value="" selected>Select Category</option>
   {{#each categoryList}}
-  
+   {{#if this.parentCategory}}
     <option value="{{this.categoryName}}">{{this.categoryName}}</option>
-  
+   {{/if}}
   {{/each}}
 </select>
 
