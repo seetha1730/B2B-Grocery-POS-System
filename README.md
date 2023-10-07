@@ -70,6 +70,7 @@ The B2B Grocery Store POS System provides three user profiles, each with distinc
 Admins have full control over the system.
 They can create product and category cards, modify them as needed, manage inventory, and access all system functionalities.
 Use the following access credentials to log in as an Admin:
+username :admin
 Email: admin@admin.com
 Password: admin123
 
@@ -80,7 +81,7 @@ Use the following access credentials to log in as a Cashier:
 Email: seetharaj1990@gmail.com
 Password: 3JUfZLfThF
 
-4. Customer:
+3. Customer:
 Customers have the most limited access, primarily for security purposes.
 They cannot access any administrative or cashier functionalities.
 Use the following access credentials to log in as a Customer:
