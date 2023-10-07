@@ -1,4 +1,9 @@
 READ ME
+
+## Links
+# Trello Link: https://trello.com/b/QwSHxyka/lea-and-seetha
+# Slides presentation : https://slides.com/lea-3/palette
+# Github repository : https://github.com/seetha1730/B2B-Grocery-POS-System.git
 # App deployed with Cyclic: https://easy-ruby-viper-cape.cyclic.cloud
 # B2B Grocery Store POS System
 
