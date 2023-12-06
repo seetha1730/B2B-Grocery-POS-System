@@ -5,7 +5,7 @@ const express = require("express")
 require("./db");
 const path = require('path')
 const app = express()
-const port = 3001
+const port = 3000
 const bodyParser = require('body-parser');
 const hbs = require("hbs");
 const cors = require('cors');
@@ -53,6 +53,6 @@ app.use('/',userRoutes);
 app.use('/',OrderRoutes);
 app.use('/',emailRoutes);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`App running on port ${port}`)
 })
