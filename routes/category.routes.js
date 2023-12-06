@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/Category.model");
+const fileUploader = require("../config/cloudinary.config");
 const { isAdmin } = require("../middleware/route-guard");
 
 const generateCPageNumber = (itemLength) => {
