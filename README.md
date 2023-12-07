@@ -82,18 +82,13 @@ Password: admin123
 2. Cashier:
 Cashiers have limited access and can only add products to the shopping cart and process transactions.
 They cannot create or modify product/category cards.
-Use the following access credentials to log in as a Cashier:
-username:seetha
-Email: seetharaj1990@gmail.com
-Password: seetha123
+
 
 3. Customer:
 Customers have the most limited access, primarily for security purposes.
 They cannot access any administrative or cashier functionalities.
 Use the following access credentials to log in as a Customer:
-username:seetha1
-Email: seetharose20@gmail.com
-Password: seetha123
+
 
 Logging In:
 Visit the application by opening your web browser and navigating to http://localhost:3000 after starting the application as described in the Installation section.
